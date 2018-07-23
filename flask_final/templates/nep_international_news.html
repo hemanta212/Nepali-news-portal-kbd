@@ -1,0 +1,40 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<br><br>
+    
+    <div class="panel panel-default">
+    <div class="panel-heading">International News[nep]</div>
+    </div>
+    {% for news in news_list.items %}
+        <div class="panel panel-default">
+        <div class="panel-heading"><h3><a href="{{news.news_link}}" target="_blank">{{news.title}}</a></h3></div>
+        
+        {%if news.image_link%}
+        <img class="article-img img-responsive" src={{news.image_link}}>
+        {%endif%} 
+        
+        <div class="panel-body">
+        <div>
+        <small class="text-muted">{{ news.date.strftime('%Y-%m-%d') }}</small>
+        <span>| {{news.source}}</span>
+        </div><br>
+        <div>
+        {{news.summary}}
+        </div>
+        </div>
+        </div>  
+    {% endfor %}
+    
+    {%for page_num in news_list.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)%}
+    	{%if page_num%}		
+    		{%if news_list.page == page_num%}
+    			<a class= "btn btn-info mb-4" href="{{url_for("nep_international_news", page=page_num)}}">{{page_num}}</a>
+    		{%else%}
+    			<a class= "btn btn-outline-info mb-4" href="{{url_for("nep_international_news", page=page_num)}}">{{page_num}}</a>
+   			{%endif%}
+   		{%else%}
+    		  ...
+    		
+    	{%endif%}
+    {%endfor%}
+{% endblock content %}

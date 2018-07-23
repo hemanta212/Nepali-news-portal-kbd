@@ -1,0 +1,16 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+<br><br>
+<a href='{{url_for('about')}}'><h1> About This website</h1></a>
+<p>This website is built as the pet project of me(Hemanta Sharma). On the journey to learn backend web-development I decided to make something of my own interest to practice my Skills.
+Khabar Board currently featured extracted summary news from various news portals from Nepal. Similarly, We will soon incorporate news from top international sites as well. Similarly, handy tools like conversion tools, weather and other facilities are also on the way.</p>
+<br><br>
+<p>I am also planning to include push notificatiion and news_letters in the future.</p>
+<br>
+<p> Special Thanks to my friend Suyog Sharma for designing the front-end portion of this website.</p> 
+
+<div>
+<button class='btn btn-info'><a href="{{url_for('news')}}">Back to dashboard</a></button>
+</div>
+{%endblock content%}

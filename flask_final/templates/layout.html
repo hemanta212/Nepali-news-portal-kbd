@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% if title %}
+	<title>{{title}}</title>
+{% else %}
+	<title>Flask Final Home</title>
+{%endif %}
+
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='home/home.css')}}">
+
+</head>
+<body>
+	<!--<div class="header">
+		<!--Navbar-->
+	<!-- Image and text -->
+	<nav class="navbar navbar-dark primary-color fixed-top">
+	<a class="navbar-brand text-centre" href="#">
+	<img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.j27MLe8mojDbPfWaJnXNYAHaHa%26pid%3D15.1&f=1" height="30" class="d-inline-block align-top" alt="">
+	Khabar Board
+	</a>
+	</nav>
+   	<br>
+		{% with messages = get_flashed_messages(with_categories = True)%}
+		{%if messages%}
+			{%for category,message in messages%}
+				<br><br><div class="alert alert-{{category}}">{{message}}</div>
+			{%endfor%}
+		{%endif%}
+		{%endwith%}
+	{% block content%}
+		
+	{%endblock content%}
+	
+	<!--Footer-->
+	<footer class="pt-5">
+		<div class="container-fluid padding" id="ft1">
+	
+			<div class="row text-center">
+	
+				<!--Social Connecting-->
+	
+				<div class="col-12">
+					<h2>Connect With US</h2>
+				</div>
+	
+				<div class="col-12 social padding">
+					<a href="#"><i class="fa fa-facebook fa-3x"></i></a>
+					<a href="#"><i class="fa fa-twitter fa-3x"></i></a>
+					</div>
+	
+			</div><br><br>
+	
+			<div class="text-center">
+	
+				<div class="row" id="ft2">
+					<div class="col-6">
+						<p><img src="">Frontend By:</p>
+						<p>Suyog Sharma</p>
+					</div>
+	
+					<div class="col-6">
+						<p>Backend By:</p>
+						<p>Hemanta Sharma</p>
+					</div>
+				</div>
+	
+				<div class="mt-2 text-center text-muted">
+					copyright &copy; 2018
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
+	
+</body>
+</html>
