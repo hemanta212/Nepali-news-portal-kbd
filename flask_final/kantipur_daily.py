@@ -1,19 +1,19 @@
 from bs4 import BeautifulSoup as BS
 import requests
 import csv
-from time
+from time import sleep
 
 
 url = 'https://www.kantipurdaily.com/news'
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
 
-#try:            
+#try:
 #    response = requests.get(url, headers=headers)
 #    sleep(3)
 #except requests.exceptions.ConnectionError:
-#    r.status_code = "Connection refused"    
-#    
+#    r.status_code = "Connection refused"
+#
 
 
 page = ''
@@ -32,11 +32,11 @@ soup = BS(page.content, 'lxml')
 #print(soup.prettify())
 def kantipur_daily_extractor():
     with open("kantipur_daily_cache.csv",'w') as w:
-    
+
         counter = 0
         news_list = []
         for article in soup.find_all('article',class_='normal'):
-        
+
             title = article.h2.a.text
             author = article.find('div', class_= 'author').text
             summary = article.find('p').text
@@ -53,9 +53,9 @@ def kantipur_daily_extractor():
         'news_link' : link
             }
             news_list.append(news_dict)
-             
-            
+
+
             counter += 1
         w.write(str(news_list))
-    return news_list    
+    return news_list
 kantipur_daily_extractor()
