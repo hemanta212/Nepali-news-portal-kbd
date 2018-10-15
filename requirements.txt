@@ -1,0 +1,10 @@
+flask
+flask-sqlalchemy
+flask-mail
+bs4
+requests
+lxml
+flask-wtf
+flask-bcrypt
+flask-login
+
