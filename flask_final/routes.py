@@ -185,7 +185,7 @@ def reset_token(token):
     if form.validate_on_submit():
         flash("Your password has been succesfully updated! Login now. ",
               'success')
-        hashed_password = bcrypt.generate_password_hash(form.password.data)\.
+        hashed_password = bcrypt.generate_password_hash(form.password.data).\
         decode('utf-8')
         user.password = hashed_password
         db.session.commit()
