@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Collapsible sidebar using Bootstrap 3</title>
+        <title>Dashboard | Khabar-board</title>
 
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -226,7 +226,7 @@ a.article, a.article:hover {
                         <a href="{{url_for('about')}}">About US</a>
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">News</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
-                           {# <li><a href="{{url_for('nep_national_news')}}">National(nep)</a></li>#}
+                            <li><a href="{{url_for('nep_national_news')}}">National(nep)</a></li>
                             <li><a href="{{url_for('eng_national_news')}}">National(eng)</a></li>
                             <li><a href="{{url_for('nep_international_news')}}">International(nep)</a></li>
                         </ul>
