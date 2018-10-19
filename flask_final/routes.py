@@ -1,9 +1,9 @@
-from flask import render_template, url_for, redirect, flash,request
-from flask_login import login_user, logout_user, current_user,login_required
+from flask import render_template, url_for, redirect, flash, request
+from flask_login import login_user, logout_user, current_user, login_required
 from flask_mail import Message
 from flask_final import app, bcrypt, db, mail
-from flask_final.forms import SignupForm, LoginForm, RequestResetForm,
-PasswordResetForm
+from flask_final.forms import(SignupForm, LoginForm, RequestResetForm,
+                              PasswordResetForm)
 from flask_final.models import User
 from flask_final.models import NepNationalNews as NNN
 from flask_final.models import NepInternationalNews as NIN

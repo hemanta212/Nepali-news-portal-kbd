@@ -34,7 +34,7 @@
    
    
    <div class="panel panel-default">
-   <div class="panel-heading"><a href="{{url_for('eng_national_news')}}" target="_blank">National News[eng]</a></div>
+       <div class="panel-heading"><h2><a href="{{url_for('eng_national_news')}}" target="_blank">National News[eng]</a></h2></div>
    </div>
   {% for news in ENN_list %}
    
@@ -61,5 +61,36 @@
    </div>
    <div class='line'></div><br>
    
+
+
+      
+   <div class="panel panel-default">
+   <div class="panel-heading"><h2><a href="{{url_for('nep_national_news')}}" target="_blank">National News[nep]</a></h2></div>
+   </div>
+  {% for news in NNN_list %}
+   
+   <div class="panel panel-default">
+   <div class="panel-heading"><a href="{{news.news_link}}" target="_blank">{{news.title}}</a></div>
+   
+   {%if news.image_link%}
+   <img class="article-img img-responsive" src={{news.image_link}}>
+   {%endif%} 
+   
+   <div class="panel-body">
+   <div>
+   <small class="text-muted">{{ news.date.strftime('%Y-%m-%d') }}</small>
+   <span>| {{news.source}}</span>
+   </div><br>
+   <div>
+   {{news.summary}}
+   </div>
+   </div>
+   </div>
+   {% endfor %}
+   <div class="panel-body">
+   		<small class="text-muted"><a href="{{url_for('nep_national_news')}}">More on this topic.</a></small>
+   </div>
+   <div class='line'></div><br>
+ 
    
 {% endblock content %}
