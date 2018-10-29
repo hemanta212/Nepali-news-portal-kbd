@@ -1,33 +1,32 @@
 {% extends "dashboard.html" %}
 {% block content %}
-<br><br><br>
-	
+  <br><br><br>
+
 	<div class="panel panel-default">
-	<div class="panel-heading">National News[nep]</div>
+	<div class="panel-heading"><h2>National News[nep]</h2></div>
 	</div>
     {% for news in news_list.items %}
     	<div class="panel panel-default">
-        	<div class="panel-heading"><h3><a href="{{news.news_link}}" target="_blank">{{news.title}}</a></h3></div>
-        
-        	{%if news.image_link%}
-        		<img class="article-img" src={{news.image_link}}>
-        	{%endif%} 
-        
-        	<div class="panel-body">
-        		<div>
-        			<small class="text-muted">{{ news.date.strftime('%Y-%m-%d') }}</small>
-        			<span>| {{news.source}}</span>
-        		</div>
-        		<br>
-        		<div>
-        		{{news.summary}}
-        		</div>
-        	</div>
+        <div class="panel-heading"><h3><a href="{{news.news_link}}", target="_blank">{{news.title}}</h3></a></div>
+
+        {%if news.image_link%}
+          <img class="article-img img-responsive" src={{news.image_link}}>
+        {%endif%}
+
+        <div class="panel-body">
+          <div>
+        	<small class="text-muted">{{ news.date.strftime('%Y-%m-%d') }}</small>
+          <span><a href="{{news.news_link}}", target="_blank">| {{news.source}}</a></span>
+        </div><br>
+        <div class="text-justify lead">
+          {{news.summary}}
+        </div><a href="{{news.news_link}}", target="_blank">|थप पढ्नुहोस >>|</a>
         </div>
-    {% endfor %}
-    
+     </div>
+   {% endfor %}
+
     {%for page_num in news_list.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)%}
-    	{%if page_num%}		
+    	{%if page_num%}
     		{%if news_list.page == page_num%}
     			<a class= "btn btn-info mb-4" href="{{url_for("nep_national_news", page=page_num)}}">{{page_num}}</a>
     		{%else%}
@@ -35,7 +34,7 @@
    			{%endif%}
    		{%else%}
     		  ...
-    		
+
     	{%endif%}
     {%endfor%}
 {% endblock content %}
