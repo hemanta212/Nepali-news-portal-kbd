@@ -1,22 +1,22 @@
 {%extends 'layout.html'%}
 
 {%block content%}
-<br><br>
+<br><br><br><br>
 
-   
+
    <!-- Material form login -->
    <form method="POST" action="">
    		{{form.hidden_tag()}}
    <fieldset>
    		<p class="h4 text-center mb-4">Request reset</p>
-   
+
    <!-- Material input email -->
    {%if form.email.errors%}
    		<div class="md-form">
    		<i class="fa fa-envelope prefix grey-text"></i>
    		{{form.email(type="email", id="materialFormLoginEmailEx", class="form-control")}}
-   		{{form.email.label(for="materialFormLoginEmailEx")}}   
-   		
+   		{{form.email.label(for="materialFormLoginEmailEx")}}
+
    		{%for error in form.email.errors%}
    			<span>{{error}}</span>
    			</div>
@@ -25,11 +25,11 @@
        	<div class="md-form">
        	<i class="fa fa-envelope prefix grey-text"></i>
        	{{form.email(type="email", id="materialFormLoginEmailEx", class="form-control")}}
-       	{{form.email.label(for="materialFormLoginEmailEx")}}   
+       	{{form.email.label(for="materialFormLoginEmailEx")}}
        	</div>
    {%endif%}
    <!-- Material input password -->
-   
+
    <div class="text-center mt-4">
    {{form.submit(class="btn btn-default")}}
    </div>

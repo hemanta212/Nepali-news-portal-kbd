@@ -60,7 +60,7 @@ def login():
             login_user(user, remember=form.remember.data)
             return redirect(url_for('news'))
         else:
-            flash('Invalid username or password. Try again!', "info    ")
+            flash('Invalid email or password. Try again!', "info    ")
             return redirect(url_for('login'))
     return render_template('login.html', title="Sign Up", form=form)
 

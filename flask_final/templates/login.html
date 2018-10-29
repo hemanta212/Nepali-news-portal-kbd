@@ -1,22 +1,22 @@
 {%extends 'layout.html'%}
 
 {%block content%}
-<br><br>
+<br><br><br>
 
-   
+
    <!-- Material form login -->
    <form method="POST" action="">
    {{form.hidden_tag()}}
    <fieldset>
    <p class="h4 text-center mb-4">Log in</p>
-   
+
    <!-- Material input email -->
    {%if form.email.errors%}
    		<div class="md-form">
    		<i class="fa fa-envelope prefix grey-text"></i>
    		{{form.email(type="email", id="materialFormLoginEmailEx", class="form-control")}}
-   		{{form.email.label(for="materialFormLoginEmailEx")}}   
-   		
+   		{{form.email.label(for="materialFormLoginEmailEx")}}
+
    		{%for error in form.email.errors%}
    			<span>{{error}}</span>
    			</div>
@@ -25,7 +25,7 @@
        	<div class="md-form">
        	<i class="fa fa-envelope prefix grey-text"></i>
        	{{form.email(type="email", id="materialFormLoginEmailEx", class="form-control")}}
-       	{{form.email.label(for="materialFormLoginEmailEx")}}   
+       	{{form.email.label(for="materialFormLoginEmailEx")}}
        	</div>
    {%endif%}
    <!-- Material input password -->
@@ -34,11 +34,11 @@
    		<i class="fa fa-lock prefix grey-text"></i>
    		{{form.password(type="password", id="materialFormLoginPasswordEx", class="form-control")}}
    		{{form.password.label(for="materialFormLoginPasswordEx")}}
-   		
+
    		{%for error in form.password.errors%}
    			<p>{{error}}</p>
    			</div>
-   		{%endfor%}	
+   		{%endfor%}
    {%else%}
    		<div class="md-form">
    		<i class="fa fa-lock prefix grey-text"></i>
@@ -58,7 +58,7 @@
    <div class="options text-right">
    <p class="pt-1">Don't have an account yet? <a href="{{url_for('signup')}}" class="blue-text">Sign up</a></p>
    <p class="pt-1">Forgot your password? <a href="{{url_for('reset_request')}}" class="blue-text">Reset</a></p>
-   
+
    <button class="btn btn-info"><a href="{{url_for('home')}}">Back</a></button>
    </div>
    <!--/.Panel 8-->
