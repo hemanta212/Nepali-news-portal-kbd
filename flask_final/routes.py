@@ -59,7 +59,7 @@ def login():
         else:
             flash('Invalid email or password. Try again!', "info    ")
             return redirect(url_for('login'))
-    return render_template('login.html', title="Sign Up", form=form)
+    return render_template('login.html', title="Log in", form=form)
 
 
 @login_required
@@ -86,7 +86,8 @@ def news():
     ENN_list = ENN.query.order_by(ENN.date.desc())[:5]
     NIN_list = NIN.query.order_by(NIN.date.desc())[:5]
 
-    return render_template("news.html", ENN_list=ENN_list, NIN_list=NIN_list, NNN_list=NNN_list)
+    return render_template("news.html", ENN_list=ENN_list, NIN_list=NIN_list,
+                           NNN_list=NNN_list)
 
 
 @login_required
@@ -97,7 +98,11 @@ def nep_national_news():
     page = request.args.get("page", 1, type=int)
     news_list = NNN.query.order_by(NNN.date.desc()).paginate(page=page,
                                                              per_page=10)
-    return render_template("nep_national_news.html", news_list=news_list)
+    return render_template("detail_news.html", title='National-Nep',
+                           news_list=news_list,
+                           heading='National News [Nep]',
+                           urlfor='nep_national_news',
+                           read_more='|थप पढ्नुहोस >>|')
 
 
 @login_required
@@ -108,7 +113,11 @@ def nep_international_news():
     page = request.args.get("page", 1, type=int)
     news_list = NIN.query.order_by(NIN.date.desc()).paginate(page=page,
                                                              per_page=10)
-    return render_template("nep_international_news.html", news_list=news_list)
+    return render_template("detail_news.html", title='International-Nep',
+                           news_list=news_list,
+                           heading='International News [Nep]',
+                           urlfor='nep_international_news',
+                           read_more='|थप पढ्नुहोस >>|')
 
 
 @login_required
@@ -119,7 +128,11 @@ def eng_national_news():
     page = request.args.get("page", 1, type=int)
     news_list = ENN.query.order_by(ENN.date.desc()).paginate(page=page,
                                                              per_page=10)
-    return render_template("eng_national_news.html", news_list=news_list)
+    return render_template("detail_news.html", title='National-Eng',
+                           news_list=news_list,
+                           heading='National News [Eng]',
+                           urlfor='eng_national_news',
+                           read_more='|Read More>>|')
 
 
 @app.route("/password/reset", methods=["GET", 'POST'])
@@ -154,15 +167,17 @@ def reset_token(token):
         db.session.commit()
         return redirect(url_for('login'))
 
-    return render_template('reset_password.html', form=form)
+    return render_template('reset_password.html', title='Password reset',
+                           form=form)
 
 
 def send_reset_mail(user):
     token = user.get_reset_token()
     msg = Message('Reset Password for Khabar Board',
                   sender='noreply@demo.com', recipients=[user.email])
-    msg.body = f'''{user.full_name}, you can have your password reset in below
-    link {url_for('reset_token', token=token, _external =True)} if
-    you have not sent this email then you can just ignore it'''
+    msg.html = render_template('reset_password_email.html', action_url=url_for('reset_token', token=token, _external=True), user=user)
+    # msg.body = f'''{user.full_name}, you can have your password reset in below
+    # link {url_for('reset_token', token=token, _external =True)} if
+    # you have not sent this email then you can just ignore it'''
 
     mail.send(msg)

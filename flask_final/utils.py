@@ -9,8 +9,8 @@ from flask_final import db
 
 def news_fetcher(category):
     category_dict = {
-        NIN: kantipur_daily_extractor(),
-        NNN: nagarik_international_extractor(),
+        NNN: kantipur_daily_extractor(),
+        NIN: nagarik_international_extractor(),
         ENN: kathmandu_post_extractor(),
     }
     raw_news_list = category_dict[category]
