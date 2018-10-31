@@ -9,9 +9,7 @@ from flask_final.models import NepNationalNews as NNN
 from flask_final.models import NepInternationalNews as NIN
 from flask_final.models import EngNationalNews as ENN
 
-from flask_final.nagarik_international import nagarik_international_extractor
-from flask_final.kantipur_daily import kantipur_daily_extractor
-from flask_final.kathmandupost import kathmandu_post_extractor
+from flask_final.utils import news_fetcher
 
 
 @app.route("/", methods=["GET", 'POST'])
@@ -56,7 +54,6 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password,
                                                form.password.data):
-            flash('You are logged in', 'success')
             login_user(user, remember=form.remember.data)
             return redirect(url_for('news'))
         else:
@@ -81,6 +78,10 @@ def news():
 
      Ouput:
          many list of models items."""
+    news_fetcher(NNN)
+    news_fetcher(NIN)  # Reload all the models to get the latest news!!
+    news_fetcher(ENN)
+
     NNN_list = NNN.query.order_by(NNN.date.desc())[:5]
     ENN_list = ENN.query.order_by(ENN.date.desc())[:5]
     NIN_list = NIN.query.order_by(NIN.date.desc())[:5]
@@ -92,24 +93,10 @@ def news():
 @app.route("/dashboard/news/nep/national", methods=["GET", 'POST'])
 def nep_national_news():
     """Save extracted news to model & passes to template"""
-    kantipur_daily_news_list = kantipur_daily_extractor()
-    for news in kantipur_daily_news_list[::-1]:
-        dup = NNN.query.filter_by(summary=news["title"]).first()
-        if dup == None:
-            news_post = NNN(title=news['title'], nep_date=news['date'],
-                            source=news['source'], summary=news['summary'],
-                            news_link=news['news_link'],)
-            db.session.add(news_post)
-            db.session.commit()
-    try:
-        for i in NNN.query.order_by(NNN.date.desc())[30:]:
-            db.session.delete(i)
-            db.session.commit()
-    finally:
-        page = request.args.get("page", 1, type=int)
-        news_list = NNN.query.order_by(NNN.date.desc()).paginate(page=page,
-                                                                 per_page=10)
-
+    news_fetcher(NNN)
+    page = request.args.get("page", 1, type=int)
+    news_list = NNN.query.order_by(NNN.date.desc()).paginate(page=page,
+                                                             per_page=10)
     return render_template("nep_national_news.html", news_list=news_list)
 
 
@@ -117,25 +104,10 @@ def nep_national_news():
 @app.route("/dashboard/news/nep/international", methods=["GET", 'POST'])
 def nep_international_news():
     """Save extracted news to model & passes to template"""
-    nagarik_international_news_list = nagarik_international_extractor()
-
-    for news in nagarik_international_news_list[::-1]:
-        dup = NIN.query.filter_by(summary=news["title"]).first()
-        if dup == None:
-            news_post = NIN(title=news['title'], nep_date=news['date'],
-                            source=news['source'], summary=news['summary'],
-                            news_link=news['news_link'])
-            db.session.add(news_post)
-            db.session.commit()
-    try:
-        for i in NIN.query.order_by(NIN.date.desc())[30:]:
-            db.session.delete(i)
-            db.session.commit()
-    finally:
-        page = request.args.get("page", 1, type=int)
-        news_list = NIN.query.order_by(NIN.date.desc()).paginate(page=page,
-                                                                 per_page=10)
-
+    news_fetcher(NIN)
+    page = request.args.get("page", 1, type=int)
+    news_list = NIN.query.order_by(NIN.date.desc()).paginate(page=page,
+                                                             per_page=10)
     return render_template("nep_international_news.html", news_list=news_list)
 
 
@@ -143,28 +115,10 @@ def nep_international_news():
 @app.route("/dashboard/news/eng/national", methods=["GET", 'POST'])
 def eng_national_news():
     """Save extracted news to model & passes to template"""
-    kathmandu_post_news_list = kathmandu_post_extractor()
-    for news in kathmandu_post_news_list[::-1]:
-        dup = ENN.query.filter_by(summary=news["title"]).first()
-        if dup == None:
-            news_post = ENN(title=news['title'], nep_date=news['date'],
-                            source=news['source'],
-                            summary=news['summary'],
-                            news_link=news['news_link'],
-                            image_link=news['image_link'])
-            db.session.add(news_post)
-            db.session.commit()
-
-    try:
-        for i in ENN.query.order_by(ENN.date.desc())[30:]:
-            print(i.date)
-            db.session.delete(i)
-            db.session.commit()
-    finally:
-        page = request.args.get("page", 1, type=int)
-        news_list = ENN.query.order_by(ENN.date.desc()).paginate(page=page,
-                                                                 per_page=10)
-
+    news_fetcher(ENN)
+    page = request.args.get("page", 1, type=int)
+    news_list = ENN.query.order_by(ENN.date.desc()).paginate(page=page,
+                                                             per_page=10)
     return render_template("eng_national_news.html", news_list=news_list)
 
 
