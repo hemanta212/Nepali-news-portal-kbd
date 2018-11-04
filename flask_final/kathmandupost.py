@@ -81,7 +81,8 @@ def kathmandu_post_extractor():
                 except:
                     image_link = "img not available"
 
-            date = news.find('div', class_="post").text.split(", ")[2].rstrip()
+            date = news.find('div', class_="post").text.split(", ")[1].rstrip()
+            print(date)
             summary = news.find('div', class_="text").text
             news_dict = {
                 "image_link": image_link,
