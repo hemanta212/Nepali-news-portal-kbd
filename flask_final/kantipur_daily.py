@@ -8,12 +8,6 @@ import codecs
 url = 'https://www.kantipurdaily.com/news'
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
-# try:
-#    response = requests.get(url, headers=headers)
-#    sleep(3)
-# except requests.exceptions.ConnectionError:
-#    r.status_code = "Connection refused"
-#
 
 page = ''
 while page == '':
@@ -28,7 +22,6 @@ while page == '':
         print("Was a nice sleep, now let me continue...")
         continue
 soup = BS(page.content, 'lxml')
-# print(soup.prettify())
 
 
 def kantipur_daily_extractor():
@@ -58,7 +51,6 @@ def kantipur_daily_extractor():
         news_list.append(news_dict)
 
         counter += 1
-    # w.write(str(news_list))
     return news_list
 
 

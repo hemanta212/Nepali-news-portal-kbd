@@ -19,7 +19,7 @@ def news_fetcher(category):
         dup = category.query.filter_by(title=news["title"]).first()
 
         if dup == None:
-            news_post = category(title=news['title'], nep_date=news['date'],
+            news_post = category(title=news['title'],
                                  source=news['source'], summary=news['summary'],
                                  image_link=news['image_link'], news_link=news['news_link'],)
             db.session.add(news_post)

@@ -41,7 +41,7 @@ def kathmandu_post_extractor():
             post_link = news.h1.a['href']
             full_link = default_link + post_link
             title = news.h1.a.text
-            date = news.find('div', class_="post").text.split(",")[1].rstrip().lstrip()
+            #date = news.find('div', class_="post").text.split(",")[1].rstrip().lstrip()
             summary = news.find('div', class_="text").text
 
             if len(summary) >= 1001:
@@ -49,7 +49,6 @@ def kathmandu_post_extractor():
 
             news_dict = {
                 "title": title,
-                "date": date,
                 "source": "ekantipur",
                 "news_link": full_link,
                 "summary": summary,
@@ -72,7 +71,6 @@ def kathmandu_post_extractor():
             full_link = default_link + post_link
             title = news.h2.a.text
             image_div = news.find('div', class_='ktp-main-news')
-
             if image_div == None:
                 continue
             else:
@@ -81,13 +79,12 @@ def kathmandu_post_extractor():
                 except:
                     image_link = "img not available"
 
-            date = news.find('div', class_="post").text.split(", ")[1].rstrip()
-            print(date)
+            #date = news.find('div', class_="post").text.split(", ")[1].rstrip()
+
             summary = news.find('div', class_="text").text
             news_dict = {
                 "image_link": image_link,
                 "title": title,
-                "date": date,
                 "source": "ekantipur",
                 "news_link": full_link,
                 "summary": summary,
