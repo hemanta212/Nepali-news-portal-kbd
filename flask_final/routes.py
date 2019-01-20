@@ -45,6 +45,21 @@ def signup():
   return render_template('signup.html', title="Sign Up", form=form)
 
 
+@app.route("/try", methods=["GET", 'POST'])
+def tryfree():
+  if current_user.is_authenticated:
+    return redirect(url_for('news'))
+  user = User.query.filter_by(email="try@try.com").first()
+  if not user:
+    user = User(full_name="try", email="try@try.com",
+                password="try")
+
+    db.session.add(user)
+    db.session.commit()
+  login_user(user, remember=True)
+  return redirect(url_for('news'))
+
+
 @app.route("/login", methods=["GET", 'POST'])
 def login():
   if current_user.is_authenticated:
