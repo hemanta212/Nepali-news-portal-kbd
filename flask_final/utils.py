@@ -25,6 +25,6 @@ def news_fetcher(category):
             db.session.add(news_post)
             db.session.commit()
 
-    for i in category.query.order_by(category.date.desc())[30:]:
+    for i in category.query.order_by(category.date.asc())[30:]:
         db.session.delete(i)
         db.session.commit()
