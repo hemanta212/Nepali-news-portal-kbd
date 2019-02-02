@@ -41,7 +41,11 @@ def kathmandu_post_extractor():
             post_link = news.h1.a['href']
             full_link = default_link + post_link
             title = news.h1.a.text
+<<<<<<< HEAD
+            date = news.find('div', class_="post").text.split(",")[1].rstrip().lstrip()
+=======
             #date = news.find('div', class_="post").text.split(",")[1].rstrip().lstrip()
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
             summary = news.find('div', class_="text").text
 
             if len(summary) >= 1001:
@@ -51,6 +55,10 @@ def kathmandu_post_extractor():
                 "title": title,
                 "source": "ekantipur",
                 "news_link": full_link,
+<<<<<<< HEAD
+                'nep_date': date,
+=======
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
                 "summary": summary,
                 "image_link": img_link,
             }
@@ -79,12 +87,24 @@ def kathmandu_post_extractor():
                 except:
                     image_link = "img not available"
 
+<<<<<<< HEAD
+            # dealing with variable date location during parsing.
+            try:
+                date = news.find('div', class_="post").text.split(", ")[2].rstrip()
+            except IndexError:
+                date = news.find('div', class_="post").text.split(", ")[1].rstrip()
+=======
             #date = news.find('div', class_="post").text.split(", ")[1].rstrip()
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
 
             summary = news.find('div', class_="text").text
             news_dict = {
                 "image_link": image_link,
                 "title": title,
+<<<<<<< HEAD
+                "nep_date": date,
+=======
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
                 "source": "ekantipur",
                 "news_link": full_link,
                 "summary": summary,
@@ -95,3 +115,9 @@ def kathmandu_post_extractor():
         return last_list
 
     return main_news()
+<<<<<<< HEAD
+
+
+kathmandu_post_extractor()
+=======
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b

@@ -16,7 +16,7 @@
 
    <div class="panel-body">
    <div>
-   <small class="text-muted">{{ news.date.strftime('%Y-%m-%d') }}</small>
+   <small class="text-muted">{{ news.nep_date }}</small>
    <span>| {{news.source}}</span>
    </div><br>
    <div class="text-justify lead">
@@ -46,8 +46,8 @@
    {%endif%}
 
    <div class="panel-body">
-   <div>
-   <small class="text-muted">{{ news.date.strftime('%Y-%m-%d') }}</small>
+   <div><!--news.date.strftime('%Y-%m-%d')-->
+   <small class="text-muted">{{ news.nep_date }}</small>
    <span>| {{news.source}}</span>
    </div><br>
    <div  class="text-justify lead">
@@ -78,7 +78,7 @@
 
    <div class="panel-body">
    <div>
-   <small class="text-muted">{{ news.date.strftime('%Y-%m-%d') }}</small>
+   <small class="text-muted">{{ news.nep_date }}</small>
    <span>| {{news.source}}</span>
    </div><br>
    <div class="text-justify lead">

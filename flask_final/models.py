@@ -42,19 +42,31 @@ class NepNationalNews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+<<<<<<< HEAD
+    nep_date = db.Column(db.String(20), nullable=False)
+=======
     # nep_date = db.Column(db.String(20), nullable = , )
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
     summary = db.Column(db.Text,)
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
     news_link = db.Column(db.Text,)
 
     def __repr__(self):
+<<<<<<< HEAD
+        return 'news({0}, {1}, {2})'.format(self.id, self.source, self.date)
+=======
         return 'news({0}, {1}, {2})'.format(self.id, self.source, self.nep_date)
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
 
 
 class NepInternationalNews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
+<<<<<<< HEAD
+    nep_date = db.Column(db.String(20), nullable=False)
+=======
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
     summary = db.Column(db.Text,)
     title = db.Column(db.Text, nullable=False)
@@ -62,18 +74,30 @@ class NepInternationalNews(db.Model):
     news_link = db.Column(db.Text,)
 
     def __repr__(self):
+<<<<<<< HEAD
+        return 'news({0}, {1}, {2})'.format(self.id, self.source, self.date)
+=======
         return 'news({0}, {1}, {2})'.format(self.id, self.source, self.nep_date)
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
 
 
 class EngNationalNews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+<<<<<<< HEAD
+    nep_date = db.Column(db.String(20), nullable=False)
+=======
     #nep_date = db.Column(db.String(20), nullable = False, )
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
     summary = db.Column(db.Text, )
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
     news_link = db.Column(db.Text,)
 
     def __repr__(self):
+<<<<<<< HEAD
+        return 'news({0}, {1}, {2})'.format(self.id, self.source, self.date)
+=======
         return 'news({0}, {1}, {2})'.format(self.id, self.source, self.nep_date)
+>>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
