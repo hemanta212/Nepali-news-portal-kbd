@@ -21,12 +21,9 @@ def news_fetcher(category):
         if dup == None:
             news_post = category(title=news['title'],
                                  source=news['source'], summary=news['summary'],
-<<<<<<< HEAD
                                  image_link=news['image_link'], news_link=news['news_link'],
                                  nep_date=news["nep_date"])
-=======
-                                 image_link=news['image_link'], news_link=news['news_link'],)
->>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
+
             db.session.add(news_post)
             db.session.commit()
 

@@ -42,11 +42,7 @@ def kantipur_daily_extractor():
         link = "https://kantipurdaily.com" + date_ore
         news_dict = {
             'title': title,
-<<<<<<< HEAD
             'nep_date': date,
-=======
-            'date': date,
->>>>>>> 2e3f771e54483475637b5c5ad8eead981285ae7b
             'source': 'ekantipur',
             'summary': summary,
             'news_link': link,
