@@ -51,6 +51,3 @@ def nagarik_international_extractor():
 
     # w.write(str(final_news_list))
     return final_news_list
-
-
-nagarik_international_extractor()

@@ -52,6 +52,3 @@ def kantipur_daily_extractor():
 
         counter += 1
     return news_list
-
-
-kantipur_daily_extractor()
