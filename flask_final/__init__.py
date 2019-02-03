@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
@@ -20,14 +21,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # app.config["SECRET_KEY"] = configvar["SECRET_KEY"]  # use os.environ.get() if not linux server
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
-# disable the warning popup when server starts
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
