@@ -1,0 +1,32 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+bcrypt = "==3.1.4"
+beautifulsoup4 = "==4.6.3"
+bs4 = "==0.0.1"
+cffi = "==1.11.5"
+chardet = "==3.0.4"
+click = "==7.0"
+flask = "==1.0.2"
+flask-bcrypt = "==0.7.1"
+flask-login = "==0.4.1"
+flask-mail = "==0.9.1"
+flask-sqlalchemy = "==2.3.2"
+flask-wtf = "==0.14.2"
+itsdangerous = "==0.24"
+jinja2 = "==2.10"
+lxml = "==4.2.5"
+requests = "==2.20.0"
+sqlalchemy = "==1.2.12"
+urllib3 = "==1.23"
+werkzeug = "==0.14.1"
+wtforms = "==2.2.1"
+gunicorn = "==19.9.0"
+
+[requires]
+python_version = "3.6.6"
