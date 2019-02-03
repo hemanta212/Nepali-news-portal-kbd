@@ -13,20 +13,24 @@ def news_fetcher(category):
         NIN: nagarik_international_extractor(),
         ENN: kathmandu_post_extractor(),
     }
+    print("I am runing after declaration of dict")
     raw_news_list = category_dict[category]
+    print("I am runing after declaration of raw_news_list")
+    try:
+        for news in raw_news_list[::-1]:
+            dup = category.query.filter_by(title=news["title"]).first()
 
-    for news in raw_news_list[::-1]:
-        dup = category.query.filter_by(title=news["title"]).first()
+            if dup == None:
+                news_post = category(title=news['title'],
+                                     source=news['source'], summary=news['summary'],
+                                     image_link=news['image_link'], news_link=news['news_link'],
+                                     nep_date=news["nep_date"])
 
-        if dup == None:
-            news_post = category(title=news['title'],
-                                 source=news['source'], summary=news['summary'],
-                                 image_link=news['image_link'], news_link=news['news_link'],
-                                 nep_date=news["nep_date"])
+                db.session.add(news_post)
+                db.session.commit()
 
-            db.session.add(news_post)
+        for i in category.query.order_by(category.date.asc())[30:]:
+            db.session.delete(i)
             db.session.commit()
-
-    for i in category.query.order_by(category.date.asc())[30:]:
-        db.session.delete(i)
-        db.session.commit()
+    except:
+        pass
