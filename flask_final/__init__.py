@@ -1,35 +1,32 @@
 import json
 import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_final.config import Config
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-login_manager.login_view = "login"
+login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
+
+app.config.from_object(Config)
+# disable the warning popup when server starts
+db = SQLAlchemy(app)
+mail = Mail(app)
+
+from flask_final.users.routes import users
+from flask_final.newslet.routes import newslet
+from flask_final.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(newslet)
+app.register_blueprint(main)
 
 # for deploying on a linux server use os.environ.get() otherwise
 # with open("/etc/kbd/config.json") as json_file:
 #    configvar = json.load(json_file)
-
-# disable the warning popup when server starts
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# app.config["SECRET_KEY"] = configvar["SECRET_KEY"]  # use os.environ.get() if not linux server
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
-db = SQLAlchemy(app)
-
-app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL')
-app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASSWORD')
-mail = Mail(app)
-
-
-from flask_final import routes

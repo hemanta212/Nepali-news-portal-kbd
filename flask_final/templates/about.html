@@ -3,7 +3,7 @@
 {%block content%}
 <br><br><br>
 <div class="container">
-<a href='{{url_for('about')}}'><h1> About this website</h1></a>
+<a href='{{url_for('main.about')}}'><h1> About this website</h1></a>
 <p class="text-justify">This website is built as the pet project of me(Hemanta Sharma). On the journey to learn backend web-development, I decided to make something of my own interest to practice my skills.
 </p>
 <p class="text-justify">
@@ -13,7 +13,7 @@ Khabar-board currently featured extracted summary news from various news portals
 <p>I am also planning to include push notificatiion and newsletters in the future.</p>
 <br>
 <div class="mb-5">
-<button class='btn btn-info'><a href="{{url_for('news')}}">Back to dashboard</a></button>
+<button class='btn btn-info'><a href="{{url_for('newslet.news')}}">Back to dashboard</a></button>
 </div>
 </div>
 {%endblock content%}

@@ -2,7 +2,7 @@
 {% block content %}
 
    <div class="panel panel-default">
-   <div class="panel-heading"><h2><a href="{{url_for('nep_national_news')}}" target="_blank">National News[nep]</a></h2></div>
+   <div class="panel-heading"><h2><a href="{{url_for('newslet.nep_national_news')}}" target="_blank">National News[nep]</a></h2></div>
    </div>
   {% for news in NNN_list %}
 
@@ -25,14 +25,14 @@
    </div>
    {% endfor %}
    <div class="panel-body">
-         <small class="text-muted"><a href="{{url_for('nep_national_news')}}">More on this topic.</a></small>
+         <small class="text-muted"><a href="{{url_for('newslet.nep_national_news')}}">More on this topic.</a></small>
    </div>
    <div class='line'></div><br>
 
 
 
    <div class="panel panel-default">
-   <div class="panel-heading"><h2><a href="{{url_for('nep_international_news')}}" target="_blank">International News[nep]</a></h2></div>
+   <div class="panel-heading"><h2><a href="{{url_for('newslet.nep_international_news')}}" target="_blank">International News[nep]</a></h2></div>
    </div>
    {% for news in NIN_list %}
 
@@ -55,7 +55,7 @@
    </div>
    {% endfor %}
 	<div class="panel-body">
-		<small class="text-muted"><a href="{{url_for('nep_international_news')}}">More on this topic.</a></small>
+		<small class="text-muted"><a href="{{url_for('newslet.nep_international_news')}}">More on this topic.</a></small>
 	</div>
 	<div class='line'></div><br>
 
@@ -63,7 +63,7 @@
 
 
    <div class="panel panel-default">
-       <div class="panel-heading"><h2><a href="{{url_for('eng_national_news')}}" target="_blank">National News[eng]</a></h2></div>
+       <div class="panel-heading"><h2><a href="{{url_for('newslet.eng_national_news')}}" target="_blank">National News[eng]</a></h2></div>
    </div>
   {% for news in ENN_list %}
 
@@ -86,7 +86,7 @@
    </div>
    {% endfor %}
    <div class="panel-body">
-   		<small class="text-muted"><a href="{{url_for('eng_national_news')}}">More on this topic.</a></small>
+   		<small class="text-muted"><a href="{{url_for('newslet.eng_national_news')}}">More on this topic.</a></small>
    </div>
    <div class='line'></div><br>
 

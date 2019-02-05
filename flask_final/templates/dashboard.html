@@ -38,15 +38,15 @@
                 <ul class="list-unstyled components">
                     <p>Dashboard</p>
                     <li class="#">
-                        <a href="{{url_for('news')}}">Home</a>
+                        <a href="{{url_for('newslet.news')}}">Home</a>
 
                     <li>
-                        <a href="{{url_for('about')}}">About</a>
+                        <a href="{{url_for('main.about')}}">About</a>
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">News</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li><a href="{{url_for('nep_national_news')}}">National(Nep)</a></li>
-                            <li><a href="{{url_for('eng_national_news')}}">National(Eng)</a></li>
-                            <li><a href="{{url_for('nep_international_news')}}">International(Nep)</a></li>
+                            <li><a href="{{url_for('newslet.nep_national_news')}}">National(Nep)</a></li>
+                            <li><a href="{{url_for('newslet.eng_national_news')}}">National(Eng)</a></li>
+                            <li><a href="{{url_for('newslet.nep_international_news')}}">International(Nep)</a></li>
                         </ul>
                     </li>
                     <li>
@@ -57,7 +57,7 @@
                 </ul>
 
                 <ul class="list-unstyled CTAs">
-                    <li><a href="{{url_for('logout')}}" class="download"><i class="glyphicon glyphicon-off"></i>  Logout</a></li>
+                    <li><a href="{{url_for('users.logout')}}" class="download"><i class="glyphicon glyphicon-off"></i>  Logout</a></li>
                     <li><a href="https://github.com/hemanta212/Khabar-board">Get Source Code!</a></li>
                 </ul>
             </nav>

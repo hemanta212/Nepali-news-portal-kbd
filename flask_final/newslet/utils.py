@@ -1,18 +1,18 @@
 try:
-    from flask_final.nagarik_international import nagarik_international_extractor
-    from flask_final.kantipur_daily import kantipur_daily_extractor
-    from flask_final.kathmandupost import kathmandu_post_extractor
+    from flask_final.newslet.nagarik_international import nagarik_international_extractor
+    from flask_final.newslet.kantipur_daily import kantipur_daily_extractor
+    from flask_final.newslet.kathmandupost import kathmandu_post_extractor
 
-except Exception as e:
-    print(e)
+except Exception as E:
+    print(E)
 
     def news_fetcher(category):
         pass
 
 else:
-    from flask_final.models import NepNationalNews as NNN
-    from flask_final.models import NepInternationalNews as NIN
-    from flask_final.models import EngNationalNews as ENN
+    from flask_final.newslet.models import NepNationalNews as NNN
+    from flask_final.newslet.models import NepInternationalNews as NIN
+    from flask_final.newslet.models import EngNationalNews as ENN
     from flask_final import db
 
     def news_fetcher(category):
@@ -26,7 +26,7 @@ else:
         for news in raw_news_list[::-1]:
             dup = category.query.filter_by(title=news["title"]).first()
 
-            if dup == None:
+            if dup is None:
                 news_post = category(title=news['title'],
                                      source=news['source'], summary=news['summary'],
                                      image_link=news['image_link'], news_link=news['news_link'],

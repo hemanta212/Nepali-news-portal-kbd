@@ -1,20 +1,21 @@
+import time
 from bs4 import BeautifulSoup as BS
 import requests
-import csv
-import codecs
-import time
+
 
 count = 0
 url = 'http://nagariknews.nagariknetwork.com/category/27'
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
+     (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
 page = ''
 while page == '' and count < 4:
     try:
         page = requests.get(url, headers=headers)
         break
-    except:
-        print("Connection refused by the server..")
+    except Exception as e:
+        print("Connection refused by the server..", e)
         print("Let me sleep for 5 seconds")
         print("ZZzzzz...")
         time.sleep(5)
@@ -27,7 +28,8 @@ soup = BS(response.content, 'lxml')
 
 def nagarik_international_extractor():
 
-    # with codecs.open("ujyaalo_international_cache.csv", "w", encoding='utf-8', errors='ignore') as w:
+    # with codecs.open("ujyaalo_international_cache.csv", "w",
+    #  encoding='utf-8', errors='ignore') as w:
     # with open("ujyaalo_international_cache.csv", 'w') as w:
 
     news_articles = soup.find_all('div', class_='detail-on')

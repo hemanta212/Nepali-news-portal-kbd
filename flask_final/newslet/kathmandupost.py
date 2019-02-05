@@ -41,10 +41,11 @@ def kathmandu_post_extractor():
             post_link = news.h1.a['href']
             full_link = default_link + post_link
             title = news.h1.a.text
-            date = news.find('div', class_="post").text.split(",")[1].rstrip().lstrip()
-            #date = news.find('div', class_="post").text.split(",")[1].rstrip().lstrip()
+            try:
+                date = news.find('div', class_="post").text.split(",")[2].rstrip().lstrip()
+            except IndexError:
+                date = news.find('div', class_="post").text.split(",")[1].rstrip().lstrip()
             summary = news.find('div', class_="text").text
-
             if len(summary) >= 1001:
                 summary = summary[:1000]
 
@@ -58,7 +59,6 @@ def kathmandu_post_extractor():
             }
 
             featured_news.append(news_dict)
-
         return featured_news
 
     def main_news():
@@ -86,7 +86,7 @@ def kathmandu_post_extractor():
                 date = news.find('div', class_="post").text.split(", ")[2].rstrip()
             except IndexError:
                 date = news.find('div', class_="post").text.split(", ")[1].rstrip()
-            #date = news.find('div', class_="post").text.split(", ")[1].rstrip()
+
             summary = news.find('div', class_="text").text
             news_dict = {
                 "image_link": image_link,
@@ -102,3 +102,4 @@ def kathmandu_post_extractor():
         return last_list
 
     return main_news()
+kathmandu_post_extractor()
