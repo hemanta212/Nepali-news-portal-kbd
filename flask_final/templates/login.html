@@ -4,69 +4,69 @@
 <br><br><br>
 
 
-   <!-- Material form login -->
-   <form method="POST" action="">
-   {{form.hidden_tag()}}
-   <fieldset>
-   <p class="h4 text-center mb-4">Log in</p>
+<!-- Material form login -->
+<form method="POST" action="">
+    {{form.hidden_tag()}}
+    <fieldset>
+        <p class="h4 text-center mb-4">Log in</p>
 
-   <!-- Material input email -->
-   {%if form.email.errors%}
-   		<div class="md-form">
-   		<i class="fa fa-envelope prefix grey-text"></i>
-   		{{form.email(type="email", id="materialFormLoginEmailEx", class="form-control")}}
-   		{{form.email.label(for="materialFormLoginEmailEx")}}
+        <!-- Material input email -->
+        {%if form.email.errors%}
+        <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            {{form.email(type="email", id="materialFormLoginEmailEx", class="form-control")}}
+            {{form.email.label(for="materialFormLoginEmailEx")}}
 
-   		{%for error in form.email.errors%}
-   			<span>{{error}}</span>
-   			</div>
-   		{%endfor%}
-   {%else%}
-       	<div class="md-form">
-       	<i class="fa fa-envelope prefix grey-text"></i>
-       	{{form.email(type="email", id="materialFormLoginEmailEx", class="form-control")}}
-       	{{form.email.label(for="materialFormLoginEmailEx")}}
-       	</div>
-   {%endif%}
-   <!-- Material input password -->
-   {%if form.password.errors %}
-   		<div class="md-form">
-   		<i class="fa fa-lock prefix grey-text"></i>
-   		{{form.password(type="password", id="materialFormLoginPasswordEx", class="form-control")}}
-   		{{form.password.label(for="materialFormLoginPasswordEx")}}
+            {%for error in form.email.errors%}
+            <span>{{error}}</span>
+        </div>
+        {%endfor%}
+        {%else%}
+        <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            {{form.email(type="email", id="materialFormLoginEmailEx", class="form-control")}}
+            {{form.email.label(for="materialFormLoginEmailEx")}}
+        </div>
+        {%endif%}
+        <!-- Material input password -->
+        {%if form.password.errors %}
+        <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            {{form.password(type="password", id="materialFormLoginPasswordEx", class="form-control")}}
+            {{form.password.label(for="materialFormLoginPasswordEx")}}
 
-   		{%for error in form.password.errors%}
-   			<p>{{error}}</p>
-   			</div>
-   		{%endfor%}
-   {%else%}
-   		<div class="md-form">
-   		<i class="fa fa-lock prefix grey-text"></i>
-   		{{form.password(type="password", id="materialFormLoginPasswordEx", class="form-control")}}
-   		{{form.password.label(for="materialFormLoginPasswordEx")}}
-   		</div>
-   {%endif%}
-   <div class="mt-4 ml-4 form-check">
-   {{form.remember(class="form-check-input")}}
-   {{form.remember.label(class="form-check-label")}}
-   </div>
-   <div class="text-center mt-4">
-   {{form.submit(class="btn btn-default")}}
-   </div>
-   <!--Footer-->
-   <div class="modal-footer">
-   <div class="options text-right">
-   <p class="pt-1">Don't have an account yet? <a href="{{url_for('users.signup')}}" class="blue-text">Sign up</a></p>
-   <p class="pt-1">Forgot your password? <a href="{{url_for('users.reset_request')}}" class="blue-text">Reset</a></p>
+            {%for error in form.password.errors%}
+            <p>{{error}}</p>
+        </div>
+        {%endfor%}
+        {%else%}
+        <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            {{form.password(type="password", id="materialFormLoginPasswordEx", class="form-control")}}
+            {{form.password.label(for="materialFormLoginPasswordEx")}}
+        </div>
+        {%endif%}
+        <div class="mt-4 ml-4 form-check">
+            {{form.remember(class="form-check-input")}}
+            {{form.remember.label(class="form-check-label")}}
+        </div>
+        <div class="text-center mt-4">
+            {{form.submit(class="btn btn-default")}}
+        </div>
+        <!--Footer-->
+        <div class="modal-footer">
+            <div class="options text-right">
+                <p class="pt-1">Don't have an account yet? <a href="{{url_for('users.signup')}}" class="blue-text">Sign up</a></p>
+                <p class="pt-1">Forgot your password? <a href="{{url_for('users.reset_request')}}" class="blue-text">Reset</a></p>
 
-   <button class="btn btn-info"><a href="{{url_for('main.home')}}">Back</a></button>
-   </div>
-   <!--/.Panel 8-->
-   </div>
-   </fieldset>
-   </form>
-   <!-- Material form login -->
-   <br>
+                <button class="btn btn-info"><a href="{{url_for('main.home')}}">Back</a></button>
+            </div>
+            <!--/.Panel 8-->
+        </div>
+    </fieldset>
+</form>
+<!-- Material form login -->
+<br>
 
 
 {%endblock content%}

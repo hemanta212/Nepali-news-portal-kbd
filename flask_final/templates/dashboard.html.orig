@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        {% if title %}
+            <title>{{title}}</title>
+        {% else %}
+            <title>Dashboard | Khabar-board</title>
+        {%endif %}
+
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
+
+        <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='dashboard/dashboard.css')}}">
+        <link rel="icon"  type="image/png/jpg" href="{{url_for('static',filename='images/icon.jpg')}}">
+    </head>
+
+    <body>
+
+       <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div id="dismiss">
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                </div>
+
+                <div class="sidebar-header">
+                    <img class="img-responsive" style="width:3em;" src={{url_for('static',filename='images/icon.jpg')}}>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <p>Dashboard</p>
+                    <li class="#">
+                        <a href="{{url_for('newslet.news')}}">Home</a>
+
+                    <li>
+<<<<<<< Updated upstream
+                        <a href="{{url_for('main.about')}}">About</a>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">News</a>
+=======
+                        <a href="{{url_for('about')}}">About</a>
+
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">News
+                        </a>
+
+>>>>>>> Stashed changes
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li><a href="{{url_for('newslet.nep_national_news')}}">National(Nep)</a></li>
+                            <li><a href="{{url_for('newslet.eng_national_news')}}">National(Eng)</a></li>
+                            <li><a href="{{url_for('newslet.nep_international_news')}}">International(Nep)</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#">Conversion Tools</a>
+                    </li>
+                </ul>
+
+                <ul class="list-unstyled CTAs">
+                    <li><a href="{{url_for('users.logout')}}" class="download"><i class="glyphicon glyphicon-off"></i>  Logout</a></li>
+                    <li><a href="https://github.com/hemanta212/Khabar-board">Get Source Code!</a></li>
+                </ul>
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+               <nav class=" navbar navbar-default">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class=" btn btn-info navbar-btn">
+                                <i class=" glyphicon glyphicon-align-left"></i>
+                                Menu
+                            </button>
+                        </div>
+
+                    </div>
+                </nav>
+
+                 {%block content%}
+                    {% with messages = get_flashed_messages(with_categories = True)%}
+                        {%if messages%}
+                            {%for category,message in messages%}
+                                <br><br><div class="alert alert-{{category}}">{{message}}</div>
+                            {%endfor%}
+                        {%endif%}
+                     {%endwith%}
+
+                {%endblock content%}
+            </div>
+
+        <div class="overlay"></div>
+
+        <!-- jQuery CDN -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Bootstrap Js CDN -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- jQuery Custom Scroller CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#sidebar").mCustomScrollbar({
+                    theme: "minimal"
+                });
+
+                $('#dismiss, .overlay').on('click', function () {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').fadeOut();
+                });
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').addClass('active');
+                    $('.overlay').fadeIn();
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
+            });
+        </script>
+    </body>
+</html>
