@@ -1,11 +1,13 @@
-from bs4 import BeautifulSoup as BS
 import time
+from bs4 import BeautifulSoup as BS
 import requests
 
 
 count = 0
 url = 'https://kathmandupost.ekantipur.com'
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
+         (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
 page = ''
 while page == '' and count < 4:
@@ -22,7 +24,6 @@ while page == '' and count < 4:
         continue
 
 soup = BS(page.content, 'lxml')
-news = []
 
 
 def kathmandu_post_extractor():
@@ -42,9 +43,11 @@ def kathmandu_post_extractor():
             full_link = default_link + post_link
             title = news.h1.a.text
             try:
-                date = news.find('div', class_="post").text.split(",")[2].rstrip().lstrip()
+                date = news.find('div', class_="post").text.split(",")[
+                    2].rstrip().lstrip()
             except IndexError:
-                date = news.find('div', class_="post").text.split(",")[1].rstrip().lstrip()
+                date = news.find('div', class_="post").text.split(",")[
+                    1].rstrip().lstrip()
             summary = news.find('div', class_="text").text
             if len(summary) >= 1001:
                 summary = summary[:1000]
@@ -65,7 +68,6 @@ def kathmandu_post_extractor():
         main_news = soup.find('div', class_="main-news")
         news_list = main_news.find_all('div', class_="item")
         main_list = []
-        reg_titles = []
 
         for news in news_list:
             post_link = news.h2.a['href']
@@ -73,7 +75,7 @@ def kathmandu_post_extractor():
             full_link = default_link + post_link
             title = news.h2.a.text
             image_div = news.find('div', class_='ktp-main-news')
-            if image_div == None:
+            if image_div is None:
                 continue
             else:
                 try:
@@ -83,9 +85,11 @@ def kathmandu_post_extractor():
 
             # dealing with variable date location during parsing.
             try:
-                date = news.find('div', class_="post").text.split(", ")[2].rstrip()
+                date = news.find('div', class_="post").text.split(", ")[
+                    2].rstrip()
             except IndexError:
-                date = news.find('div', class_="post").text.split(", ")[1].rstrip()
+                date = news.find('div', class_="post").text.split(", ")[
+                    1].rstrip()
 
             summary = news.find('div', class_="text").text
             news_dict = {
@@ -102,4 +106,6 @@ def kathmandu_post_extractor():
         return last_list
 
     return main_news()
+
+
 kathmandu_post_extractor()
