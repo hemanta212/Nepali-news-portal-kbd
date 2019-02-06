@@ -1,42 +1,56 @@
 {% extends "dashboard.html" %}
 {% block content %}
-	<br><br><br>
-
+<br><br><br>
+<div class="container">
     <div class="panel panel-default">
-    <div class="panel-heading"><h2>{{ heading }} </h2></div>
+        <div class="panel-heading">
+            <h2>{{ heading }}</h2>
+        </div>
     </div>
+
+    <!--iterate through every news in the new_list -->
     {% for news in news_list.items %}
-        <div class="panel panel-default">
-        <div class="panel-heading"><h3><a href="{{news.news_link}}" target="_blank">{{news.title}}</a></h3></div>
+    <!-- For heading containing title and anchored news_link -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3> <a href="{{news.news_link}}" target="_blank">{{news.title}} </a> </h3>
+        </div>
 
         {%if news.image_link%}
-        	<img class="article-img img-responsive" src={{news.image_link}}>
+        <img class="article-img img-responsive" src={{news.image_link}}>
         {%endif%}
 
+        <!-- NEWS BODY (SUMMARY) -->
         <div class="panel-body">
-        	<div>
-        		<small class="text-muted">{{ news.nep_date }}</small>
-  				<span><a href="{{news.news_link}}", target="_blank">| {{news.source}}</a></span>
-  			</div><br>
-  			<div class="text-justify lead">
-  			  {{news.summary}}
-  			</div><a href="{{news.news_link}}", target="_blank">{{ read_more }} </a>
+            <div>
+                <small class="text-muted">{{ news.nep_date }}</small>
+                <span> <a href="{{news.news_link}}" , target="_blank">| {{news.source}}</a> </span>
+            </div><br>
+
+            <div class="text-justify lead">
+                {{news.summary}}
+            </div>
+
+            <a href="{{news.news_link}}" , target="_blank">{{ read_more }} </a>
         </div>
-     </div>
-   {% endfor %}
+    </div>
+    {% endfor %}
 
-    {%for page_num in news_list.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)%}
-    	{%if page_num%}
-    		{%if news_list.page == page_num%}
-    			<a class= "btn btn-info mb-4" href="{{url_for(newslet_func, page=page_num)}}">
-            <!-- newslet_func is passed as var from newslet.routes.py file NIN, NNN, ENN funcs -->
-          {{page_num}}</a>
-    		{%else%}
-    			<a class= "btn btn-outline-info mb-4" href="{{url_for(newslet_func, page=page_num)}}">{{page_num}}</a>
-   			{%endif%}
-   		{%else%}
-    		  ...
+</div>
 
-    	{%endif%}
-    {%endfor%}
+<!-- settings for page no indicator at bottom -->
+{%for page_num in news_list.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)%}
+{%if page_num%}
+{%if news_list.page == page_num%}
+<a class="btn btn-info mb-4" href="{{url_for(newslet_func, page=page_num)}}">
+    <!-- newslet_func is passed as var from newslet.routes.py file NIN, NNN, ENN funcs -->
+    {{page_num}}</a>
+{%else%}
+<a class="btn btn-outline-info mb-4" href="{{url_for(newslet_func, page=page_num)}}">{{page_num}}</a>
+{%endif%}
+{%else%}
+...
+
+{%endif%}
+{%endfor%}
 {% endblock content %}

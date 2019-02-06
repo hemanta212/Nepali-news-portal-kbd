@@ -1,58 +1,70 @@
-html,body {
-	width: 100%;
-	height: 100%;
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
+
 nav {
-	padding-bottom: 2%;
+  padding-bottom: 2%;
 }
+
 #nav1 ul {
-	text-align: right;
-	margin-left: 70%;
+  text-align: right;
+  margin-left: 70%;
 }
+
 #nav1 ul a {
-	margin-left: 16px;
+  margin-left: 16px;
 }
+
 ul a:hover {
-	border-bottom: 2px solid black;
+  border-bottom: 2px solid black;
 }
+
 #intro {
-	padding: 14% 0;
-	background-size: cover;
-	height: 100%;
-	margin-top: 3%;
+  padding: 14% 0;
+  background-size: cover;
+  height: 100%;
+  margin-top: 3%;
 }
+
 #get {
-	background: #bab9b9;
+  background: #bab9b9;
 }
+
 #id1 {
-	background-size: cover;
-	background: url(images/bg.jpg);
+  background-size: cover;
+  background: url(images/bg.jpg);
 }
-#row1{
-	color: white;
+
+#row1 {
+  color: white;
 }
+
 #content {
-	color: black;
+  color: black;
 }
+
 .social a {
-	margin: 17px;
+  margin: 17px;
 
 }
+
 footer {
-	color: white;
-	background: black;
-	margin-top: -2%;
-}
-#ft1 , #ft2 {
-	margin-top: 2%;
+  color: white;
+  background: black;
+  margin-top: -2%;
 }
 
-.text-overlay{
-	color: black;
+#ft1,
+#ft2 {
+  margin-top: 2%;
 }
+
+.text-overlay {
+  color: black;
+}
+
 .get-started {
-	color:white;
+  color: white;
 }
-
-
-	
