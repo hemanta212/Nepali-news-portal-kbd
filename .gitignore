@@ -7,5 +7,5 @@
 *swo
 *swn
 *Pipfile*
-*Pipfile.lock*
-
+*.lock*
+*.toml*
