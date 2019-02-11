@@ -16,25 +16,31 @@ else:
     from flask_final import db
 
     def news_fetcher(category):
-        category_dict = {
-            NNN: kantipur_daily_extractor(),
-            NIN: nagarik_international_extractor(),
-            ENN: kathmandu_post_extractor(),
+        model_maps = {
+            'NNN': NNN,
+            'NIN': NIN,
+            'ENN': ENN
         }
-        raw_news_list = category_dict[category]
+        extractor_maps = {
+            'NNN': kantipur_daily_extractor,
+            'NIN': nagarik_international_extractor,
+            'ENN': kathmandu_post_extractor,
+        }
+        raw_news_list = extractor_maps[category]()
 
         for news in raw_news_list[::-1]:
-            dup = category.query.filter_by(title=news["title"]).first()
+            dup = model_maps[category].query.filter_by(
+                title=news["title"]).first()
 
             if dup is None:
-                news_post = category(title=news['title'],
-                                     source=news['source'], summary=news['summary'],
-                                     image_link=news['image_link'], news_link=news['news_link'],
-                                     nep_date=news["nep_date"])
+                news_post = model_maps[category](title=news['title'],
+                                                 source=news['source'], summary=news['summary'],
+                                                 image_link=news['image_link'], news_link=news['news_link'],
+                                                 nep_date=news["nep_date"])
 
                 db.session.add(news_post)
                 db.session.commit()
 
-        for i in category.query.order_by(category.date.asc())[30:]:
+        for i in model_maps[category].query.order_by(model_maps[category].date.asc())[30:]:
             db.session.delete(i)
             db.session.commit()

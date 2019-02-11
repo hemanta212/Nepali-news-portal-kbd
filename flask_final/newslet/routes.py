@@ -21,9 +21,9 @@ def news():
 
     Ouput:
        many list of models items."""
-    news_fetcher(NNN)
-    news_fetcher(NIN)  # Reload all the models to get the latest news!!
-    news_fetcher(ENN)
+    news_fetcher('NNN')
+    news_fetcher('NIN')  # Reload all the models to get the latest news!!
+    news_fetcher('ENN')
 
     NNN_list = NNN.query.order_by(NNN.date.desc())[:5]
     ENN_list = ENN.query.order_by(ENN.date.desc())[:5]
@@ -37,7 +37,7 @@ def news():
 @login_required
 def nep_national_news():
     """Save extracted news to model & passes to template"""
-    news_fetcher(NNN)
+    news_fetcher('NNN')
     page = request.args.get("page", 1, type=int)
     news_list = NNN.query.order_by(NNN.date.desc()).paginate(page=page,
                                                              per_page=10)
@@ -52,7 +52,7 @@ def nep_national_news():
 @login_required
 def nep_international_news():
     """Save extracted news to model & passes to template"""
-    news_fetcher(NIN)
+    news_fetcher('NIN')
     page = request.args.get("page", 1, type=int)
     news_list = NIN.query.order_by(NIN.date.desc()).paginate(page=page,
                                                              per_page=10)
@@ -67,7 +67,7 @@ def nep_international_news():
 @login_required
 def eng_national_news():
     """Save extracted news to model & passes to template"""
-    news_fetcher(ENN)
+    news_fetcher('ENN')
     page = request.args.get("page", 1, type=int)
     news_list = ENN.query.order_by(ENN.date.desc()).paginate(page=page,
                                                              per_page=10)
