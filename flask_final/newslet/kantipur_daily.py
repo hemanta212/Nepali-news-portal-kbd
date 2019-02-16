@@ -10,10 +10,8 @@ headers = {
 
 try:
     page = requests.get(url, headers=headers)
-    break
 except Exception as e:
     print("Connection refused by the server..", e)
-    continue
 
 soup = BS(page.content, 'lxml')
 

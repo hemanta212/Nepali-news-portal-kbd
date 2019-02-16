@@ -42,5 +42,6 @@ else:
                 db.session.commit()
 
         for i in model_maps[category].query.order_by(model_maps[category].date.asc())[30:]:
-            db.session.delete(i)
-            db.session.commit()
+            #db.session.delete(i)
+            #db.session.commit()
+            pass

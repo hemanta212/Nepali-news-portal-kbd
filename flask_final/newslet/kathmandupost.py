@@ -10,10 +10,8 @@ headers = {
 
 try:
     page = requests.get(url, headers=headers)
-    break
 except Exception as e:
     print("Connection refused by the server..", e)
-    continue
 
 soup = BS(page.content, 'lxml')
 
@@ -98,6 +96,7 @@ def kathmandu_post_extractor():
         return last_list
 
     return main_news()
+
 
 if __name__ == "__main__":
     kathmandu_post_extractor()
