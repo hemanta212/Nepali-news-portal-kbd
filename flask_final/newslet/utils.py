@@ -41,7 +41,6 @@ else:
                 db.session.add(news_post)
                 db.session.commit()
 
-        for i in model_maps[category].query.order_by(model_maps[category].date.asc())[30:]:
-            #db.session.delete(i)
-            #db.session.commit()
-            pass
+        for i in model_maps[category].query.order_by(model_maps[category].date.desc())[30:]:
+            db.session.delete(i)
+            db.session.commit()
