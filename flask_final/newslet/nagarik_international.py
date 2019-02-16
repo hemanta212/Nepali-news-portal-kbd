@@ -1,27 +1,19 @@
-import time
 from bs4 import BeautifulSoup as BS
 import requests
 
 
-count = 0
 url = 'http://nagariknews.nagariknetwork.com/category/27'
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
      (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
-page = ''
-while page == '' and count < 4:
-    try:
-        page = requests.get(url, headers=headers)
-        break
-    except Exception as e:
-        print("Connection refused by the server..", e)
-        print("Let me sleep for 5 seconds")
-        print("ZZzzzz...")
-        time.sleep(5)
-        count += 1
-        print("Was a nice sleep, now let me continue...")
-        continue
+try:
+    page = requests.get(url, headers=headers)
+    break
+except Exception as e:
+    print("Connection refused by the server..", e)
+    continue
+
 response = requests.get(url, headers=headers)
 soup = BS(response.content, 'lxml')
 
@@ -45,7 +37,7 @@ def nagarik_international_extractor():
                 'summary': summary,
                 'source': 'Nagarik news',
                 'summary': summary,
-                'news_link': link,
+                'news_link': news_link,
                 'image_link': image_url,
                 'nep_date': nep_date,
             }
@@ -76,4 +68,5 @@ def nagarik_international_extractor():
     return final_list
 
 
-nagarik_international_extractor()
+if __name__ == '__main__':
+    nagarik_international_extractor()

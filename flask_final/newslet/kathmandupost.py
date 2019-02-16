@@ -1,4 +1,3 @@
-import time
 from bs4 import BeautifulSoup as BS
 import requests
 
@@ -9,19 +8,12 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
          (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
-page = ''
-while page == '' and count < 4:
-    try:
-        page = requests.get(url, headers=headers)
-        break
-    except:
-        print("Connection refused by the server..")
-        print("Let me sleep for 5 seconds")
-        print("ZZzzzz...")
-        time.sleep(5)
-        count += 1
-        print("Was a nice sleep, now let me continue...")
-        continue
+try:
+    page = requests.get(url, headers=headers)
+    break
+except Exception as e:
+    print("Connection refused by the server..", e)
+    continue
 
 soup = BS(page.content, 'lxml')
 
@@ -107,5 +99,5 @@ def kathmandu_post_extractor():
 
     return main_news()
 
-
-kathmandu_post_extractor()
+if __name__ == "__main__":
+    kathmandu_post_extractor()

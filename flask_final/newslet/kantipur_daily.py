@@ -1,4 +1,3 @@
-import time
 from bs4 import BeautifulSoup as BS
 import requests
 
@@ -9,18 +8,13 @@ headers = {
          (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
 
-page = ''
-while page == '':
-    try:
-        page = requests.get(url, headers=headers)
-        break
-    except:
-        print("Connection refused by the server..")
-        print("Let me sleep for 5 seconds")
-        print("ZZzzzz...")
-        time.sleep(5)
-        print("Was a nice sleep, now let me continue...")
-        continue
+try:
+    page = requests.get(url, headers=headers)
+    break
+except Exception as e:
+    print("Connection refused by the server..", e)
+    continue
+
 soup = BS(page.content, 'lxml')
 
 
@@ -53,3 +47,7 @@ def kantipur_daily_extractor():
 
         counter += 1
     return news_list
+
+
+if __name__ == "__main__":
+    kathmandu_daily_extractor()
