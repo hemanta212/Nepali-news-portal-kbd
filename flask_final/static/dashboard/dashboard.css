@@ -195,7 +195,8 @@ a.article:hover {
 
 @media screen and (min-width: 600px) {
   .news {
-    width:60%;
+    width:80%;
+    margin:0 auto;
   }
 }
   
