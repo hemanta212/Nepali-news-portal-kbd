@@ -37,10 +37,11 @@ def kathmandu_post_extractor():
                     2].rstrip().lstrip()
             except IndexError:
                 try:
-                date = news.find('div', class_="post").text.split(",")[
-                    1].rstrip().lstrip()
+                    date = news.find('div', class_="post").text.split(",")[\
+                        1].rstrip().lstrip()
                 except IndexError:
                     date = 'error'
+            print(date)
             summary = news.find('div', class_="text").text
             if len(summary) >= 1001:
                 summary = summary[:1000]
