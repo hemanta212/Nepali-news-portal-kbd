@@ -19,8 +19,9 @@ else:
         model_maps = {
             'NNN': NNN,
             'NIN': NIN,
-            'ENN': ENN
+            'ENN':ENN
         }
+        
         extractor_maps = {
             'NNN': kantipur_daily_extractor,
             'NIN': nagarik_international_extractor,
@@ -40,7 +41,11 @@ else:
 
                 db.session.add(news_post)
                 db.session.commit()
-
+        #if category != 'ENN':
         for i in model_maps[category].query.order_by(model_maps[category].date.desc())[30:]:
             db.session.delete(i)
             db.session.commit()
+#        else:
+ #           for i in model_maps[category].query.order_by(model_maps[category].date.asc())[30:]:
+ #               db.session.delete(i)
+ #               db.session.commit()
