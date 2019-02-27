@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "khabar-board"
+version = "0.5"
+description = ""
+authors = ["hemanta212 <sharmahemanta.212@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+flask = "^1.0"
+bs4 = "^0.0.1"
+requests = "^2.21"
+flask-login = "^0.4.1"
+flask-sqlalchemy = "^2.3"
+flask-bcrypt = "^0.7.1"
+lxml = "^4.3"
+flask-mail = "^0.9.1"
+flask-wtf = "^0.14.2"
+Psycopg2 = "^2.7"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.2"
+autopep8 = "^1.4"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
