@@ -1,12 +1,16 @@
 from bs4 import BeautifulSoup as BS
 import requests
 
+try:
+    from flask_final import Logger
+    logger = Logger(file='flask_app.log', debug_file='/newslet/extractors.log').get_logger()
+except ModuleNotFoundError:
+    print("Running in single mode no loggers attached")
 
 url = 'https://www.kantipurdaily.com/news'
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
          (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-
 
 try:
     page = requests.get(url, headers=headers)
@@ -14,24 +18,23 @@ except Exception as e:
     print("Connection refused by the server..", e)
 
 soup = BS(page.content, 'lxml')
-
-
+count += 1
 def kantipur_daily_extractor():
    # with codecs.open("kantipur_daily_cache.csv", "w", encoding='utf-8', errors='ignore') as w:
         # with open("kantipur_daily_cache.csv", 'w') as w:
-
+    logger.info("started Kantipurdaily")
     counter = 0
     news_list = []
     for article in soup.find_all('article', class_='normal'):
-
         title = article.h2.a.text
-        #author = article.find('div', class_='author').text
+        logger.debug("title:", title)
         summary = article.find('p').text
         date_ore = article.h2.a['href']
         contaminated_list = date_ore.split('/')
         pure_date_list = [contaminated_list[2],
                           contaminated_list[3], contaminated_list[4]]
         date = "/".join(pure_date_list)
+        logger.debug("date %s", date)
         link = "https://kantipurdaily.com" + date_ore
         news_dict = {
             'title': title,
@@ -42,10 +45,12 @@ def kantipur_daily_extractor():
             'image_link': None
         }
         news_list.append(news_dict)
-
+        logger.debug("news dict", news_dict)
         counter += 1
+    logger.debug(news_list)
     return news_list
 
 
 if __name__ == "__main__":
+    logger = Logger(file='flask_app.log', debug_file='newslet/extractors.log').get_logger()
     kathmandu_daily_extractor()
