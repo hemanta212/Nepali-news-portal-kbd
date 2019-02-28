@@ -13,15 +13,15 @@
             <h3><a href="{{news.news_link}}" target="_blank">{{news.title}}</a></h3>
         </div>
 
-        {%if news.image_link%}
-        <img class="article-img img-responsive" src={{news.image_link}}>
-        {%endif%}
-
         <div class="panel-body">
             <div>
                 <small class="text-muted">{{ news.nep_date }}</small>
                 <span>| {{news.source}}</span>
             </div><br>
+
+            {%if news.image_link%}
+                <img style="width:80px;float:left" class="article-img img-responsive" src={{news.image_link}}>
+            {%endif%}
             <div class="text-justify lead">
                 {{news.summary}}
             </div><a href="{{news.news_link}}" , target="_blank">|थप पढ्नुहोस >>|</a>

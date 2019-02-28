@@ -26,7 +26,7 @@ def news():
     news_fetcher('ENN')
 
     NNN_list = NNN.query.order_by(NNN.date.desc())[:5]
-    ENN_list = ENN.query.order_by(ENN.date.desc())[:5]
+    ENN_list = ENN.query.order_by(ENN.nep_date.desc())[:5]
     NIN_list = NIN.query.order_by(NIN.date.desc())[:5]
 
     return render_template("news.html", ENN_list=ENN_list, NIN_list=NIN_list,
@@ -69,7 +69,7 @@ def eng_national_news():
     """Save extracted news to model & passes to template"""
     news_fetcher('ENN')
     page = request.args.get("page", 1, type=int)
-    news_list = ENN.query.order_by(ENN.date.desc()).paginate(page=page,
+    news_list = ENN.query.order_by(ENN.nep_date.desc()).paginate(page=page,
                                                              per_page=10)
     return render_template("detail_news.html", title='National-Eng',
                            news_list=news_list,

@@ -25,7 +25,9 @@ def nagarik_international_extractor():
         cover_news_list = []
         cover_div = soup.find_all("div", class_='col-sm-3 part-ent')
         for news in cover_div:
-            image_url = news.div.img['src']
+            img = news.div.img['src']
+            image = img.replace("media/cache/nagarik_thumbnail_460_300/", "")
+            image_url = image.replace("media/cache/resolve/nagarik_thumbnail_460_300/", "")
             title = news.h3.a.text
             summary = news.p.text
             primary_url = "https://nagariknews.nagariknetwork.com"

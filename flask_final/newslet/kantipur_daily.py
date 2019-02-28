@@ -27,6 +27,10 @@ def kantipur_daily_extractor():
         title = article.h2.a.text
         #author = article.find('div', class_='author').text
         summary = article.find('p').text
+        image = article.find('div', class_="image").figure.a.img["data-src"]
+        img = image.replace("-lowquality", "")
+        small_img = img.replace("lowquality", "")
+        big_img = small_img.replace("300x0", "1000x0")
         date_ore = article.h2.a['href']
         contaminated_list = date_ore.split('/')
         pure_date_list = [contaminated_list[2],
@@ -39,7 +43,7 @@ def kantipur_daily_extractor():
             'source': 'ekantipur',
             'summary': summary,
             'news_link': link,
-            'image_link': None
+            'image_link': big_img,
         }
         news_list.append(news_dict)
 
@@ -48,4 +52,4 @@ def kantipur_daily_extractor():
 
 
 if __name__ == "__main__":
-    kathmandu_daily_extractor()
+    kantipur_daily_extractor()

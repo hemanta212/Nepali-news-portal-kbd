@@ -1,4 +1,4 @@
-try:
+try:#For offline dev
     from flask_final.newslet.nagarik_international import nagarik_international_extractor
     from flask_final.newslet.kantipur_daily import kantipur_daily_extractor
     from flask_final.newslet.kathmandupost import kathmandu_post_extractor
@@ -19,9 +19,9 @@ else:
         model_maps = {
             'NNN': NNN,
             'NIN': NIN,
-            'ENN':ENN
+            'ENN':ENN,
         }
-        
+
         extractor_maps = {
             'NNN': kantipur_daily_extractor,
             'NIN': nagarik_international_extractor,
@@ -41,11 +41,12 @@ else:
 
                 db.session.add(news_post)
                 db.session.commit()
-        #if category != 'ENN':
-        for i in model_maps[category].query.order_by(model_maps[category].date.desc())[30:]:
-            db.session.delete(i)
-            db.session.commit()
-#        else:
- #           for i in model_maps[category].query.order_by(model_maps[category].date.asc())[30:]:
- #               db.session.delete(i)
- #               db.session.commit()
+
+        if category != 'ENN':
+            for i in model_maps[category].query.order_by(model_maps[category].date.desc())[30:]:
+                db.session.delete(i)
+                db.session.commit()
+        else:
+            for i in model_maps[category].query.order_by(model_maps[category].nep_date.desc())[30:]:
+                db.session.delete(i)
+                db.session.commit()
