@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
 
     <!-- Scrollbar Custom CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='dashboard/dashboard.css')}}">
     <link rel="icon" type="image/png/jpg" href="{{url_for('static',filename='images/icon.jpg')}}">
@@ -62,8 +63,9 @@
             </ul>
 
             <ul class="list-unstyled CTAs">
-                <li><a href="{{url_for('users.logout')}}" class="download"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
-                <li><a href="https://github.com/hemanta212/Khabar-board">Get Source Code!</a></li>
+                <li><a href="{{url_for('users.logout')}}" class="download"><i class="glyphicon glyphicon-off"></i>
+                        Logout</a></li>
+
             </ul>
         </nav>
 
@@ -102,20 +104,21 @@
         <!-- Bootstrap Js CDN -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!-- jQuery Custom Scroller CDN -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
         <script type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $("#sidebar").mCustomScrollbar({
                     theme: "minimal"
                 });
 
-                $('#dismiss, .overlay').on('click', function() {
+                $('#dismiss, .overlay').on('click', function () {
                     $('#sidebar').removeClass('active');
                     $('.overlay').fadeOut();
                 });
 
-                $('#sidebarCollapse').on('click', function() {
+                $('#sidebarCollapse').on('click', function () {
                     $('#sidebar').addClass('active');
                     $('.overlay').fadeIn();
                     $('.collapse.in').toggleClass('in');

@@ -38,7 +38,7 @@ def nagarik_international_extractor():
                 'source': 'Nagarik news',
                 'summary': summary,
                 'news_link': news_link,
-                'image_link': image_url,
+                'image_link': img,
                 'nep_date': nep_date,
             }
             cover_news_list.append(cover_news_dict)
