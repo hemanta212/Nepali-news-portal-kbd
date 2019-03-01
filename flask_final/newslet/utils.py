@@ -1,4 +1,4 @@
-try:#For offline dev
+try:  # For offline dev
     from flask_final.newslet.nagarik_international import nagarik_international_extractor
     from flask_final.newslet.kantipur_daily import kantipur_daily_extractor
     from flask_final.newslet.kathmandupost import kathmandu_post_extractor
@@ -19,7 +19,7 @@ else:
         model_maps = {
             'NNN': NNN,
             'NIN': NIN,
-            'ENN':ENN,
+            'ENN': ENN,
         }
 
         extractor_maps = {
@@ -34,10 +34,11 @@ else:
                 title=news["title"]).first()
 
             if dup is None:
-                news_post = model_maps[category](title=news['title'],
-                                                 source=news['source'], summary=news['summary'],
-                                                 image_link=news['image_link'], news_link=news['news_link'],
-                                                 nep_date=news["nep_date"])
+                news_post = model_maps[category](
+                    title=news['title'],
+                    source=news['source'], summary=news['summary'],
+                    image_link=news['image_link'], news_link=news['news_link'],
+                    nep_date=news["nep_date"])
 
                 db.session.add(news_post)
                 db.session.commit()

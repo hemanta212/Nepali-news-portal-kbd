@@ -70,7 +70,7 @@ def eng_national_news():
     news_fetcher('ENN')
     page = request.args.get("page", 1, type=int)
     news_list = ENN.query.order_by(ENN.nep_date.desc()).paginate(page=page,
-                                                             per_page=10)
+                                                                 per_page=10)
     return render_template("detail_news.html", title='National-Eng',
                            news_list=news_list,
                            heading='National News [Eng]',
