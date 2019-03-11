@@ -1,5 +1,5 @@
 try:  # For offline dev
-    from flask_final.newslet.nagarik_international import nagarik_international_extractor
+    from flask_final.newslet.kantipur_international import kantipur_international_extractor
     from flask_final.newslet.kantipur_daily import kantipur_daily_extractor
     from flask_final.newslet.kathmandupost import kathmandu_post_extractor
 
@@ -24,7 +24,7 @@ else:
 
         extractor_maps = {
             'NNN': kantipur_daily_extractor,
-            'NIN': nagarik_international_extractor,
+            'NIN': kantipur_international_extractor,
             'ENN': kathmandu_post_extractor,
         }
         raw_news_list = extractor_maps[category]()
