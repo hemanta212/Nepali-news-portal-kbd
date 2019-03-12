@@ -1,41 +1,31 @@
 from bs4 import BeautifulSoup as BS
 import requests
-import codecs
 
-try:
-    from flask_final import Kbdlog
-    logger = Kbdlog(file='kbd.log', debug_file='/newslet/kantipur.log', console=False).get_logger()
 
-except ModuleNotFoundError:
-    print("Running in single mode no loggers attached")
-
-url = 'https://www.kantipurdaily.com/news'
+url = 'https://www.kantipurdaily.com/world'
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
          (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-
 
 
 try:
     page = requests.get(url, headers=headers)
 except Exception as e:
     print("Connection refused by the server..", e)
+
 soup = BS(page.content, 'lxml')
 
-def custom_nepali_logger(msg, data):
-    #debug_file = 'flask_final/logs/newslet/kantipur.log'
-    debug_file = '../logs/newslet/kantipur.log'
-    with codecs.open(debug_file, "a", encoding='UTF-8', errors='ignore') as w:
-        w.writelines(msg)
-        w.writelines(data)
 
-def kantipur_daily_extractor():
+def kantipur_international_extractor():
+   # with codecs.open("kantipur_daily_cache.csv", "w", encoding='utf-8', errors='ignore') as w:
+        # with open("kantipur_daily_cache.csv", 'w') as w:
 
     counter = 0
     news_list = []
     for article in soup.find_all('article', class_='normal'):
 
         title = article.h2.a.text
+        #author = article.find('div', class_='author').text
         summary = article.find('p').text
         image = article.find('div', class_="image").figure.a.img["data-src"]
         img = image.replace("-lowquality", "")
@@ -57,10 +47,8 @@ def kantipur_daily_extractor():
         }
         news_list.append(news_dict)
         counter += 1
-    custom_nepali_logger('titles:', [i['nep_date'] for i in news_list])
     return news_list
 
 
 if __name__ == "__main__":
-    kantipur_daily_extractor()
-
+    kantipur_international_extractor()

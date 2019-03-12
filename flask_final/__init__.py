@@ -20,6 +20,7 @@ class Kbdlog(Logger):
         if self.debug_file:
             self.debug_file = self.dir + self.debug_file
 
+
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)

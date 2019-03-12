@@ -2,7 +2,7 @@ import os
 
 class Config:
     # disable the warning popup when server starts
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
     # app.config["SECRET_KEY"] = configvar["SECRET_KEY"]
     # use os.environ.get() if not linux server
     SECRET_KEY = os.environ.get("SECRET_KEY")

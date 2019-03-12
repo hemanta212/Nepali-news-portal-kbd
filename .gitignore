@@ -8,5 +8,6 @@
 *swn
 *Pipfile*
 *.lock*
-*.toml*
 *.orig*
+*.toml*
+
