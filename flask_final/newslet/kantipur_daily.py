@@ -23,8 +23,8 @@ except Exception as e:
 soup = BS(page.content, 'lxml')
 
 def custom_nepali_logger(msg, data):
-    #debug_file = 'flask_final/logs/newslet/kantipur.log'
-    debug_file = '../logs/newslet/kantipur.log'
+    debug_file = 'flask_final/logs/newslet/kantipur.log'
+#    debug_file = '../logs/newslet/kantipur.log'
     with codecs.open(debug_file, "a", encoding='UTF-8', errors='ignore') as w:
         w.writelines(msg)
         w.writelines(data)

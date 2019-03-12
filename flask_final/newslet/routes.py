@@ -43,7 +43,7 @@ def nep_national_news():
                                                              per_page=10)
     return render_template("detail_news.html", title='National-Nep',
                            news_list=news_list,
-                           heading='National News [Nep]',
+                           heading='National News [नेपा]',
                            newslet_func='newslet.nep_national_news',
                            read_more='|थप पढ्नुहोस >>|')
 
@@ -58,7 +58,7 @@ def nep_international_news():
                                                              per_page=10)
     return render_template("detail_news.html", title='International-Nep',
                            news_list=news_list,
-                           heading='International News [Nep]',
+                           heading='International News [नेपा]',
                            newslet_func='newslet.nep_international_news',
                            read_more='|थप पढ्नुहोस >>|')
 
