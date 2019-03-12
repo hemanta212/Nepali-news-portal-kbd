@@ -193,10 +193,27 @@ a.article:hover {
   right: 0;
 }
 
+
+/* ---------------------------------------------------
+   NEWS STYLE
+----------------------------------------------------- */
 @media screen and (min-width: 600px) {
   .news {
     width:80%;
     margin:0 auto;
   }
 }
-  
+
+.panel-heading {
+    color: #333;
+    background-color: #ffffff;
+}
+.panel-heading {
+    padding: 10px 15px;
+    border-color: white;
+    border: 0px solid white;
+}
+.panel-default {
+    border-color: white;
+    border: 0px solid white;
+}
