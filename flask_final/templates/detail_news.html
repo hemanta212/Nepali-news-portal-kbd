@@ -1,14 +1,24 @@
 {% extends "dashboard.html" %}
 {% block content %}
-<br><br><br>
 
 <div class="news_menu">
     <span>Categories</span>
     <ul>
-        <li class="current"> <a href='{{url_for('newslet.news')}}'>Home</a> </li>
-        <li> <a href='{{url_for('newslet.nep_national_news')}}'>National News[नेपा]</a> </li>
-        <li> <a href='{{url_for('newslet.nep_international_news')}}'>National News[नेपा] </a> </li>
-        <li> <a href='{{url_for('newslet.eng_national_news')}}'>International News[Eng] </a> </li>
+        <li> <a id="newsmenu_home" href='{{url_for('newslet.news')}}'>
+            Home
+        </a></li>
+
+        <li> <a id="newsmenu_NNN" href='{{url_for('newslet.nep_national_news')}}'>
+            National News[नेपा]
+        </a> </li>
+
+        <li> <a id="newsmenu_ENN" href='{{url_for('newslet.eng_national_news')}}'>
+            National News[Eng]
+        </a></li>
+
+        <li> <a id='newsmenu_NIN' href='{{url_for('newslet.nep_international_news')}}'>
+            International News[नेपा]
+        </a></li>
 
     </ul>
 </div>
@@ -30,7 +40,7 @@
         </div>
 
         {%if news.image_link%}
-        <img class="article-img img-responsive" src={{news.image_link}}>
+        <img class="article-img img-responsive load_sideway" src={{news.image_link}}>
         {%endif%}
 
         <!-- NEWS BODY (SUMMARY) -->
@@ -68,4 +78,31 @@
 {%endfor%}
 
 </div>
+
+<script>
+    category = document.getElementById('title').text;
+    if (category == 'National-Nep') {
+        newsmenu_a_tag = document.getElementById('newsmenu_NNN');
+        sidebar_a_tag = document.getElementById('sidebar_NNN');
+    }
+    else if (category == 'International-Nep') {
+        newsmenu_a_tag = document.getElementById('newsmenu_NIN');
+        sidebar_a_tag = document.getElementById('sidebar_NIN');
+    }
+    else if (category == 'National-Eng') {
+        newsmenu_a_tag = document.getElementById('newsmenu_ENN');
+        sidebar_a_tag = document.getElementById('sidebar_ENN');
+    }
+    else {
+        console.log(category);
+    }
+    sidebar_a_tag.setAttribute("class", "current");
+    newsmenu_a_tag.setAttribute("class", "current");
+
+    // else if (category == 'About this website') {
+    //     about_tag = document.getElementById('sidebar_about')
+    //     about_tag.setAttribute("class", "current");
+    // }
+
+</script>
 {% endblock content %}

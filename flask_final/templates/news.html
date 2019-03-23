@@ -4,15 +4,14 @@
 <div class="news_menu">
     <span>Categories</span>
     <ul>
-        <li class="current"> <a href='{{url_for('newslet.news')}}'>Home</a> </li>
+        <li> <a class="current" href='{{url_for('newslet.news')}}'>Home</a> </li>
         <li> <a href='{{url_for('newslet.nep_national_news')}}'>National News[नेपा]</a> </li>
-        <li> <a href='{{url_for('newslet.nep_international_news')}}'>National News[नेपा] </a> </li>
-        <li> <a href='{{url_for('newslet.eng_national_news')}}'>International News[Eng] </a> </li>
+        <li> <a href='{{url_for('newslet.eng_national_news')}}'>National News[Eng] </a> </li>
+        <li> <a href='{{url_for('newslet.nep_international_news')}}'>
+        International News[नेपा] </a> </li>
 
     </ul>
 </div>
-
-
 
 <div class="news">
     <div class="panel panel-default">
@@ -27,7 +26,7 @@
             <h3><a href="{{news.news_link}}" target="_blank">{{news.title}}</a></h3>
         </div>
         {%if news.image_link%}
-        <img class="article-img img-responsive" src={{news.image_link}}>
+        <img class="article-img img-responsive load_sideway" src={{news.image_link}}>
         {%endif%}
         <div class="panel-body">
             <div>
@@ -62,7 +61,7 @@
         </div>
 
         {%if news.image_link%}
-        <img class="article-img img-responsive" src={{news.image_link}}>
+        <img class="article-img img-responsive load_sideway" src={{news.image_link}}>
         {%endif%}
 
         <div class="panel-body">
@@ -98,7 +97,7 @@
         </div>
 
         {%if news.image_link%}
-        <img class="article-img img-responsive img-fluid" src={{news.image_link}}>
+        <img class="article-img img-responsive img-fluid load_sideway" src={{news.image_link}}>
         {%endif%}
 
         <div class="panel-body">
@@ -120,5 +119,9 @@
 
 </div>
 
+<script>
+    sidebar_home = document.getElementById('sidebar_home');
+    sidebar_home.setAttribute("class", "current");
+</script>
 
 {% endblock content %}

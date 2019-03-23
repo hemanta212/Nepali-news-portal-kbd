@@ -202,8 +202,7 @@ a.article:hover {
 .news_menu {
     width: 23%;
     float: left;
-    background:#f4f4;
-    color: #ffffff;
+    background:#f5f5f5;
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
@@ -220,7 +219,8 @@ a.article:hover {
     color: black;
 }
 
-li .current{
+.news_menu .current,
+#sidebar .current {
     color:#e8491d;
     font-weight:bold;
 }
@@ -250,13 +250,22 @@ li .current{
     margin: 0 auto;
 }
 
+@media (min-width: 600px){
+
+  .news .load_sideway{
+      float: right;
+      width: 30%;
+      padding-left: 5px;
+  }
+}
+
 @media (max-width: 768px){
     #content,
     div.news,
     div.news_menu {
     float: none;
     width: 100%;
-    padding:0px;
+    padding:2px;
   }
   div.news_menu {
     width: 60%;
