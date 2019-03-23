@@ -12,9 +12,9 @@ main = Blueprint('main', __name__)
 def home():
     if current_user.is_authenticated:
         return redirect(url_for('newslet.news'))
-    return render_template('home.html',)
+    return render_template('home.html')
 
 
 @main.route("/about", methods=["GET"])
 def about():
-    return render_template('about.html', title="About US")
+    return render_template('about.html', title="About this website")

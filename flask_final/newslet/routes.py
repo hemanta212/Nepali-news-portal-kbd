@@ -42,7 +42,7 @@ def news():
         models[category + '_list'] = model.query.order_by(order)[:5]
 
     return render_template(
-        "news.html", ENN_list=models['ENN_list'],
+        "news.html", title='Dashboard | Home', ENN_list=models['ENN_list'],
         NIN_list=models['NIN_list'], NNN_list=models['NNN_list'])
 
 

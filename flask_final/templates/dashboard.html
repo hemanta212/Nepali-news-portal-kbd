@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     {% if title %}
-    <title>{{title}}</title>
+    <title id='title'>{{title}}</title>
     {% else %}
     <title>Dashboard | Khabar-board</title>
     {%endif %}
@@ -42,18 +42,20 @@
             <ul class="list-unstyled components">
                 <p>Dashboard</p>
                 <li class="#">
-                    <a href="{{url_for('newslet.news')}}">Home</a>
+                    <a id='sidebar_home' href="{{url_for('newslet.news')}}">Home</a>
 
                 <li>
-                    <a href="{{url_for('main.about')}}">About</a>
+                    <a id='about' href="{{url_for('main.about')}}">About</a>
 
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">News
                     </a>
 
                     <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li><a href="{{url_for('newslet.nep_national_news')}}">National(नेपा)</a></li>
-                        <li><a href="{{url_for('newslet.eng_national_news')}}">National(Eng)</a></li>
-                        <li><a href="{{url_for('newslet.nep_international_news')}}">International(नेपा)</a></li>
+                        <li><a id='sidebar_NNN' href="{{url_for('newslet.nep_national_news')}}">National(नेपा)</a></li>
+
+                        <li><a id='sidebar_ENN' href="{{url_for('newslet.eng_national_news')}}">National(Eng)</a></li>
+
+                        <li><a id='sidebar_NIN' href="{{url_for('newslet.nep_international_news')}}">International(नेपा)</a></li>
                     </ul>
                 </li>
 
@@ -101,21 +103,21 @@
 
 
         <script>
-            window.onscroll = function() {myFunction()};
+            window.onscroll = function() {responsiveNewsSidebar()};
 
             var news_menu = document.getElementsByClassName("news_menu")[0];
             var sticky = news_menu.offsetTop;
             var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-            var x = window.matchMedia("(max-width: 768px)")
+            var media_query = window.matchMedia("(min-width: 768px)")
 
-            function myFunction() {
-              if (window.pageYOffset > sticky && !x.matches) {
+            function responsiveNewsSidebar() {
+              if (window.pageYOffset > sticky && media_query.matches) {
                 news_menu.classList.add("sticky");
               } else {
                 news_menu.classList.remove("sticky");
               }
             }
-            x.addListener(myFunction)
+            media_query.addListener(responsiveNewsSidebar)
         </script>
 
         <!-- jQuery CDN -->
