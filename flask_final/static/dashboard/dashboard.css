@@ -250,6 +250,15 @@ li .current{
     margin: 0 auto;
 }
 
+@media (min-width: 600px){
+
+  .news .load_sideway{
+      float: right;
+      width: 30%;
+      padding-left: 5px;
+  }
+}
+
 @media (max-width: 768px){
     #content,
     div.news,
