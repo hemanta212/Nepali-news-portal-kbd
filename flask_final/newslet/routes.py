@@ -32,13 +32,13 @@ def news():
     """
 
     categories = ('NIN', 'NNN', 'ENN')
+    models = {}
     for category in categories:
         # Reload all the models to get the latest news!!
         news_fetcher(category)
 
         model = eval(category)  # change 'NNN' to NNN
         order = model.date.desc()  # order by latest date
-        models = {}
         models[category + '_list'] = model.query.order_by(order)[:5]
 
     return render_template(
