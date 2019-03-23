@@ -1,36 +1,42 @@
+'''
+Script to scrape news from www.kantipurdaily.com/news
+Contains:
+    kantipur_daily_extractor(): Gives list of news dicts
+ '''
 from bs4 import BeautifulSoup as BS
 import requests
-import codecs
-
-try:
-    from flask_final import Kbdlog
-    logger = Kbdlog(file='kbd.log', debug_file='/newslet/kantipur.log', console=False).get_logger()
-
-except ModuleNotFoundError:
-    print("Running in single mode no loggers attached")
 
 url = 'https://www.kantipurdaily.com/news'
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
-         (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit\
+    /537.36(KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
 
 try:
     page = requests.get(url, headers=headers)
 except Exception as e:
     print("Connection refused by the server..", e)
+
 soup = BS(page.content, 'lxml')
 
-def custom_nepali_logger(msg, data):
-    debug_file = 'flask_final/logs/newslet/kantipur.log'
-#    debug_file = '../logs/newslet/kantipur.log'
-    with codecs.open(debug_file, "a", encoding='UTF-8', errors='ignore') as w:
-        w.writelines(msg)
-        w.writelines(data)
 
 def kantipur_daily_extractor():
+    '''
+    Extracts news from www.kantipurdaily.com/news
+    Retruns
+    The order is as given by the website
+    A list containing news dictionaries. Here is a sample
 
+        {
+            title: str in nepali
+            'nep_date': 2019/06/34 like date,
+            'source': 'ekantipur',
+            'summary': news summary in nepali,
+            'news_link': link,
+            'image_link': imglink,
+        }
+
+    '''
     counter = 0
     news_list = []
     for article in soup.find_all('article', class_='normal'):
@@ -57,10 +63,9 @@ def kantipur_daily_extractor():
         }
         news_list.append(news_dict)
         counter += 1
-    custom_nepali_logger('titles:', [i['nep_date'] for i in news_list])
+
     return news_list
 
 
 if __name__ == "__main__":
     kantipur_daily_extractor()
-

@@ -1,6 +1,13 @@
-"""Author : Hemanta Sharma
-Contains routes for managing news.
+# -*-code; UTF_8
 """
+Contains routes for managing news.
+    news(): Mix collection with 3 samples
+    Detail news routes
+        nep_national_news()
+        nep_international_news()
+        eng_national_news()
+"""
+
 from flask import Blueprint
 from flask import request, render_template
 from flask_login import login_required
@@ -15,28 +22,38 @@ newslet = Blueprint('newslet', __name__)
 @newslet.route("/dashboard/news", methods=["GET", 'POST'])
 @login_required
 def news():
-    """Combo of all news models.
-
+    """
+    Combo of all news models.
     Takes sample news from all models
 
-    Ouput:
-       many list of models items."""
-    news_fetcher('NNN')
-    news_fetcher('NIN')  # Reload all the models to get the latest news!!
-    news_fetcher('ENN')
+    Returns:
+       pass many list of models items to news.html template
+       and renders it
+    """
 
-    NNN_list = NNN.query.order_by(NNN.date.desc())[:5]
-    ENN_list = ENN.query.order_by(ENN.date.desc())[:5]
-    NIN_list = NIN.query.order_by(NIN.date.desc())[:5]
+    categories = ('NIN', 'NNN', 'ENN')
+    models = {}
+    for category in categories:
+        # Reload all the models to get the latest news!!
+        news_fetcher(category)
 
-    return render_template("news.html", ENN_list=ENN_list, NIN_list=NIN_list,
-                           NNN_list=NNN_list)
+        model = eval(category)  # change 'NNN' to NNN
+        order = model.date.desc()  # order by latest date
+        models[category + '_list'] = model.query.order_by(order)[:5]
+
+    return render_template(
+        "news.html", ENN_list=models['ENN_list'],
+        NIN_list=models['NIN_list'], NNN_list=models['NNN_list'])
 
 
 @newslet.route("/dashboard/news/nep/national", methods=["GET", 'POST'])
 @login_required
 def nep_national_news():
-    """Save extracted news to model & passes to template"""
+    """
+    Save extracted news from scraper to db model
+    then passes to detail_news.html template to render it
+    """
+
     news_fetcher('NNN')
     page = request.args.get("page", 1, type=int)
     news_list = NNN.query.order_by(NNN.date.desc()).paginate(page=page,
@@ -51,7 +68,11 @@ def nep_national_news():
 @newslet.route("/dashboard/news/nep/international", methods=["GET", 'POST'])
 @login_required
 def nep_international_news():
-    """Save extracted news to model & passes to template"""
+    """
+    Save extracted news from scraper to db model
+    then passes to detail_news.html template to render it
+    """
+
     news_fetcher('NIN')
     page = request.args.get("page", 1, type=int)
     news_list = NIN.query.order_by(NIN.date.desc()).paginate(page=page,
@@ -66,11 +87,14 @@ def nep_international_news():
 @newslet.route("/dashboard/news/eng/national", methods=["GET", 'POST'])
 @login_required
 def eng_national_news():
-    """Save extracted news to model & passes to template"""
+    """
+    Save extracted news from scraper to db model
+    then passes to detail_news.html template to render it
+    """
     news_fetcher('ENN')
     page = request.args.get("page", 1, type=int)
     news_list = ENN.query.order_by(ENN.date.desc()).paginate(page=page,
-                                                                 per_page=10)
+                                                             per_page=10)
     return render_template("detail_news.html", title='National-Eng',
                            news_list=news_list,
                            heading='National News [Eng]',

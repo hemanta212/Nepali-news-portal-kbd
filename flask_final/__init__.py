@@ -1,3 +1,9 @@
+#-*-code: UTF-8
+'''
+Initialization module of projects that initializes
+app, db, Kbdlog,bcrypt, login_manager, mail, Config
+
+'''
 import json
 import os
 

@@ -1,6 +1,11 @@
+'''
+Script to scrape news from kathmandupost.ekantipur.com
+Contains:
+    kathmandu_post_extractor(): Gives list of news dicts
+ '''
+
 from bs4 import BeautifulSoup as BS
 import requests
-from pprint import pprint
 
 count = 0
 url = 'https://kathmandupost.ekantipur.com'
@@ -16,8 +21,19 @@ except Exception as e:
 soup = BS(page.content, 'lxml')
 
 
-
 def featured():
+    '''
+    This is a helper func to kathmandu_post_extractor func.
+    It is mixed with kantipur_daily_extractor so you dont have
+    to call it.
+
+    This extracts top (latest) 1/2 featured news having diffrent set
+    of layouts thant main news section
+
+    Retruns:
+        Same layout  that of kantipur_daily_extractor func
+
+    '''
     featured_news_list = []
     sticky_news_list = soup.find_all('div', class_="sticky-news")
 
@@ -38,7 +54,7 @@ def featured():
                 2].rstrip().lstrip()
         except IndexError:
             try:
-                date = news.find('div', class_="post").text.split(",")[\
+                date = news.find('div', class_="post").text.split(",")[
                     1].rstrip().lstrip()
             except IndexError:
                 date = 'error'
@@ -61,6 +77,23 @@ def featured():
 
 
 def kathmandu_post_extractor():
+    '''Extracts the news from https://kathmandupost.ekantipur.com
+       with the same order as that of the website
+    Retruns:
+        A list containing dictionaries of news list[0] has latest
+        example of such dictionary is
+        {
+                "image_link": image_link,
+                "title": title in englist,
+                "nep_date": date in 23 Mar 2018 format,
+                "source": "ekantipur",
+                "news_link": full_link,
+                "summary": summary,
+        }
+
+    '''
+    # the main news system is divided in 3 divs with
+    # diffrent main classes  but inside layout is same
     main_news_div1 = soup.find('div', class_="main-news")
     main_news_div2 = soup.find('div', class_="news")
     main_news_div3_pre = soup.find('div', class_="home-featured-news")
@@ -105,9 +138,10 @@ def kathmandu_post_extractor():
             }
             main_news_list.append(news_dict)
 
+    # mix latest news from featured helper funtion
     all_news_list = featured() + main_news_list
-#    pprint(all_news_list)
     return all_news_list
+
 
 if __name__ == "__main__":
     kathmandu_post_extractor()
