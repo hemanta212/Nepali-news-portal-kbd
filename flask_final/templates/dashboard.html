@@ -99,6 +99,25 @@
 
         <div class="overlay"></div>
 
+
+        <script>
+            window.onscroll = function() {myFunction()};
+
+            var news_menu = document.getElementsByClassName("news_menu")[0];
+            var sticky = news_menu.offsetTop;
+            var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+            var x = window.matchMedia("(max-width: 768px)")
+
+            function myFunction() {
+              if (window.pageYOffset > sticky && !x.matches) {
+                news_menu.classList.add("sticky");
+              } else {
+                news_menu.classList.remove("sticky");
+              }
+            }
+            x.addListener(myFunction)
+        </script>
+
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <!-- Bootstrap Js CDN -->

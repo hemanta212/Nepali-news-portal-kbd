@@ -1,6 +1,19 @@
 {% extends "dashboard.html" %}
 {% block content %}
 <br><br><br>
+
+<div class="news_menu">
+    <span>Categories</span>
+    <ul>
+        <li class="current"> <a href='{{url_for('newslet.news')}}'>Home</a> </li>
+        <li> <a href='{{url_for('newslet.nep_national_news')}}'>National News[नेपा]</a> </li>
+        <li> <a href='{{url_for('newslet.nep_international_news')}}'>National News[नेपा] </a> </li>
+        <li> <a href='{{url_for('newslet.eng_national_news')}}'>International News[Eng] </a> </li>
+
+    </ul>
+</div>
+
+
 <div class="news">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -36,7 +49,7 @@
     </div>
     {% endfor %}
 
-</div>
+
 
 <!-- settings for page no indicator at bottom -->
 {%for page_num in news_list.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)%}
@@ -53,4 +66,6 @@
 
 {%endif%}
 {%endfor%}
+
+</div>
 {% endblock content %}

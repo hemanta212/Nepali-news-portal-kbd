@@ -185,6 +185,7 @@ a.article:hover {
 ----------------------------------------------------- */
 #content {
   width: 100%;
+  margin:0 auto;
   padding: 20px;
   min-height: 100vh;
   transition: all 0.3s;
@@ -197,12 +198,72 @@ a.article:hover {
 /* ---------------------------------------------------
    NEWS STYLE
 ----------------------------------------------------- */
-@media screen and (min-width: 600px) {
-  .news {
-    width:80%;
+
+.news_menu {
+    width: 23%;
+    float: left;
+    background:#f4f4;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+}
+
+.news_menu span{
+    padding:5px;
+    font: 20px/1.5 Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+li .current{
+    color:#e8491d;
+    font-weight:bold;
+}
+.news_menu ul{
+    margin-left: 0em;
+    list-style: none;
+    padding-inline-start: 0px;
+}
+.news_menu ul li{
+    padding: 0.3em 0 0.3em 0;
+    text-align: center;
+}
+.news_menu ul li a{
+    text-decoration: none;
+    color: black;
+    font: 15px/1.5 Arial, Helvetica, sans-serif;
+    border: 0px solid #f4f4;
+}
+.news_menu ul li a:hover{
+    font-weight: bold;
+    color:grey;
+}
+
+.news{
+    width:75%;
+    float: right;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px){
+    #content,
+    div.news,
+    div.news_menu {
+    float: none;
+    width: 100%;
+    padding:0px;
+  }
+  div.news_menu {
+    width: 60%;
     margin:0 auto;
   }
 }
+
 
 .panel-heading {
     color: #333;
