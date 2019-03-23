@@ -1,3 +1,8 @@
+'''
+Script to scrape news from www.kantipurdaily.com/world
+Contains:
+    kantipur_international_extractor(): Gives list of news dicts
+ '''
 from bs4 import BeautifulSoup as BS
 import requests
 
@@ -6,7 +11,6 @@ url = 'https://www.kantipurdaily.com/world'
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
          (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-
 
 try:
     page = requests.get(url, headers=headers)
@@ -17,15 +21,24 @@ soup = BS(page.content, 'lxml')
 
 
 def kantipur_international_extractor():
-   # with codecs.open("kantipur_daily_cache.csv", "w", encoding='utf-8', errors='ignore') as w:
-        # with open("kantipur_daily_cache.csv", 'w') as w:
-
-    counter = 0
+    '''
+    Scrapes news from www.kantipurdaily.com/world
+    Retruns:
+        A list containing dictionaries of news. list[0] has latest
+        The format or attributes of dictionary is like this sample
+        {
+            'title': title in nepali,
+            'nep_date': date in 2019/02/34 format,
+            'source': 'ekantipur',
+            'summary': summary in nepali,
+            'news_link': link,
+            'image_link': high resolution image,
+        }
+    '''
     news_list = []
     for article in soup.find_all('article', class_='normal'):
 
         title = article.h2.a.text
-        #author = article.find('div', class_='author').text
         summary = article.find('p').text
         image = article.find('div', class_="image").figure.a.img["data-src"]
         img = image.replace("-lowquality", "")
@@ -46,7 +59,7 @@ def kantipur_international_extractor():
             'image_link': big_img,
         }
         news_list.append(news_dict)
-        counter += 1
+
     return news_list
 
 

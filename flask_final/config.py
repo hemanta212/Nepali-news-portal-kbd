@@ -1,3 +1,5 @@
+'''COnfigurations for the app itself'''
+
 import os
 
 class Config:

@@ -1,6 +1,7 @@
 """
 contains core routes of webapp
 """
+
 from flask import render_template, redirect, Blueprint, url_for
 from flask_login import current_user
 main = Blueprint('main', __name__)
@@ -14,6 +15,6 @@ def home():
     return render_template('home.html',)
 
 
-@main.route("/about", methods=["GET", 'POST'])
+@main.route("/about", methods=["GET"])
 def about():
     return render_template('about.html', title="About US")
