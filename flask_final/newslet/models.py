@@ -21,6 +21,7 @@ class NepNationalNews(db.Model):
         image_link
         news_link
     '''
+    __tablename__ = 'NNN'
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
@@ -46,7 +47,7 @@ class NepInternationalNews(db.Model):
         image_link
         news_link
     '''
-
+    __tablename__ = 'NIN'
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
     nep_date = db.Column(db.String(20), nullable=False)
@@ -72,7 +73,7 @@ class EngNationalNews(db.Model):
         image_link
         news_link
     '''
-
+    __tablename__ = 'ENN'
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
