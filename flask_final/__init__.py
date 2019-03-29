@@ -12,7 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-from flask_final.config import SqliteDebug as Config
+from flask_final.config import PostgresProduction as Config
 from logger_file import Logger
 
 class Kbdlog(Logger):

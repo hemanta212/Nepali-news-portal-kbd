@@ -1,6 +1,6 @@
 import os
 import sys
-from flask_final.config import SqliteDebug as Config
+from flask_final.config import PostgresProduction as Config
 from flask_final import app, db
 
 app.config.from_object(Config)
