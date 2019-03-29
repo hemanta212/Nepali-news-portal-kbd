@@ -77,8 +77,15 @@ You can access created database with created user by,
     
 Your postgres database url wil be "postgresql://localhost/name_of_database"
 
-Insert this database url in the secrets_template.json file in place of SQLALCHEMY_DATABASE_URI value
-Also fill in your details and RENAME the file to secrets.json
+Delete the secrets.json file if present in your folder.
+
+Now set an environment variable named DATABASE_URL, EMAIL, and EMAIL_PASSWORD
+
+In linux:
+
+      export DATABASE_URL='postgresql://localhost/name_of_database'
+      export EMAIL='your_email@something.com'
+      export EMAIL_PASSWORD='your password'
 
 Make sure PosgresProduction is imported in manage.py and flask_final/__init__.py files.
 

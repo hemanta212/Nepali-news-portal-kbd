@@ -8,7 +8,9 @@ database_config = app.config['SQLALCHEMY_DATABASE_URI']
 
 #if database is not postgres but sqlite we initialize it diffrently.
 if  database_config == 'sqlite:///site.db':
+    print('setting sqlite db....')
     db.create_all()
+    print('done.')
     sys.exit(0)
 
 from flask_script import Manager
