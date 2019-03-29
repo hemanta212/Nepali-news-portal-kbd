@@ -1,10 +1,19 @@
 import os
-from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
-from flask_final.config import Config
+import sys
+from flask_final.config import SqliteDebug as Config
 from flask_final import app, db
 
 app.config.from_object(Config)
+database_config = app.config['SQLALCHEMY_DATABASE_URI']
+
+#if database is not postgres but sqlite we initialize it diffrently.
+if  database_config == 'sqlite:///site.db':
+    db.create_all()
+    sys.exit(0)
+
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
+
 
 migrate = Migrate(app, db)
 manager = Manager(app)
