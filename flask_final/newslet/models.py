@@ -21,11 +21,11 @@ class NepNationalNews(db.Model):
         image_link
         news_link
     '''
-    __tablename__ = 'NNN'
+    __tablename__ = 'NEP_NATIONAL'
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-    nep_date = db.Column(db.String(50), nullable=False)
+    nep_date = db.Column(db.Text, nullable=False)
     summary = db.Column(db.Text,)
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
@@ -47,10 +47,10 @@ class NepInternationalNews(db.Model):
         image_link
         news_link
     '''
-    __tablename__ = 'NIN'
+    __tablename__ = 'NEP_INTERNATIONAL'
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
-    nep_date = db.Column(db.String(50), nullable=False)
+    nep_date = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
     summary = db.Column(db.Text,)
     title = db.Column(db.Text, nullable=False)
@@ -73,11 +73,11 @@ class EngNationalNews(db.Model):
         image_link
         news_link
     '''
-    __tablename__ = 'ENN'
+    __tablename__ = 'ENG_NATIONAL'
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-    nep_date = db.Column(db.String(50), nullable=False)
+    nep_date = db.Column(db.Text , nullable=False)
     summary = db.Column(db.Text, )
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
