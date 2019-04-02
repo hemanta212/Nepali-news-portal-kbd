@@ -39,8 +39,9 @@ def tryfree():
         return redirect(url_for('newslet.news'))
     user = User.query.filter_by(email="try@try.com").first()
     if not user:
+        hashed_password = bcrypt.generate_password_hash('try').decode('utf-8')
         user = User(full_name="try", email="try@try.com",
-                    password="try")
+                    password=hashed_password)
 
         db.session.add(user)
         db.session.commit()
