@@ -12,7 +12,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-from flask_final.config import PostgresProduction as Config
 from logger_file import Logger
 
 class Kbdlog(Logger):
@@ -27,25 +26,28 @@ class Kbdlog(Logger):
             self.debug_file = self.dir + self.debug_file
 
 
-app = Flask(__name__)
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
+bcrypt = Bcrypt()
+login_manager = LoginManager()
 login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
+db = SQLAlchemy()
+mail = Mail()
 
-app.config.from_object(Config)
-# disable the warning popup when server starts
-db = SQLAlchemy(app)
-mail = Mail(app)
+def create_app(config):
+    app = Flask(__name__)
+    app.config.from_object(config)
 
-from flask_final.users.routes import users
-from flask_final.newslet.routes import newslet
-from flask_final.main.routes import main
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
 
-app.register_blueprint(users)
-app.register_blueprint(newslet)
-app.register_blueprint(main)
+    from flask_final.users.routes import users
+    from flask_final.newslet.routes import newslet
+    from flask_final.main.routes import main
 
-# for deploying on a linux server use os.environ.get() otherwise
-# with open("/etc/kbd/config.json") as json_file:
-#    configvar = json.load(json_file)
+    app.register_blueprint(users)
+    app.register_blueprint(newslet)
+    app.register_blueprint(main)
+
+    return app

@@ -76,11 +76,18 @@ def logout():
 @users.route("/password/reset", methods=["GET", 'POST'])
 def reset_request():
     form = RequestResetForm()
-    if form.validate_on_submit():
+    if form.email.data == 'try@try.com':
+        flash('Invalid request. This is public try account', 'warning')
+
+    elif form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_mail(user)
-        flash('Email with reset link is sent. Check your email!')
-        return redirect(url_for('users.login'))
+        flash('Email with reset link is sent. Check your email!', 'success')
+        if current_user.is_authenticated:
+            return redirect(url_for('users.reset_request'))
+        else:
+            return redirect(url_for('users.login'))
+
     return render_template("reset_request.html", titile="Reset password",
                            form=form)
 

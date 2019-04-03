@@ -3,13 +3,13 @@ import os
 import sys
 import json
 
+
 class Config:
 
-    #basic debuggin properties:
+    # basic debuggin properties:
     DEBUG = False
     TESTING = False
-    CSRF_ENABLED = True  # security for forms
-
+    WTF_CSRF_ENABLED = True  # security for forms
 
     # whether to detect changes in project
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -17,7 +17,7 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
-    #Email configs for reseting things you know.
+    # Email configs for reseting things you know.
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
@@ -25,18 +25,19 @@ class Config:
     MAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
 
+# check if there is a secrets.json file.
+def Secrets():
+    if os.path.exists('secrets.json'):
 
-#check if there is a secrets.json file.
-if os.path.exists('secrets.json'):
+        with open('secrets.json', 'r') as rf:
+            configs = json.load(rf)
 
-    with open('secrets.json', 'r') as rf:
-        configs = json.load(rf)
-
-    class Config(Config):
-        SECRET_KEY = configs["SECRET_KEY"]
-        MAIL_USERNAME = configs["MAIL_USERNAME"]
-        MAIL_PASSWORD = configs["MAIL_PASSWORD"]
-        SQLALCHEMY_DATABASE_URI = configs["SQLALCHEMY_DATABASE_URI"]
+        class Config_class(Config):
+            SECRET_KEY = configs["SECRET_KEY"]
+            MAIL_USERNAME = configs["MAIL_USERNAME"]
+            MAIL_PASSWORD = configs["MAIL_PASSWORD"]
+            SQLALCHEMY_DATABASE_URI = configs["SQLALCHEMY_DATABASE_URI"]
+    return Config_class
 
 class Debug(Config):
 
@@ -45,14 +46,18 @@ class Debug(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = True,
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
+
 class SqliteDebug(Debug):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
+
 
 class SqliteProduction(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
 
+
 class PostgresDebug(Debug):
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+
 
 class PostgresProduction(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
