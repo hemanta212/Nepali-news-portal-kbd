@@ -1,18 +1,7 @@
-import sys
-from flask_final.config import (SqliteProduction, PostgresProduction,
-                                 PostgresDebug, Secrets, SqliteDebug)
-from flask_final import create_app
-from flask_final import db
-Config = sys.argv[1:]
+from flask_final.config import PostgresProduction
+from flask_final import db, create_app
 
-if Config == []:
-    app = create_app(PostgresProduction)
-
-elif Config[0] == 'secrets':
-    config_class = Secrets()
-    app = create_app(config_class)
-else:
-    app = create_app(eval(Config[0]))
+app = create_app(PostgresProduction)
 
 if __name__ == "__main__":
     app.run()

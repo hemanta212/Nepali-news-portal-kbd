@@ -1,14 +1,14 @@
 import os
 import sys
-from flask_final.config import PostgresProduction
+from flask_final.config import PostgresProduction, SqliteProduction
 from flask_final import db, create_app
 
+arg = sys.argv[1:]
 app = create_app(PostgresProduction)
-app.config.from_object(Config)
-database_config = app.config['SQLALCHEMY_DATABASE_URI']
 
 #if database is not postgres but sqlite we initialize it diffrently.
-if  database_config == 'sqlite:///site.db':
+if 'sqlite' in arg:
+    app = create_app(SqliteProduction)
     print('setting sqlite db....')
     with app.app_context():
         db.create_all()
