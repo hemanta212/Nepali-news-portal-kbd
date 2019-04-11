@@ -18,3 +18,7 @@ def home():
 @main.route("/about", methods=["GET"])
 def about():
     return render_template('about.html', title="About this website")
+
+@main.route("/privacy_policy", methods=["GET"])
+def privacy_policy():
+    return render_template('privacy_policy.html', title="Privacy policy")
