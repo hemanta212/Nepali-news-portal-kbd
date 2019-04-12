@@ -2,19 +2,32 @@
 Khabar-board is an online webapp that scrapes news from diffrent new portals of Nepal. Currently the news is Scraped for National nepali, 
 International nepali and National english sections from Kantipur and Kathmandu Post.
 
-It features basic Login and Logout function and email reset function as of now.
-It supports Postgresql database as well.
+Features:
 
- ## Installation 
+* Login, Logout, Remember login through cookies
+* Reset and confirm email address
+* Integrated Unittesting feature
+* Scraping of News and serving
+* Pagination, Collapsible sidebar, Responsive navigation
+* Use proper structure with flask blueprinting
+* Support PostgreSQL and Sqlite database
+* Hosted Live at heroku @ kbd.herokuapp.com
+
+Todo:
+- [ ] Integrate various international news apis
+- [ ] Integrate social media login (facebook, github)
+- [ ] Use Docker 
+- [ ] Add logging
+- [ ] Complete testing coverage
+
+## Installation 
  (make it work on your computer)
  
 first properly install python 3.6 or above in your system.
 
-
 step1: clone/download this repository and navigate to this repo through cmd
 
-Step2(optional):
-
+Step2:
 make a virtualenv:
 
     python -m venv <name>
@@ -31,15 +44,8 @@ For Linux or Unix
 
 Step3:
 
-Now open manage.py and flask_final/__init__.py files and in both of them change following lines,
-```
-from flask_final.config import PosgresProduction as Config
-```
-To
-```
-from flask_final.config import SqliteDebug as Config
-```
-Go to secrets_template.json file and enter your details there and SAVE IT as secrets.json file
+Now again navigate to Khabar-board folder and rename template_secrets.json to secrets.json
+
 
 Step 4:
 
@@ -48,8 +54,8 @@ Run,
     pip install -r bare_requirements.txt
 then,
 
-    python manage.py
-    python run.py
+    python manage.py sqlite
+    python start.py secrets
 
 Finally open your browser and head over to http://localhost:5000 and website will load.
 
@@ -58,10 +64,30 @@ Finally open your browser and head over to http://localhost:5000 and website wil
 
 To run the project on posgres database you need to install postgresql 10+ in your system
 
-For windows:
+* For windows:
 Download and install setupfile from https://www.postgresql.org/download/windows/
 
-For linux:
+Create a postgreql database and obtain its local url
+Now remove the gunicorn in requirements.txt
+
+then, 
+    
+      pip install -r requirements.txt
+
+Now, Add your postgresql local url of database you created earlier to environment variable named DATABASE_URL and add random 
+strings to a new SECRET_KEY environment variable.
+
+###  If you are setting first time without migrate folder 
+      python manage.py db init  
+      python manage.py db migrate
+      python manage.py db upgrade
+      python manage.py runserver
+
+###  If migrate folder is present
+      python manage.py db upgrade
+      python manage.py runserver
+
+* For linux:
 install postgres:
 
     sudo apt-get install postgresql postgresql-contrib
@@ -97,6 +123,7 @@ After that,
     python manage.py db init
     python manage.py db migrate
     python manage.py db upgrade
+
 Finally run the application with.
     
     python manage.py runserver
