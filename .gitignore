@@ -12,3 +12,4 @@
 *.orig*
 *.toml*
 secrets*
+*.db*
