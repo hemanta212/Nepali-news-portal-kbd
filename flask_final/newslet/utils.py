@@ -83,7 +83,7 @@ else:
             order = models[category].nep_date.desc()
 
         # this for loop picks iterates over latest news list
-        # and then preserves first 30 items and deletes  all others
-        for i in models[category].query.order_by(order)[30:]:
+        # and then preserves first 60 items and deletes  all others
+        for i in models[category].query.order_by(order)[60:]:
             db.session.delete(i)
             db.session.commit()

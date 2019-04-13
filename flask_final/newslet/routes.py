@@ -57,7 +57,7 @@ def nep_national_news():
     news_fetcher('NNN')
     page = request.args.get("page", 1, type=int)
     news_list = NNN.query.order_by(NNN.date.desc()).paginate(page=page,
-                                                             per_page=10)
+                                                             per_page=15)
     return render_template("detail_news.html", title='National-Nep',
                            news_list=news_list,
                            heading='National News [नेपा]',
@@ -76,7 +76,7 @@ def nep_international_news():
     news_fetcher('NIN')
     page = request.args.get("page", 1, type=int)
     news_list = NIN.query.order_by(NIN.date.desc()).paginate(page=page,
-                                                             per_page=10)
+                                                             per_page=15)
     return render_template("detail_news.html", title='International-Nep',
                            news_list=news_list,
                            heading='International News [नेपा]',
@@ -94,7 +94,7 @@ def eng_national_news():
     news_fetcher('ENN')
     page = request.args.get("page", 1, type=int)
     news_list = ENN.query.order_by(ENN.date.desc()).paginate(page=page,
-                                                             per_page=10)
+                                                             per_page=15)
     return render_template("detail_news.html", title='National-Eng',
                            news_list=news_list,
                            heading='National News [Eng]',
