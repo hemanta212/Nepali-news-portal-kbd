@@ -1,5 +1,5 @@
 # Khabar-board
-Khabar-board is an online webapp that scrapes news from diffrent new portals of Nepal. Currently the news is Scraped for National nepali, 
+Khabar-board is an online webapp that scrapes news from diffrent new portals of Nepal. Currently the news is Scraped for National nepali,
 International nepali and National english sections from Kantipur and Kathmandu Post.
 
 Features:
@@ -7,22 +7,29 @@ Features:
 * Login, Logout, Remember login through cookies
 * Reset and confirm email address
 * Integrated Unittesting feature
-* Scraping of News and serving
+* National and International news in both nepali and english
+* News collection(scraping, api) and serving
 * Pagination, Collapsible sidebar, Responsive navigation
 * Use proper structure with flask blueprinting
 * Support PostgreSQL and Sqlite database
 * Hosted Live at heroku @ kbd.herokuapp.com
 
 Todo:
-- [ ] Integrate various international news apis
+* Tick indcates progress.
+- [x] Integrate various international news apis(top, general, sports, tech...)
+- [ ] News search on keyword for custom category (like bitcoin, trump, etc)
+- [ ] Give user choice to customize news topic, sources, language etc
+- [ ] Remove compulsory login and establish per person db record of preferences
+- [ ] Redesign the dashboard
 - [ ] Integrate social media login (facebook, github)
-- [ ] Use Docker 
-- [ ] Add logging
+- [ ] Use Docker
+- [x] Add logging
 - [ ] Complete testing coverage
+- [ ] Rewrite manage.py and database management
 
-## Installation 
+## Installation
  (make it work on your computer)
- 
+
 first properly install python 3.6 or above in your system.
 
 step1: clone/download this repository and navigate to this repo through cmd
@@ -31,16 +38,16 @@ Step2:
 make a virtualenv:
 
     python -m venv <name>
-    
-Go inside this new folder and activate the virtual environment by running: 
+
+Go inside this new folder and activate the virtual environment by running:
 
 For Windows
 
     Scripts\activate
 For Linux or Unix
-    
+
     source bin/activate
- 
+
 
 Step3:
 
@@ -70,15 +77,15 @@ Download and install setupfile from https://www.postgresql.org/download/windows/
 Create a postgreql database and obtain its local url
 Now remove the gunicorn in requirements.txt
 
-then, 
-    
+then,
+
       pip install -r requirements.txt
 
-Now, Add your postgresql local url of database you created earlier to environment variable named DATABASE_URL and add random 
+Now, Add your postgresql local url of database you created earlier to environment variable named DATABASE_URL and add random
 strings to a new SECRET_KEY environment variable.
 
-###  If you are setting first time without migrate folder 
-      python manage.py db init  
+###  If you are setting first time without migrate folder
+      python manage.py db init
       python manage.py db migrate
       python manage.py db upgrade
       python manage.py runserver
@@ -98,9 +105,9 @@ And create a database using created user account
 
     sudo -u name_of_user createdb name_of_database
 You can access created database with created user by,
-    
+
     psql -U name_of_user -d name_of_database
-    
+
 Your postgres database url wil be "postgresql://localhost/name_of_database"
 
 Delete the secrets.json file if present in your folder.
@@ -125,7 +132,7 @@ After that,
     python manage.py db upgrade
 
 Finally run the application with.
-    
+
     python manage.py runserver
-    
-Website will be at http://localhost:5000 load it in your browser. 
+
+Website will be at http://localhost:5000 load it in your browser.

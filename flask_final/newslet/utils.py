@@ -14,6 +14,8 @@ try:
         kantipur_daily_extractor)
     from flask_final.newslet.kathmandupost import (
         kathmandu_post_extractor)
+    from flask_final.newslet.top_international_news import(
+        get_general_headlines)
 
 # Incase scrapers cannot be imported (networks or some reasons)
 except Exception as E:
@@ -32,7 +34,8 @@ else:
     from flask_final.newslet.models import NepNationalNews as NNN
     from flask_final.newslet.models import NepInternationalNews as NIN
     from flask_final.newslet.models import EngNationalNews as ENN
-    from flask_final import db
+    from flask_final.newslet.models import EngInternationalNews as EIN
+    from flask_final import db, NEWS_API_KEY
 
     def news_fetcher(category):
         '''
@@ -46,17 +49,26 @@ else:
             'NNN': NNN,
             'NIN': NIN,
             'ENN': ENN,
+            'EIN': EIN,
         }
 
-        extractors = {
+        scrapers = {
             'NNN': kantipur_daily_extractor,
             'NIN': kantipur_international_extractor,
             'ENN': kathmandu_post_extractor,
         }
 
-        scraped_news_list = extractors[category]()
+        extractors = {
+            'EIN': (get_general_headlines, NEWS_API_KEY, dict()),
+        }
 
-        for news in scraped_news_list[::-1]:
+        if category in scrapers:
+            news_list = scrapers.get(category)()
+        else:
+            func, API_KEY, kwargs = extractors.get(category)
+            news_list = func(API_KEY, **kwargs)
+
+        for news in news_list[::-1]:
             # In scraped_news_list index 0 is latest one. This for loop
             # iterates in opposite direction so that
             # index 0 (latest news) is registered at last so that
@@ -64,23 +76,23 @@ else:
             # so it gets oldest date assigned by db model
 
             duplicate = models[category].query.filter_by(
-                                                title=news["title"]).first()
+                title=news["title"]).first()
 
             if duplicate is None:
                 news_post = models[category](
                     title=news['title'],
                     source=news['source'], summary=news['summary'],
                     image_link=news['image_link'], news_link=news['news_link'],
-                    nep_date=news["nep_date"])
+                    raw_date=news['raw_date'], date=news.get('date'))
 
                 db.session.add(news_post)
                 db.session.commit()
 
         if category != 'ENN':
-            # use nep_date to order if english otherwise use date
+            # use raw_date to order if english otherwise use date
             order = models[category].date.desc()  # order by latest news
         else:
-            order = models[category].nep_date.desc()
+            order = models[category].raw_date.desc()
 
         # this for loop picks iterates over latest news list
         # and then preserves first 60 items and deletes  all others
