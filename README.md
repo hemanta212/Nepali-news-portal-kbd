@@ -1,6 +1,8 @@
 # Khabar-board
-Khabar-board is an online webapp that scrapes news from diffrent new portals of Nepal. Currently the news is Scraped for National nepali,
-International nepali and National english sections from Kantipur and Kathmandu Post.
+Khabar-board is an online webapp that scrapes news from diffrent new portals of Nepal and worldwide.
+
+Currently, the news is Scraped for National nepali,
+International nepali, National english and International english sections from Kantipur and Kathmandu Post, and top headlines from International sources like bbc, cnn, new york times, etc
 
 Features:
 
@@ -28,14 +30,9 @@ Todo:
 - [ ] Rewrite manage.py and database management
 
 ## Installation
- (make it work on your computer)
-
-first properly install python 3.6 or above in your system.
-
-step1: clone/download this repository and navigate to this repo through cmd
-
-Step2:
-make a virtualenv:
+* First properly install python 3.6 or above in your system.
+* clone/download this repository and navigate to this repo through cmd
+* make a virtualenv:
 
     python -m venv <name>
 
@@ -48,15 +45,9 @@ For Linux or Unix
 
     source bin/activate
 
+* Now again navigate to Khabar-board folder and rename template_secrets.json to secrets.json
 
-Step3:
-
-Now again navigate to Khabar-board folder and rename template_secrets.json to secrets.json
-
-
-Step 4:
-
-Run,
+* Run,
 
     pip install -r bare_requirements.txt
 then,
@@ -64,7 +55,9 @@ then,
     python manage.py sqlite
     python start.py secrets
 
-Finally open your browser and head over to http://localhost:5000 and website will load.
+* Finally open your browser and head over to http://localhost:5000 and website will load.
+
+* Note: fill secrets.json file with your email and password for password reset functionality!
 
 
 ## Run USING POSTGRES DATABASE.
@@ -74,16 +67,18 @@ To run the project on posgres database you need to install postgresql 10+ in you
 * For windows:
 Download and install setupfile from https://www.postgresql.org/download/windows/
 
-Create a postgreql database and obtain its local url
-Now remove the gunicorn in requirements.txt
-
-then,
+* Create a postgreql database and obtain its local url
+* Now remove the gunicorn in requirements.txt
+* then,
 
       pip install -r requirements.txt
 
-Now, Add your postgresql local url of database you created earlier to environment variable named DATABASE_URL and add random
-strings to a new SECRET_KEY environment variable.
+* Add your postgresql local url of database you created earlier to environment variable named DATABASE_URL
+* Make new SECRET_KEY environment variable and random string as value
 
+* Note: Add EMAIL and EMAIL_PASSWORD environment variable with your email and password for password reset functionality!
+
+* Finally,
 ###  If you are setting first time without migrate folder
       python manage.py db init
       python manage.py db migrate
@@ -95,24 +90,30 @@ strings to a new SECRET_KEY environment variable.
       python manage.py runserver
 
 * For linux:
+
 install postgres:
 
     sudo apt-get install postgresql postgresql-contrib
-Now create a superuser for PostgreSQL
+
+* Now create a superuser for PostgreSQL
 
     sudo -u postgres createuser --superuser name_of_user
-And create a database using created user account
+
+* And create a database using created user account
 
     sudo -u name_of_user createdb name_of_database
-You can access created database with created user by,
+
+* You can access created database with created user by,
 
     psql -U name_of_user -d name_of_database
 
-Your postgres database url wil be "postgresql://localhost/name_of_database"
+* Your postgres database url wil be something like
 
-Delete the secrets.json file if present in your folder.
+    postgresql://localhost/name_of_database
 
-Now set an environment variable named DATABASE_URL, EMAIL, and EMAIL_PASSWORD
+* Delete the secrets.json file if present in your folder.
+
+* Set environment variables named DATABASE_URL, EMAIL, and EMAIL_PASSWORD
 
 In linux:
 
@@ -120,19 +121,26 @@ In linux:
       export EMAIL='your_email@something.com'
       export EMAIL_PASSWORD='your password'
 
-Make sure PosgresProduction is imported in manage.py and flask_final/__init__.py files.
+  * Note: EMAIL and EMAIL_PASSWORD are only required for password reset functionality!
 
-Now run
+* Run
 
     pip install -r requirements.txt
-After that,
+
+* After that,
+
+  if migrations folder is present
+
+    python manage.py db upgrade
+
+  otherwise
 
     python manage.py db init
     python manage.py db migrate
     python manage.py db upgrade
 
-Finally run the application with.
+* Finally run the application with.
 
     python manage.py runserver
 
-Website will be at http://localhost:5000 load it in your browser.
+* Website will be at http://localhost:5000 load it in your browser.
