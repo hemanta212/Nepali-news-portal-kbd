@@ -16,7 +16,7 @@ lxml==4.2.5
 requests==2.20.0
 SQLAlchemy==1.2.12
 urllib3==1.23
-Werkzeug==0.14.1
+Werkzeug==0.15.2
 WTForms==2.2.1
 gunicorn==19.9.0
 Flask-Migrate==2.2.1
