@@ -31,7 +31,7 @@ def news():
        pass many list of models items to news.html template
        and rende  """
 
-    categories = ('NIN', 'NNN', 'ENN')
+    categories = ('NIN', 'NNN', 'ENN', 'EIN')
     models = {}
     for category in categories:
         # Reload all the models to get the latest news!!
@@ -43,7 +43,8 @@ def news():
 
     return render_template(
         "news.html", title='Dashboard | Home', ENN_list=models['ENN_list'],
-        NIN_list=models['NIN_list'], NNN_list=models['NNN_list'])
+        NIN_list=models['NIN_list'], NNN_list=models['NNN_list'],
+        EIN_list=models['EIN_list'])
 
 
 @newslet.route("/dashboard/news/nep/national", methods=["GET"])
