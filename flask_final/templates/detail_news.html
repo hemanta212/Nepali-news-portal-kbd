@@ -20,6 +20,9 @@
             International News[नेपा]
         </a></li>
 
+        <li> <a id="newsmenu_EIN" href='{{url_for('newslet.eng_international_news')}}'>
+            International News[Eng]
+        </a></li>
     </ul>
 </div>
 
@@ -46,7 +49,7 @@
         <!-- NEWS BODY (SUMMARY) -->
         <div class="panel-body">
             <div>
-                <small class="text-muted">{{ news.nep_date }}</small>
+                <small class="text-muted">{{ news.raw_date }}</small>
                 <span> <a href="{{news.news_link}}" , target="_blank">| {{news.source}}</a> </span>
             </div><br>
 
@@ -92,6 +95,10 @@
     else if (category == 'National-Eng') {
         newsmenu_a_tag = document.getElementById('newsmenu_ENN');
         sidebar_a_tag = document.getElementById('sidebar_ENN');
+    }
+    else if (category == 'International-Eng') {
+        newsmenu_a_tag = document.getElementById('newsmenu_EIN');
+        sidebar_a_tag = document.getElementById('sidebar_EIN');
     }
     else {
         console.log(category);

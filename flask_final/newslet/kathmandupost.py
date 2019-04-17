@@ -66,7 +66,7 @@ def featured():
             "title": title,
             "source": "ekantipur",
             "news_link": full_link,
-            'nep_date': date,
+            'raw_date': date,
             "summary": summary,
             "image_link": img_link,
         }
@@ -85,7 +85,7 @@ def kathmandu_post_extractor():
         {
                 "image_link": image_link,
                 "title": title in englist,
-                "nep_date": date in 23 Mar 2018 format,
+                "raw_date": date in 23 Mar 2018 format,
                 "source": "ekantipur",
                 "news_link": full_link,
                 "summary": summary,
@@ -131,7 +131,7 @@ def kathmandu_post_extractor():
             news_dict = {
                 "image_link": image_link,
                 "title": title,
-                "nep_date": date,
+                "raw_date": date,
                 "source": "ekantipur",
                 "news_link": full_link,
                 "summary": summary,
