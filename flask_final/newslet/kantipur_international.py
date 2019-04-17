@@ -2,7 +2,8 @@
 Script to scrape news from www.kantipurdaily.com/world
 Contains:
     kantipur_international_extractor(): Gives list of news dicts
- '''
+'''
+from datetime import datetime
 from bs4 import BeautifulSoup as BS
 import requests
 
@@ -28,7 +29,7 @@ def kantipur_international_extractor():
         The format or attributes of dictionary is like this sample
         {
             'title': title in nepali,
-            'nep_date': date in 2019/02/34 format,
+            'raw_date': date in 2019/02/34 format,
             'source': 'ekantipur',
             'summary': summary in nepali,
             'news_link': link,
@@ -49,10 +50,12 @@ def kantipur_international_extractor():
         pure_date_list = [contaminated_list[2],
                           contaminated_list[3], contaminated_list[4]]
         date = "/".join(pure_date_list)
+        date = format_date(date)
         link = "https://kantipurdaily.com" + date_ore
+
         news_dict = {
             'title': title,
-            'nep_date': date,
+            'raw_date': date,
             'source': 'ekantipur',
             'summary': summary,
             'news_link': link,
@@ -61,6 +64,13 @@ def kantipur_international_extractor():
         news_list.append(news_dict)
 
     return news_list
+
+def format_date(raw_date):
+    org_format = '%Y/%m/%d'
+    datetime_obj = datetime.strptime(raw_date, org_format)
+    dest_format = '%d %b %Y'
+    date = datetime_obj.strftime(dest_format)
+    return date
 
 
 if __name__ == "__main__":

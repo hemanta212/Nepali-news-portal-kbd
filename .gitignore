@@ -11,5 +11,7 @@
 *.lock*
 *.orig*
 *.toml*
+*poetry*
 secrets*
 *.db*
+.env

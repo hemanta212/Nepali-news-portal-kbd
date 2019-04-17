@@ -14,7 +14,7 @@ class NepNationalNews(db.Model):
     Provides date(model created), id atrribute by default
     Initialize with compulsory
         source : news source like 'ekantipur'
-        nep_date: date provided by the website itself
+        raw_date: date provided by the website itself
         summary : news summary
         title : title of the news
     Optional initialization
@@ -25,7 +25,7 @@ class NepNationalNews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-    nep_date = db.Column(db.Text, nullable=False)
+    raw_date = db.Column(db.Text, nullable=False)
     summary = db.Column(db.Text,)
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
@@ -40,7 +40,7 @@ class NepInternationalNews(db.Model):
     Provides date(model created), id atrribute by default
     Initialize with compulsory
         source : news source like 'ekantipur'
-        nep_date: date provided by the website itself
+        raw_date: date provided by the website itself
         summary : news summary
         title : title of the news
     Optional initialization
@@ -50,7 +50,7 @@ class NepInternationalNews(db.Model):
     __tablename__ = 'NEP_INTERNATIONAL'
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
-    nep_date = db.Column(db.Text, nullable=False)
+    raw_date = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
     summary = db.Column(db.Text,)
     title = db.Column(db.Text, nullable=False)
@@ -66,7 +66,7 @@ class EngNationalNews(db.Model):
     Provides date(model created), id atrribute by default
     Initialize with compulsory
         source : news source like 'ekantipur'
-        nep_date: date provided by the website itself
+        raw_date: date provided by the website itself
         summary : news summary
         title : title of the news
     Optional initialization
@@ -77,8 +77,33 @@ class EngNationalNews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(20), nullable=False, )
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-    nep_date = db.Column(db.Text , nullable=False)
+    raw_date = db.Column(db.Text , nullable=False)
     summary = db.Column(db.Text, )
+    title = db.Column(db.Text, nullable=False)
+    image_link = db.Column(db.Text)
+    news_link = db.Column(db.Text,)
+
+    def __repr__(self):
+        return 'news({0}, {1}, {2})'.format(self.id, self.source, self.date)
+
+class EngInternationalNews(db.Model):
+    '''
+    Provides date(model created), id atrribute by default
+    Initialize with compulsory
+        source : news source like 'the-washington-post'
+        raw_date: date provided by the website itself
+        summary : news summary
+        title : title of the news
+    Optional initialization
+        image_link
+        news_link
+    '''
+    __tablename__ = 'ENG_INTERNATIONAL'
+    id = db.Column(db.Integer, primary_key=True)
+    source = db.Column(db.String(20), nullable=False, )
+    raw_date = db.Column(db.Text, nullable=False)
+    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+    summary = db.Column(db.Text,)
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
     news_link = db.Column(db.Text,)
