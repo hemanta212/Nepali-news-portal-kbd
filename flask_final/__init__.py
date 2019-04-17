@@ -12,19 +12,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-from logger_file import Logger
-
-class Kbdlog(Logger):
-    '''
-    A wrapper to logger_file logger for simple unified logging experiance
-    '''
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.dir = "flask_final/logs/"
-        self.file = self.dir + self.file
-        if self.debug_file:
-            self.debug_file = self.dir + self.debug_file
-
 
 bcrypt = Bcrypt()
 login_manager = LoginManager()
