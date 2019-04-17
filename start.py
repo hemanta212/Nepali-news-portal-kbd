@@ -6,7 +6,7 @@ from flask_final import db
 Config = sys.argv[1:]
 
 if Config == []:
-    app = create_app(PostgresProduction)
+    app = create_app(SqliteProduction)
 
 elif Config[0] == 'secrets':
     config_class = Secrets()
