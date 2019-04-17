@@ -9,11 +9,17 @@
         <li> <a href='{{url_for('newslet.eng_national_news')}}'>National News[Eng] </a> </li>
         <li> <a href='{{url_for('newslet.nep_international_news')}}'>
         International News[नेपा] </a> </li>
+        <li> <a href='{{url_for('newslet.eng_international_news')}}'>International News[Eng] </a> </li>
 
     </ul>
 </div>
 
+
 <div class="news">
+
+
+<!--------------------------------------------------------------------------------->
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2><a href="{{url_for('newslet.nep_national_news')}}" target="_blank">National News[नेपा]</a></h2>
@@ -30,7 +36,7 @@
         {%endif%}
         <div class="panel-body">
             <div>
-                <small class="text-muted">{{ news.nep_date }}</small>
+                <small class="text-muted">{{ news.raw_date }}</small>
                 <span>| {{news.source}}</span>
             </div><br>
 
@@ -46,43 +52,7 @@
     </div>
     <div class='line'></div><br>
 
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h2><a href="{{url_for('newslet.nep_international_news')}}" target="_blank">International News[नेपा]</a></h2>
-        </div>
-    </div>
-    {% for news in NIN_list %}
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3><a href="{{news.news_link}}" target="_blank">{{news.title}}</a></h3>
-        </div>
-
-        {%if news.image_link%}
-        <img class="article-img img-responsive load_sideway" src={{news.image_link}}>
-        {%endif%}
-
-        <div class="panel-body">
-            <div>
-                <small class="text-muted">{{ news.nep_date }}</small>
-                <span>| {{news.source}}</span>
-            </div><br>
-            <div class="text-justify lead">
-                {{news.summary}}
-            </div><a href="{{news.news_link}}" , target="_blank">|थप पढ्नुहोस >>|</a>
-        </div>
-    </div>
-    {% endfor %}
-    <div class="panel-body">
-        <small class="text-muted"><a href="{{url_for('newslet.nep_international_news')}}">More on this
-                topic.</a></small>
-    </div>
-    <div class='line'></div><br>
-
-
-
+<!--------------------------------------------------------------------------------->
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -103,7 +73,7 @@
         <div class="panel-body">
             <div>
                 <!--news.date.strftime('%Y-%m-%d')-->
-                <small class="text-muted">{{ news.nep_date }}</small>
+                <small class="text-muted">{{ news.raw_date }}</small>
                 <span>| {{news.source}}</span>
             </div><br>
             <div class="text-justify lead">
@@ -116,6 +86,80 @@
         <small class="text-muted"><a href="{{url_for('newslet.eng_national_news')}}">More on this topic.</a></small>
     </div>
     <div class='line'></div><br>
+
+<!--------------------------------------------------------------------------------->
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2><a href="{{url_for('newslet.nep_international_news')}}" target="_blank">International News[नेपा]</a></h2>
+        </div>
+    </div>
+    {% for news in NIN_list %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3><a href="{{news.news_link}}" target="_blank">{{news.title}}</a></h3>
+        </div>
+
+        {%if news.image_link%}
+        <img class="article-img img-responsive load_sideway" src={{news.image_link}}>
+        {%endif%}
+
+        <div class="panel-body">
+            <div>
+                <small class="text-muted">{{ news.raw_date }}</small>
+                <span>| {{news.source}}</span>
+            </div><br>
+            <div class="text-justify lead">
+                {{news.summary}}
+            </div><a href="{{news.news_link}}" , target="_blank">|थप पढ्नुहोस >>|</a>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="panel-body">
+        <small class="text-muted"><a href="{{url_for('newslet.nep_international_news')}}">More on this
+                topic.</a></small>
+    </div>
+    <div class='line'></div><br>
+
+<!--------------------------------------------------------------------------------->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2><a href="{{url_for('newslet.eng_international_news')}}" target="_blank">International News[Eng]</a></h2>
+        </div>
+    </div>
+    {% for news in EIN_list %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3><a href="{{news.news_link}}" target="_blank">{{news.title}}</a></h3>
+        </div>
+
+        {%if news.image_link%}
+        <img class="article-img img-responsive img-fluid load_sideway" src={{news.image_link}}>
+        {%endif%}
+
+        <div class="panel-body">
+            <div>
+                <!--news.date.strftime('%Y-%m-%d')-->
+                <small class="text-muted">{{ news.raw_date }}</small>
+                <span>| {{news.source}}</span>
+            </div><br>
+            <div class="text-justify lead">
+                {{news.summary}}
+            </div><a href="{{news.news_link}}" , target="_blank">|Read more>>|</a>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="panel-body">
+        <small class="text-muted"><a href="{{url_for('newslet.eng_international_news')}}">More on this topic.</a></small>
+    </div>
+    <div class='line'></div><br>
+
+<!--------------------------------------------------------------------------------->
+
 
 </div>
 

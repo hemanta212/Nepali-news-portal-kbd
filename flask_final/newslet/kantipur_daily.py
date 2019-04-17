@@ -5,6 +5,7 @@ Contains:
  '''
 from bs4 import BeautifulSoup as BS
 import requests
+from datetime import datetime
 
 url = 'https://www.kantipurdaily.com/news'
 headers = {
@@ -29,7 +30,7 @@ def kantipur_daily_extractor():
 
         {
             title: str in nepali
-            'nep_date': 2019/06/34 like date,
+            'raw_date': 2019/06/34 like date,
             'source': 'ekantipur',
             'summary': news summary in nepali,
             'news_link': link,
@@ -53,9 +54,10 @@ def kantipur_daily_extractor():
                           contaminated_list[3], contaminated_list[4]]
         date = "/".join(pure_date_list)
         link = "https://kantipurdaily.com" + date_ore
+        date = format_date(date)
         news_dict = {
             'title': title,
-            'nep_date': date,
+            'raw_date': date,
             'source': 'ekantipur',
             'summary': summary,
             'news_link': link,
@@ -66,6 +68,12 @@ def kantipur_daily_extractor():
 
     return news_list
 
+def format_date(raw_date):
+    org_format = '%Y/%m/%d'
+    datetime_obj = datetime.strptime(raw_date, org_format)
+    dest_format = '%d %b %Y'
+    date = datetime_obj.strftime(dest_format)
+    return date
 
 if __name__ == "__main__":
     kantipur_daily_extractor()
