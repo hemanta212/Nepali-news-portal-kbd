@@ -8,7 +8,6 @@ Features:
 
 * Login, Logout, Remember login through cookies
 * Reset and confirm email address
-* Integrated Unittesting feature
 * National and International news in both nepali and english
 * News collection(scraping, api) and serving
 * Pagination, Collapsible sidebar, Responsive navigation
@@ -26,7 +25,7 @@ Todo:
 - [ ] Integrate social media login (facebook, github)
 - [ ] Use Docker
 - [x] Add logging
-- [ ] Complete testing coverage
+- [x] Add tests
 - [ ] Rewrite manage.py and database management
 
 ## Installation
