@@ -12,11 +12,11 @@ headers = {
     Chrome/39.0.2171.95 Safari/537.36'
     }
 
-today = datetime.datetime.today()
-yesterday = today - datetime.timedelta(days=1)
-format = '%Y-%m-%d'
-from_ = yesterday.strftime(format)
-to = today.strftime(format)
+# today = datetime.datetime.today()
+# yesterday = today - datetime.timedelta(days=1)
+# format = '%Y-%m-%d'
+# from_ = yesterday.strftime(format)
+# to = today.strftime(format)
 
 sources = ['al-jazeera-english', 'bbc-news', 'associated-press','cnn',
              'the-new-york-times', 'the-times-of-india']
@@ -61,12 +61,16 @@ def get_general_headlines(api_key, **kwargs):
         image_url = news.get('urlToImage', 'error')
         summary = news.get('description', 'Read full news at..')
         pub_date = news.get('publishedAt', 'error')
-
+        print("getting pub_date", pub_date)
         # '2019-03-04T08:45:39.4..Z' -> '2019-03-04 08:45:39.45..'
         raw_date = pub_date[:10] + ' ' + pub_date[12:-1]
+        # remove the . after seconds
+        raw_date = raw_date.split(".")[0]
         date = None
         try:
+            print("converting", pub_date, "to new format")
             raw_date, date = format_date(raw_date)
+            print("succesfully done", pub_date, "to", raw_date)
         except Exception as e:
             print(e)
             pass
