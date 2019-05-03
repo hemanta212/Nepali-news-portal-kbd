@@ -1,12 +1,11 @@
-# Nepali News Portal (kbd)
-Khabar-board(kbd) is an online webapp that scrapes news from diffrent new portals of Nepal and worldwide.
+# Khabar-board
+Khabar-board is an online webapp that scrapes news from diffrent new portals of Nepal and worldwide.
 
 Currently, the news is Scraped for National nepali,
-International nepali, National english and International english sections from Kantipur, Kathmandu Post, Himalayan Times and Nagarik news and top headlines from International sources like bbc, cnn, new york times, etc
-
-*NOTE* The site kbd.herokuapp.com is based on develop branch of this repo and not the master branch. So you need to clone the develop branch to replicate the site's behaviour and features.
+International nepali, National english and International english sections from Kantipur and Kathmandu Post, and top headlines from International sources like bbc, cnn, new york times, etc
 
 Features:
+
 * Login, Logout, Remember login through cookies
 * Reset and confirm email address
 * National and International news in both nepali and english
@@ -30,6 +29,8 @@ Todo:
 - [ ] Rewrite manage.py and database management
 
 ## Installation
+
+### Fast-Track test installation
 * First properly install python 3.6 or above in your system.
 * clone/download this repository and navigate to this repo through cmd
 * Run
@@ -44,4 +45,16 @@ Todo:
 
 * Done !!!
 
-For manual installation or more details visit [here](https://github.com/hemanta212/Khabar-board/tree/master/docs/manual_install.md)
+## Note
+* If you're facing problems while installing packages in windows try removing the package gunicorn from requirements.txt.
+* Also to enable the international news section get an api key from [News API](https://newsapi.org/register) and set environment variable 'NEWS_API_KEY' to that value.
+
+- Once setup completed, You can just activate virtualenv inside venv folder and run one of these:
+
+    python start.py (for sqlite production)
+
+    python start.py SqliteDebug
+
+    python run.py PostgresProduction or PostgresDebug
+
+For complete installation details visit [installation docs](https://github.com/hemanta212/Khabar-board/tree/master/docs/manual_install.md)
