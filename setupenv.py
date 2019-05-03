@@ -170,7 +170,7 @@ NOTE:: To get email confirmation and password reset functionality in this webapp
 Fill your email and password in this file.
 """
 
-os.system(python_cmd + ' -m pip install -r requirements.txt --user')
+os.system(python_cmd + ' -m pip install -r requirements.txt')
 
 if TYPE == 'sqlite':
     os.system(python_cmd + ' manage.py sqlite')
