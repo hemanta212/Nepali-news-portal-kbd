@@ -1,8 +1,0 @@
-Update: all
-Search: True
-Pin: True
-Default Branch: pkg_testing
-Branch pre-fix: pyup-
-Close PRs: True
-Label PRs: False
-Update hashes: True

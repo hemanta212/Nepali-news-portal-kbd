@@ -7,11 +7,9 @@
 *swp
 *swo
 *swn
-*Pipfile*
 *.lock*
 *.orig*
-*.toml*
 *poetry*
 secrets*
 *.db*
-.env
+*.env
