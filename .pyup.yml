@@ -1,8 +1,12 @@
-Update: all
-Search: True
-Pin: True
-Default Branch: pkg_testing
-Branch pre-fix: pyup-
-Close PRs: True
-Label PRs: False
-Update hashes: True
+requirements:
+  - requirements.txt
+  - bare_requirements.txt
+
+update: all
+search: True
+pin: True
+branch: pkg_testing
+branch_prefix: pyup-
+close_prs: True
+label_prs: False
+update_hashes: True
