@@ -53,13 +53,9 @@ elif show_win_help:
 Download and install setupfile from https://www.postgresql.org/download/windows/
 
 * Create a postgreql database and obtain its local url
-
 * Add your postgresql local url of database you created earlier to environment variable named DATABASE_URL
-
 * Make new SECRET_KEY environment variable and random string as value
-
 * Note: Add EMAIL and EMAIL_PASSWORD environment variable with your email and password for password reset functionality!
-
 * Finally,
 ###  If you are setting first time without migrate folder
       python manage.py db init
@@ -79,54 +75,33 @@ elif show_linux_help:
     * For linux:
 
 install postgres:
-
     sudo apt-get install postgresql postgresql-contrib
-
 * Now create a superuser for PostgreSQL
-
     sudo -u postgres createuser --superuser name_of_user
-
 * And create a database using created user account
-
     sudo -u name_of_user createdb name_of_database
-
 * You can access created database with created user by,
-
     psql -U name_of_user -d name_of_database
-
 * Your postgres database url wil be something like
-
     postgresql://localhost/name_of_database
-
 * Delete the secrets.json file if present in your folder.
-
-* Set environment variables named DATABASE_URL, EMAIL, and EMAIL_PASSWORD
-
-In linux:
-
+* Set environment variables named DATABASE_URL, EMAIL, and EMAIL_PASSWORD by
       export DATABASE_URL='postgresql://localhost/name_of_database'
       export EMAIL='your_email@something.com'
       export EMAIL_PASSWORD='your password'
 
   * Note: EMAIL and EMAIL_PASSWORD are only required for password reset functionality!
 
-
 * After that,
-
   if migrations folder is present
-
     python manage.py db upgrade
-
-  otherwise
-
+  otherwise,
     python manage.py db init
     python manage.py db migrate
     python manage.py db upgrade
 
 * Finally run the application with.
-
     python manage.py runserver
-
 * Website will be at http://localhost:5000 load it in your browser.
 '''
     print(help_msg)
@@ -195,14 +170,13 @@ NOTE:: To get email confirmation and password reset functionality in this webapp
 Fill your email and password in this file.
 """
 
-os.system(python_cmd + ' -m pip install -r requirements.txt')
+os.system(python_cmd + ' -m pip install -r requirements.txt --user')
 
 if TYPE == 'sqlite':
     os.system(python_cmd + ' manage.py sqlite')
     os.system(python_cmd + ' start.py secrets')
 
 elif TYPE == 'postgres':
-    os.system(python_cmd + ' -m pip install postgres_requirements.txt')
-    print("FINISHED!!")
-    print("Run 'python setupenv.py postgreshelp' ",
+    print("\n PROCESS:: FINISHED")
+    print("TIP:: Run 'python setupenv.py postgreshelp' ",
            "for help in setting remaining posgres environment")
