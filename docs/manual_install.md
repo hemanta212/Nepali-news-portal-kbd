@@ -44,7 +44,6 @@ Download and install setupfile from https://www.postgresql.org/download/windows/
 * then,
 
       pip install -r requirements.txt
-      pip install -r postgres_requirements.txt
 
 * Add your postgresql local url of database you created earlier to environment variable named DATABASE_URL
 * Make new SECRET_KEY environment variable and random string as value
@@ -99,7 +98,6 @@ In linux:
 * Run
 
     pip install -r requirements.txt
-    pip install -r postgres_requirements.txt
 
 * After that,
 

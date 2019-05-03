@@ -42,6 +42,6 @@ Todo:
       According to your needs
 
 * Done !!!
-
+* If you are on windows and have problem installing packages try removing gunicorn from requirements.txt.
 For manual installation or more details visit [here](https://github.com/hemanta212/Khabar-board/tree/master/docs/manual_install.md)
 
