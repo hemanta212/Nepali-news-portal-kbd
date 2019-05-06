@@ -14,6 +14,7 @@ venv_present = False
 virtualenv_present = 'Unchecked'
 user_os = sys.platform
 python_cmd = 'python'
+pip_cmd = ''
 
 if len(args) == 0 or illegal_args or '--help' in args:
     print("ERROR: Invalid use of argument")
@@ -139,13 +140,19 @@ if not venv_present and virtualenv_present:
         sys.exit(1)
 
 def activate_venv():
+    global python_cmd
+    global pip_cmd
+    print(user_os)
     if 'linux' in user_os:
-        python = 'venv/bin/python'
-    elif 'win' in user_os:
-        python = 'venv/scripts/python'
+        python_cmd = 'venv/bin/python'
+        pip_cmd = 'venv/bin/pip'
+    elif 'win32' in user_os:
+        python_cmd = 'venv\\scripts\\python'
+        pip_cmd = 'venv\\scripts\\pip'
     else:
         print("can't detect os")
-        python = 'venv/bin/python'
+        python_cmd = 'venv/bin/python'
+        pip_cmd = 'venv/bin/pip'
 
 if require_venv and venv_present:
     venv.create('./venv')
@@ -170,7 +177,7 @@ NOTE:: To get email confirmation and password reset functionality in this webapp
 Fill your email and password in this file.
 """
 
-os.system(python_cmd + ' -m pip install -r requirements.txt')
+os.system(pip_cmd + ' install -r requirements.txt')
 
 if TYPE == 'sqlite':
     os.system(python_cmd + ' manage.py sqlite')
@@ -179,4 +186,4 @@ if TYPE == 'sqlite':
 elif TYPE == 'postgres':
     print("\n PROCESS:: FINISHED")
     print("TIP:: Run 'python setupenv.py postgreshelp' ",
-           "for help in setting remaining posgres environment")
+           "for help in setting remaining postgres environment")
