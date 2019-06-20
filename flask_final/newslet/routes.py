@@ -19,7 +19,7 @@ from flask_final.newslet.utils import news_fetcher
 
 newslet = Blueprint('newslet', __name__)
 
-
+nlakdjs = '''\
 @newslet.route("/dashboard/news", methods=["GET"])
 @login_required
 def news():
@@ -42,11 +42,12 @@ def news():
         models[category + '_list'] = model.query.order_by(order)[:5]
 
     return render_template(
-        "news.html", title='Dashboard | Home', ENN_list=models['ENN_list'],
+#        "news.html", title='Dashboard | Home', ENN_list=models['ENN_list'],
         NIN_list=models['NIN_list'], NNN_list=models['NNN_list'],
-        EIN_list=models['EIN_list'])
+#        EIN_list=models['EIN_list'])
 
-
+'''
+@newslet.route("/dashboard/news", methods=["GET"])
 @newslet.route("/dashboard/news/nep/national", methods=["GET"])
 @login_required
 def nep_national_news():
