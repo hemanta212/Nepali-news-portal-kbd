@@ -12,12 +12,6 @@ headers = {
     Chrome/39.0.2171.95 Safari/537.36'
     }
 
-# today = datetime.datetime.today()
-# yesterday = today - datetime.timedelta(days=1)
-# format = '%Y-%m-%d'
-# from_ = yesterday.strftime(format)
-# to = today.strftime(format)
-
 sources = ['al-jazeera-english', 'bbc-news', 'associated-press','cnn',
              'the-new-york-times', 'the-times-of-india']
 
@@ -30,7 +24,7 @@ def get_general_headlines(api_key, **kwargs):
     '''
 
     basic_url = ['https://newsapi.org/v2/top-headlines?']
-    for param,value in kwargs.items():
+    for param, value in kwargs.items():
         string = '{0}={1}&'.format(param, value)
         basic_url.append(string)
 

@@ -11,7 +11,7 @@ main = Blueprint('main', __name__)
 @main.route("/home", methods=["GET", 'POST'])
 def home():
     if current_user.is_authenticated:
-        return redirect(url_for('newslet.news'))
+        return redirect(url_for('newslet.nep_national_news'))
     return render_template('home.html')
 
 

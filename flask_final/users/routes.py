@@ -16,7 +16,7 @@ users = Blueprint('users', __name__)
 def signup():
 
     if current_user.is_authenticated:
-        return redirect(url_for('newslet.news'))
+        return redirect(url_for('newslet.nep_national_news'))
     form = SignupForm()
     if form.validate_on_submit():
 
@@ -36,7 +36,7 @@ def signup():
 @users.route("/try", methods=["GET", 'POST'])
 def tryfree():
     if current_user.is_authenticated:
-        return redirect(url_for('newslet.news'))
+        return redirect(url_for('newslet.nep_national_news'))
     user = User.query.filter_by(email="try@try.com").first()
     if not user:
         hashed_password = bcrypt.generate_password_hash('try').decode('utf-8')
@@ -46,20 +46,20 @@ def tryfree():
         db.session.add(user)
         db.session.commit()
     login_user(user, remember=True)
-    return redirect(url_for('newslet.news'))
+    return redirect(url_for('newslet.nep_national_news'))
 
 
 @users.route("/login", methods=["GET", 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('newslet.news'))
+        return redirect(url_for('newslet.nep_national_news'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password,
                                                form.password.data):
             login_user(user, remember=form.remember.data)
-            return redirect(url_for('newslet.news'))
+            return redirect(url_for('newslet.nep_national_news'))
         else:
             flash('Invalid email or password. Try again!', "info    ")
             return redirect(url_for('users.login'))
@@ -96,7 +96,7 @@ def reset_request():
 def reset_token(token):
     if current_user.is_authenticated:
         flash('Logout and change your password.', 'info')
-        return redirect(url_for('newslet.news'))
+        return redirect(url_for('newslet.nep_national_news'))
 
     user = User.verify_reset_token(token)
     if user is None:
