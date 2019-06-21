@@ -279,11 +279,29 @@ a.article:hover {
   }
 }
 
+@media (max-width: 400px){
+  .dark_switch {
+    margin-top: -14%;
+    width: 60px;
+  }
+}
+
+@media (min-width: 400px){
+  .dark_switch {
+    margin-top: -6%;
+    width: 60px;
+  }
+  #dark_label {
+    white-space: nowrap;
+    margin-top: 5px;
+}
+}
 
 .panel-heading {
     color: #333;
     background-color: #ffffff;
 }
+
 .panel-heading {
     padding: 10px 15px;
     border-color: white;
@@ -301,8 +319,13 @@ a.article:hover {
   position: relative;
   float: right;
   display: inline-block;
-  width: 60px;
   height: 34px;
+}
+
+
+#dark_label {
+    white-space: nowrap;
+    margin-top: 8px;
 }
 
 /* Hide default HTML checkbox */
@@ -360,4 +383,3 @@ input:checked + .dark_slider:before {
   border-radius: 50%;
 }
 
-/*  ///////////////////////////DARK_MODE_SWITCH///////////////////////////////////
