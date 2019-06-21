@@ -277,25 +277,25 @@ a.article:hover {
     width: 60%;
     margin:0 auto;
   }
-}
 
-@media (max-width: 400px){
   .dark_switch {
     margin-top: -14%;
     width: 60px;
   }
 }
 
-@media (min-width: 400px){
+@media screen and (max-width: 767px) and (min-width: 400px) {
   .dark_switch {
     margin-top: -6%;
     width: 60px;
   }
+
   #dark_label {
     white-space: nowrap;
     margin-top: 5px;
+  }
 }
-}
+
 
 .panel-heading {
     color: #333;
