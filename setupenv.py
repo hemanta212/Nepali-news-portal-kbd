@@ -183,12 +183,13 @@ NOTE:: To get email confirmation and password reset functionality in this webapp
 Fill your email and password in this file.
 """
 
-os.system(pip_cmd + " install -r requirements.txt --user")
-
 if TYPE == "sqlite":
+    os.system(pip_cmd + " install -r sqlite_requirements.txt")
     os.system(python_cmd + " manage.py sqlite")
     os.system(python_cmd + " start.py secrets")
+
 elif TYPE == "postgres":
+    os.system(pip_cmd + " install -r requirements.txt")
     print("\n PROCESS:: FINISHED")
     print(
         "TIP:: Run 'python setupenv.py postgreshelp' ",

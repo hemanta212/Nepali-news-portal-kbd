@@ -6,6 +6,10 @@ Contains:
 
 from bs4 import BeautifulSoup as BS
 import requests
+try:
+    from flask_final.newslet import parser
+except ImportError:
+    parser = 'lxml'
 
 count = 0
 url = 'https://kathmandupost.ekantipur.com'
@@ -18,7 +22,7 @@ try:
 except Exception as e:
     print("Connection refused by the server..", e)
 
-soup = BS(page.content, 'lxml')
+soup = BS(page.content, parser)
 
 
 def featured():
