@@ -88,11 +88,7 @@ else:
                 db.session.add(news_post)
                 db.session.commit()
 
-        if category != 'ENN':
-            # use raw_date to order if english otherwise use date
-            order = models[category].date.desc()  # order by latest news
-        else:
-            order = models[category].raw_date.desc()
+        order = models[category].date.desc()
 
         # this for loop picks iterates over latest news list
         # and then preserves first 60 items and deletes  all others

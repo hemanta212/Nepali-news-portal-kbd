@@ -277,14 +277,16 @@ a.article:hover {
     width: 60%;
     margin:0 auto;
   }
+}
 
+@media (max-width: 500px){
   .dark_switch {
     margin-top: -14%;
     width: 60px;
   }
 }
 
-@media screen and (max-width: 767px) and (min-width: 400px) {
+@media screen and (max-width: 768px) and (min-width: 650px) {
   .dark_switch {
     margin-top: -6%;
     width: 60px;
@@ -296,6 +298,12 @@ a.article:hover {
   }
 }
 
+@media screen and (max-width: 650px) and (min-width: 500px) {
+  .dark_switch {
+    margin-top: -9%;
+    width: 60px;
+  }
+}
 
 .panel-heading {
     color: #333;
