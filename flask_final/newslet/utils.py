@@ -14,7 +14,9 @@ try:
         kantipur_daily_extractor)
     from flask_final.newslet.kathmandupost import (
         kathmandu_post_extractor)
-    from flask_final.newslet.top_international_news import(
+    from flask_final.newslet.nagarik_international import (
+        nagarik_international_extractor)
+    from flask_final.newslet.top_international_news import (
         get_general_headlines)
 
 # Incase scrapers cannot be imported (networks or some reasons)
@@ -53,22 +55,28 @@ else:
         }
 
         scrapers = {
-            'NNN': kantipur_daily_extractor,
-            'NIN': kantipur_international_extractor,
-            'ENN': kathmandu_post_extractor,
+            'NNN': (kantipur_daily_extractor, ),
+            'NIN': (kantipur_international_extractor,
+                    nagarik_international_extractor),
+            'ENN': (kathmandu_post_extractor, )
         }
 
         extractors = {
-            'EIN': (get_general_headlines, NEWS_API_KEY, dict()),
+            'EIN': (
+                    (get_general_headlines, NEWS_API_KEY, dict()),
+                )
         }
 
+        news_list = []
         if category in scrapers:
-            news_list = scrapers.get(category)()
+            for extractor in scrapers.get(category):
+                news_list += extractor()
         else:
-            func, API_KEY, kwargs = extractors.get(category)
-            news_list = func(API_KEY, **kwargs)
+            for func_info in extractors.get(category):
+                func, API_KEY, kwargs = func_info
+                news_list = func(API_KEY, **kwargs)
 
-        for news in news_list[::-1]:
+        for news in reversed(news_list):
             # In scraped_news_list index 0 is latest one. This for loop
             # iterates in opposite direction so that
             # index 0 (latest news) is registered at last so that
@@ -95,3 +103,4 @@ else:
         for i in models[category].query.order_by(order)[60:]:
             db.session.delete(i)
             db.session.commit()
+

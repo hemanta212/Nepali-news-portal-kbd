@@ -6,20 +6,19 @@ from flask import render_template, url_for, redirect, flash
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_mail import Message
 from flask_final import bcrypt, db, mail
-from flask_final.users.forms import(SignupForm, LoginForm, RequestResetForm,
-                                    PasswordResetForm)
+from flask_final.users.forms import (SignupForm, LoginForm, RequestResetForm,
+                                     PasswordResetForm)
 from flask_final.users.models import User
-users = Blueprint('users', __name__)
 
+
+users = Blueprint('users', __name__)
 
 @users.route("/signup", methods=["GET", 'POST'])
 def signup():
-
     if current_user.is_authenticated:
         return redirect(url_for('newslet.nep_national_news'))
     form = SignupForm()
     if form.validate_on_submit():
-
         flash('Your account is created', 'success')
         hashed_password = bcrypt.generate_password_hash(form.password.data)\
             .decode('utf-8')
@@ -33,22 +32,6 @@ def signup():
     return render_template('signup.html', title="Sign Up", form=form)
 
 
-@users.route("/try", methods=["GET", 'POST'])
-def tryfree():
-    if current_user.is_authenticated:
-        return redirect(url_for('newslet.nep_national_news'))
-    user = User.query.filter_by(email="try@try.com").first()
-    if not user:
-        hashed_password = bcrypt.generate_password_hash('try').decode('utf-8')
-        user = User(full_name="try", email="try@try.com",
-                    password=hashed_password)
-
-        db.session.add(user)
-        db.session.commit()
-    login_user(user, remember=True)
-    return redirect(url_for('newslet.nep_national_news'))
-
-
 @users.route("/login", methods=["GET", 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -58,8 +41,13 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password,
                                                form.password.data):
-            login_user(user, remember=form.remember.data)
-            return redirect(url_for('newslet.nep_national_news'))
+
+            allowed_emails = ['sharmahemanta.212@gmail.com', 'try@try.com']
+            if user.email in allowed_emails:
+                login_user(user, remember=form.remember.data)
+                return redirect(url_for('newslet.nep_national_news'))
+            else:
+                return redirect(url_for('newslet.eng_international_news'))
         else:
             flash('Invalid email or password. Try again!', "info    ")
             return redirect(url_for('users.login'))
@@ -70,7 +58,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.home'))
+    return redirect(url_for('newslet.eng_international_news'))
 
 
 @users.route("/password/reset", methods=["GET", 'POST'])
@@ -120,10 +108,8 @@ def send_reset_mail(user):
     token = user.get_reset_token()
     msg = Message('Reset Password for Khabar Board',
                   sender='noreply@demo.com', recipients=[user.email])
-    msg.html = render_template('reset_password_email.html', action_url=url_for
-                               ('users.reset_token', token=token, _external=True), user=user)
-    # msg.body = f'''{user.full_name}, you can have your password reset in below
-    # link {url_for('reset_token', token=token, _external =True)} if
-    # you have not sent this email then you can just ignore it'''
-
+    msg.html = render_template('reset_password_email.html', user=user,
+                               action_url=url_for('users.reset_token',
+                                                  token=token, _external=True)
+                               )
     mail.send(msg)

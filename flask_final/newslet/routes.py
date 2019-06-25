@@ -6,11 +6,12 @@ Contains routes for managing news.
         nep_national_news()
         nep_international_news()
         eng_national_news()
+        eng_international_news()
 """
 
 from flask import Blueprint
 from flask import request, render_template
-from flask_login import login_required
+from flask_login import login_required, current_user
 from flask_final.newslet.models import NepNationalNews as NNN
 from flask_final.newslet.models import NepInternationalNews as NIN
 from flask_final.newslet.models import EngNationalNews as ENN
@@ -19,34 +20,7 @@ from flask_final.newslet.utils import news_fetcher
 
 newslet = Blueprint('newslet', __name__)
 
-nlakdjs = '''\
-@newslet.route("/dashboard/news", methods=["GET"])
-@login_required
-def news():
-    """
-    Combo of all news models.
-    Takes sample news from all models
 
-    Returns:
-       pass many list of models items to news.html template
-       and rende  """
-
-    categories = ('NIN', 'NNN', 'ENN', 'EIN')
-    models = {}
-    for category in categories:
-        # Reload all the models to get the latest news!!
-        news_fetcher(category)
-
-        model = eval(category)  # change 'NNN' to NNN
-        order = model.date.desc()  # order by latest date
-        models[category + '_list'] = model.query.order_by(order)[:5]
-
-    return render_template(
-#        "news.html", title='Dashboard | Home', ENN_list=models['ENN_list'],
-        NIN_list=models['NIN_list'], NNN_list=models['NNN_list'],
-#        EIN_list=models['EIN_list'])
-
-'''
 @newslet.route("/dashboard/news", methods=["GET"])
 @newslet.route("/dashboard/news/nep/national", methods=["GET"])
 @login_required
@@ -64,7 +38,8 @@ def nep_national_news():
                            news_list=news_list,
                            heading='National News [नेपा]',
                            newslet_func='newslet.nep_national_news',
-                           read_more='|थप पढ्नुहोस >>|')
+                           read_more='|थप पढ्नुहोस >>|',
+                           logged=True)
 
 
 @newslet.route("/dashboard/news/nep/international", methods=["GET"])
@@ -83,7 +58,8 @@ def nep_international_news():
                            news_list=news_list,
                            heading='International News [नेपा]',
                            newslet_func='newslet.nep_international_news',
-                           read_more='|थप पढ्नुहोस >>|')
+                           read_more='|थप पढ्नुहोस >>|',
+                           logged=True)
 
 
 @newslet.route("/dashboard/news/eng/national", methods=["GET"])
@@ -101,11 +77,11 @@ def eng_national_news():
                            news_list=news_list,
                            heading='National News [Eng]',
                            newslet_func='newslet.eng_national_news',
-                           read_more='|Read More>>|')
+                           read_more='|Read More>>|',
+                           logged=True)
 
 
 @newslet.route("/dashboard/news/eng/international", methods=["GET"])
-@login_required
 def eng_international_news():
     """
     Save extracted news from scraper to db model
@@ -119,4 +95,5 @@ def eng_international_news():
                            news_list=news_list,
                            heading='International News [Eng]',
                            newslet_func='newslet.eng_international_news',
-                           read_more='|Read More>>|')
+                           read_more='|Read More>>|',
+                           logged=current_user.is_authenticated)

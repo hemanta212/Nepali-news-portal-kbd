@@ -1,6 +1,7 @@
 {% extends "dashboard.html" %}
 {% block content %}
 
+{% if logged %}
 <div class="news_menu">
     <span>Categories</span>
     <ul>
@@ -21,6 +22,7 @@
         </a></li>
     </ul>
 </div>
+{% endif %}
 
 
 <div class="news">
@@ -101,11 +103,6 @@
     }
     sidebar_a_tag.setAttribute("class", "current");
     newsmenu_a_tag.setAttribute("class", "current");
-
-    // else if (category == 'About this website') {
-    //     about_tag = document.getElementById('sidebar_about')
-    //     about_tag.setAttribute("class", "current");
-    // }
 
 </script>
 {% endblock content %}

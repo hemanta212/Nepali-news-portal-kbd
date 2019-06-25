@@ -12,9 +12,6 @@
     <title>Dashboard | Khabar-board</title>
     {%endif %}
 
-
-
-
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -43,11 +40,15 @@
             <ul class="list-unstyled components">
                 <p>Dashboard</p>
                 <li class="#">
+                    {% if logged %}
                     <a id='sidebar_home' href="{{url_for('newslet.nep_national_news')}}">Home</a>
-
+                    {% else %}
+                    <a id='sidebar_home' href="{{url_for('newslet.eng_international_news')}}">Home</a>
+                    {% endif %}
                 <li>
                     <a id='about' href="{{url_for('main.about')}}">About</a>
 
+                    {% if logged %}
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">News
                     </a>
 
@@ -60,6 +61,7 @@
 
                         <li><a id='sidebar_EIN' href="{{url_for('newslet.eng_international_news')}}">International(Eng)</a></li>
                     </ul>
+                    {% endif %}
                 </li>
 
                 <li>
@@ -72,17 +74,17 @@
             </ul>
 
             <ul class="list-unstyled CTAs">
+            {% if logged %}
                 <li><a href="{{url_for('users.logout')}}" class="download"><i class="glyphicon glyphicon-off"></i>
                         Logout</a></li>
-
+            {% else %}
+                <li><a href="{{url_for('users.login')}}" class="download"><i class="glyphicon glyphicon-off"></i>
+                        Login</a></li>
+ 
+            {% endif %}
             </ul>
 
-
-
         </nav>
-
-
-
         </div>
 
         <!-- Page Content Holder -->

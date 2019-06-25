@@ -1,2 +1,2 @@
-parser = 'lxml'
-# parser = 'html.parser'
+# parser = 'lxml'
+parser = 'html.parser'
