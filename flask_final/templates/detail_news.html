@@ -37,11 +37,12 @@
     <!-- For heading containing title and anchored news_link -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3> <a href="{{news.news_link}}" target="_blank">{{news.title}} </a> </h3>
+
+            <h3><a href="{{news.news_link}}" target="_blank">{{news.title}} </a> </h3>
         </div>
 
-        {%if news.image_link%}
-        <img class="article-img img-responsive load_sideway" src={{news.image_link}}>
+        {%if news.image_link %}
+        <img class="article-img img-responsive load_sideway" src="{{news.image_link}}">
         {%endif%}
 
         <!-- NEWS BODY (SUMMARY) -->

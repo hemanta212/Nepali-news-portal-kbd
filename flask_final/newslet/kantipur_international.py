@@ -11,19 +11,19 @@ try:
 except ImportError:
     parser = 'lxml'
 
+def setup():
+    url = 'https://www.kantipurdaily.com/world'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
+            (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
-url = 'https://www.kantipurdaily.com/world'
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
-         (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    try:
+        page = requests.get(url, headers=headers)
+    except Exception as e:
+        print("Connection refused by the server..", e)
 
-try:
-    page = requests.get(url, headers=headers)
-except Exception as e:
-    print("Connection refused by the server..", e)
-
-soup = BS(page.content, parser)
-
+    soup = BS(page.content, parser)
+    return soup
 
 def kantipur_international_extractor():
     '''
@@ -40,6 +40,7 @@ def kantipur_international_extractor():
             'image_link': high resolution image,
         }
     '''
+    soup = setup()
     news_list = []
     for article in soup.find_all('article', class_='normal'):
 

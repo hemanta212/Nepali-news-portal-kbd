@@ -71,6 +71,10 @@ else:
         if category in scrapers:
             for extractor in scrapers.get(category):
                 news_list += extractor()
+            if category == 'ENN':
+                for news in news_list:
+                    pass
+
         else:
             for func_info in extractors.get(category):
                 func, API_KEY, kwargs = func_info
@@ -86,13 +90,12 @@ else:
             duplicate = models[category].query.filter_by(
                 title=news["title"]).first()
 
-            if duplicate is None:
+            if not duplicate:
                 news_post = models[category](
                     title=news['title'],
                     source=news['source'], summary=news['summary'],
                     image_link=news['image_link'], news_link=news['news_link'],
                     raw_date=news['raw_date'], date=news.get('date'))
-
                 db.session.add(news_post)
                 db.session.commit()
 

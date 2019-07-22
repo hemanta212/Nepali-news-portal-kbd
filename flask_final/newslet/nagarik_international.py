@@ -4,21 +4,24 @@ from bs4 import BeautifulSoup as BS
 from flask_final.newslet import parser
 
 
-url = 'http://nagariknews.nagariknetwork.com/category/27'
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
-     (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+def setup():
+    url = 'http://nagariknews.nagariknetwork.com/category/27'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
+        (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
-try:
-    page = requests.get(url, headers=headers)
-except Exception as e:
-    print("Connection refused by the server..", e)
+    try:
+        page = requests.get(url, headers=headers)
+    except Exception as e:
+        print("Connection refused by the server..", e)
 
-response = requests.get(url, headers=headers)
-soup = BS(response.content, parser)
+    response = requests.get(url, headers=headers)
+    soup = BS(response.content, parser)
+    return soup
 
 
 def nagarik_international_extractor():
+    soup = setup()
     def cover_news(nep_date):
         cover_news_list = []
         cover_div = soup.find_all("div", class_='col-sm-3 part-ent')

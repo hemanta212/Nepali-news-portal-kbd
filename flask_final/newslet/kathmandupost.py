@@ -4,6 +4,7 @@ Contains:
     kathmandu_post_extractor(): Gives list of news dicts
  '''
 
+from datetime import datetime
 from bs4 import BeautifulSoup as BS
 import requests
 try:
@@ -11,73 +12,27 @@ try:
 except ImportError:
     parser = 'lxml'
 
-count = 0
-url = 'https://kathmandupost.ekantipur.com'
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
-         (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+URL = 'https://kathmandupost.ekantipur.com'
+def setup():
+    HEADERS = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36\
+            (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
-try:
-    page = requests.get(url, headers=headers)
-except Exception as e:
-    print("Connection refused by the server..", e)
+    try:
+        PAGE = requests.get(URL, headers=HEADERS)
+    except Exception as e:
+        print("Connection refused by the server..", e)
 
-soup = BS(page.content, parser)
+    soup = BS(PAGE.content, parser)
+    return soup
 
 
-def featured():
-    '''
-    This is a helper func to kathmandu_post_extractor func.
-    It is mixed with kantipur_daily_extractor so you dont have
-    to call it.
-
-    This extracts top (latest) 1/2 featured news having diffrent set
-    of layouts thant main news section
-
-    Retruns:
-        Same layout  that of kantipur_daily_extractor func
-
-    '''
-    featured_news_list = []
-    sticky_news_list = soup.find_all('div', class_="sticky-news")
-
-    for news in sticky_news_list:
-        img_div = news.find('div', class_='image')
-        try:
-            img_link = img_div.img['data-original']
-        except:
-            img_link = "img not available"
-
-        default_link = "https://kathmandupost.ekantipur.com"
-        post_link = news.h1.a['href']
-        full_link = default_link + post_link
-        title = news.h1.a.text
-
-        try:
-            date = news.find('div', class_="post").text.split(",")[
-                2].rstrip().lstrip()
-        except IndexError:
-            try:
-                date = news.find('div', class_="post").text.split(",")[
-                    1].rstrip().lstrip()
-            except IndexError:
-                date = 'error'
-        summary = news.find('div', class_="text").text
-        if len(summary) >= 1001:
-            summary = summary[:1000]
-
-        news_dict = {
-            "title": title,
-            "source": "ekantipur",
-            "news_link": full_link,
-            'raw_date': date,
-            "summary": summary,
-            "image_link": img_link,
-        }
-
-        featured_news_list.append(news_dict)
-
-    return featured_news_list
+def format_date(raw_date):
+    org_format = '%Y/%m/%d'
+    datetime_obj = datetime.strptime(raw_date, org_format)
+    dest_format = '%d %b %Y'
+    date = datetime_obj.strftime(dest_format)
+    return date
 
 
 def kathmandu_post_extractor():
@@ -96,55 +51,57 @@ def kathmandu_post_extractor():
         }
 
     '''
-    # the main news system is divided in 3 divs with
-    # diffrent main classes  but inside layout is same
-    main_news_div1 = soup.find('div', class_="main-news")
-    main_news_div2 = soup.find('div', class_="news")
-    main_news_div3_pre = soup.find('div', class_="home-featured-news")
-    main_news_div3 = main_news_div3_pre.find('div', class_='newslist')
+    soup = setup()
+    news_list = []
+    column_one = soup.find('div', class_='grid-first')
+    column_two = soup.find('div', class_='grid-second')
+    column_three = soup.find('div', class_='grid-third')
+    latest_column = soup.find('div', class_='block--morenews')
+    sources = [column_one, column_two, column_three, latest_column]
 
-    sources = [main_news_div1, main_news_div2, main_news_div3]
-    main_news_list = []
+    for column in sources:
+        articles = column.find_all('article')
 
-    for i in sources:
-        news_list = i.find_all('div', class_="item")
-        for news in news_list:
-            post_link = news.h2.a['href']
-            default_link = "https://kathmandupost.ekantipur.com"
-            full_link = default_link + post_link
-            title = news.h2.a.text
-            image_div = news.find('div', class_='ktp-main-news')
+        if column == column_two:
+            featured_article = articles[0]
+            h3_tag = soup.new_tag('h3')
+            featured_article.h2.wrap(h3_tag)
+            featured_article.h3.h2.unwrap()
 
-            try:
-                image_link = image_div.img['data-original']
-            except AttributeError:
+        elif column == latest_column:
+            for article in articles:
+                a_tag = article.a
+                article.h3.insert(0, a_tag)
+
+        for article in articles:
+            href_link = article.h3.a['href']
+            article_link = URL + href_link
+            title = article.h3.a.text
+
+            raw_date = "/".join(href_link.split('/')[2:5])
+            date = format_date(raw_date)
+
+            image_tag = article.find('img')
+            if image_tag:
+                image_link = image_tag['data-src']
+                #image_link = raw_img_link[raw_img_link.find('src=')+4:]
+            else:
                 image_link = None
 
-            # dealing with variable date location during parsing.
-            try:
-                date = news.find('div', class_="post").text.split(",")[
-                    2].rstrip()
-            except IndexError:
-                try:
-                    date = news.find('div', class_="post").text.split(",")[
-                        1].rstrip()
-                except IndexError:
-                    date = "error"
+            summary = article.p.text
 
-            summary = news.find('div', class_="text").text
             news_dict = {
-                "image_link": image_link,
                 "title": title,
-                "raw_date": date,
                 "source": "ekantipur",
-                "news_link": full_link,
+                "news_link": article_link,
+                "raw_date": date,
                 "summary": summary,
+                "image_link": image_link,
             }
-            main_news_list.append(news_dict)
 
-    # mix latest news from featured helper funtion
-    all_news_list = featured() + main_news_list
-    return all_news_list
+            news_list.append(news_dict)
+
+    return news_list
 
 
 if __name__ == "__main__":
