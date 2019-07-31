@@ -19,7 +19,6 @@ login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
 db = SQLAlchemy()
 mail = Mail()
-
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 
 def create_app(config):

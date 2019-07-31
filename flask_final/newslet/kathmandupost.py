@@ -71,6 +71,7 @@ def kathmandu_post_extractor():
         elif column == latest_column:
             for article in articles:
                 a_tag = article.a
+                a_tag.string = article.h3.string
                 article.h3.insert(0, a_tag)
 
         for article in articles:
@@ -84,7 +85,6 @@ def kathmandu_post_extractor():
             image_tag = article.find('img')
             if image_tag:
                 image_link = image_tag['data-src']
-                #image_link = raw_img_link[raw_img_link.find('src=')+4:]
             else:
                 image_link = None
 
