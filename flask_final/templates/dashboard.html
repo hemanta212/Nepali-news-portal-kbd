@@ -179,23 +179,8 @@
         </script>
 
         <script>
-            function getCookie(cname) {
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for(var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
 
-            var dark_mode = getCookie('dark_mode');
-            console.log(dark_mode)
+            var dark_mode = localStorage.getItem('dark_mode') 
             if(dark_mode == "true"){
                $('#dark_check').prop('checked', true);
                dark_on();
@@ -209,12 +194,12 @@
             function dark_on() {
                 $('* > :not(script)').css('background-color', 'black');
                 $('* > :not(script)').css('color', 'lightgrey');
-                document.cookie = "dark_mode=true";
+                localStorage.setItem('dark_mode', 'true')
             }
 
             function dark_off() {
                 $('* > :not(script)').removeAttr('style');
-                document.cookie = "dark_mode=false";
+                localStorage.setItem('dark_mode', 'false')
             }
 
             $('#dark_check').change(function() {
