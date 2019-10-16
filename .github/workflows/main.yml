@@ -2,7 +2,12 @@ name: Update News
 
 on:
   schedule:
+<<<<<<< HEAD
     - cron:  '15 2,8,14 * * *'
+=======
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '*/59 * * * *'
+>>>>>>> refactor and add github actions
 
 
 jobs:
@@ -12,4 +17,9 @@ jobs:
     steps:
       - name: Update
         run: |
+<<<<<<< HEAD
           curl https://kbd.herokuapp.com/update
+=======
+            curl https://kbd.herokuapp.com/update
+            curl https://trinitycollge.herokuapp.com/
+>>>>>>> refactor and add github actions

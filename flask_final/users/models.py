@@ -16,24 +16,23 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100), nullable=False)
 
     def get_reset_token(self, expires_sec=1800):
-        '''Gets token for confirming email
+        """Gets token for confirming email
 
         input:
             arg1:optional expires sec(default is 1800 )
         output:
-            a serializer token.'''
+            a serializer token."""
         s = Serializer(current_app.config["SECRET_KEY"], expires_sec)
-        return s.dumps({'user_id': self.id}).decode('utf-8')
+        return s.dumps({"user_id": self.id}).decode("utf-8")
 
     @staticmethod
     def verify_reset_token(token):
         s = Serializer(current_app.config["SECRET_KEY"])
         try:
-            user_id = s.loads(token)['user_id']
+            user_id = s.loads(token)["user_id"]
         except:
             return None
         return User.query.get(user_id)
 
     def __repr__(self):
-        return 'user({0}, {1})'.format(self.full_name, self.email)
-
+        return "user({0}, {1})".format(self.full_name, self.email)

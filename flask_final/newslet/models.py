@@ -1,16 +1,16 @@
-'''
+"""
 Database models for storing news
 Contains 3 classes:
     NepNationalNews: national news in nepali database model
     NepInternationalNews : international news in nepali  database model
     EngNationalNews :National news in english database model
-'''
+"""
 from datetime import datetime
 from flask_final import db
 
 
 class NepNationalNews(db.Model):
-    '''
+    """
     Provides date(model created), id atrribute by default
     Initialize with compulsory
         source : news source like 'ekantipur'
@@ -20,23 +20,24 @@ class NepNationalNews(db.Model):
     Optional initialization
         image_link
         news_link
-    '''
-    __tablename__ = 'NEP_NATIONAL'
+    """
+
+    __tablename__ = "NEP_NATIONAL"
     id = db.Column(db.Integer, primary_key=True)
-    source = db.Column(db.String(20), nullable=False, )
+    source = db.Column(db.String(20), nullable=False)
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
     raw_date = db.Column(db.Text, nullable=False)
-    summary = db.Column(db.Text,)
+    summary = db.Column(db.Text)
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
-    news_link = db.Column(db.Text,)
+    news_link = db.Column(db.Text)
 
     def __repr__(self):
-        return 'news({0}, {1}, {2})'.format(self.id, self.source, self.date)
+        return "news({0}, {1}, {2})".format(self.id, self.source, self.date)
 
 
 class NepInternationalNews(db.Model):
-    '''
+    """
     Provides date(model created), id atrribute by default
     Initialize with compulsory
         source : news source like 'ekantipur'
@@ -46,23 +47,24 @@ class NepInternationalNews(db.Model):
     Optional initialization
         image_link
         news_link
-    '''
-    __tablename__ = 'NEP_INTERNATIONAL'
+    """
+
+    __tablename__ = "NEP_INTERNATIONAL"
     id = db.Column(db.Integer, primary_key=True)
-    source = db.Column(db.String(20), nullable=False, )
+    source = db.Column(db.String(20), nullable=False)
     raw_date = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-    summary = db.Column(db.Text,)
+    summary = db.Column(db.Text)
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
-    news_link = db.Column(db.Text,)
+    news_link = db.Column(db.Text)
 
     def __repr__(self):
-        return 'news({0}, {1}, {2})'.format(self.id, self.source, self.date)
+        return "news({0}, {1}, {2})".format(self.id, self.source, self.date)
 
 
 class EngNationalNews(db.Model):
-    '''
+    """
     Provides date(model created), id atrribute by default
     Initialize with compulsory
         source : news source like 'ekantipur'
@@ -72,22 +74,24 @@ class EngNationalNews(db.Model):
     Optional initialization
         image_link
         news_link
-    '''
-    __tablename__ = 'ENG_NATIONAL'
+    """
+
+    __tablename__ = "ENG_NATIONAL"
     id = db.Column(db.Integer, primary_key=True)
-    source = db.Column(db.String(20), nullable=False, )
+    source = db.Column(db.String(20), nullable=False)
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-    raw_date = db.Column(db.Text , nullable=False)
-    summary = db.Column(db.Text, )
+    raw_date = db.Column(db.Text, nullable=False)
+    summary = db.Column(db.Text)
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
-    news_link = db.Column(db.Text,)
+    news_link = db.Column(db.Text)
 
     def __repr__(self):
-        return 'news({0}, {1}, {2})'.format(self.id, self.source, self.date)
+        return "news({0}, {1}, {2})".format(self.id, self.source, self.date)
+
 
 class EngInternationalNews(db.Model):
-    '''
+    """
     Provides date(model created), id atrribute by default
     Initialize with compulsory
         source : news source like 'the-washington-post'
@@ -97,16 +101,17 @@ class EngInternationalNews(db.Model):
     Optional initialization
         image_link
         news_link
-    '''
-    __tablename__ = 'ENG_INTERNATIONAL'
+    """
+
+    __tablename__ = "ENG_INTERNATIONAL"
     id = db.Column(db.Integer, primary_key=True)
-    source = db.Column(db.String(20), nullable=False, )
+    source = db.Column(db.String(20), nullable=False)
     raw_date = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-    summary = db.Column(db.Text,)
+    summary = db.Column(db.Text)
     title = db.Column(db.Text, nullable=False)
     image_link = db.Column(db.Text)
-    news_link = db.Column(db.Text,)
+    news_link = db.Column(db.Text)
 
     def __repr__(self):
-        return 'news({0}, {1}, {2})'.format(self.id, self.source, self.date)
+        return "news({0}, {1}, {2})".format(self.id, self.source, self.date)

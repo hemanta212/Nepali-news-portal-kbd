@@ -1,4 +1,4 @@
-'''Configurations for the app itself'''
+"""Configurations for the app itself"""
 import os
 import sys
 import json
@@ -15,21 +15,21 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SECRET_KEY = os.getenv("SECRET_KEY")
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 
     # Email configs for reseting things you know.
-    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_SERVER = "smtp.googlemail.com"
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.getenv('EMAIL')
-    MAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
+    MAIL_USERNAME = os.getenv("EMAIL")
+    MAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 
 # check if there is a secrets.json file.
 def Secrets():
-    if os.path.exists('secrets.json'):
+    if os.path.exists("secrets.json"):
 
-        with open('secrets.json', 'r') as rf:
+        with open("secrets.json", "r") as rf:
             configs = json.load(rf)
 
         class Config_class(Config):
@@ -37,22 +37,24 @@ def Secrets():
             MAIL_USERNAME = configs["MAIL_USERNAME"]
             MAIL_PASSWORD = configs["MAIL_PASSWORD"]
             SQLALCHEMY_DATABASE_URI = configs["SQLALCHEMY_DATABASE_URI"]
+
     return Config_class
+
 
 class Debug(Config):
 
     DEBUG = True
     TESTING = True
-    SQLALCHEMY_TRACK_MODIFICATIONS = True,
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_TRACK_MODIFICATIONS = (True,)
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 
 
 class SqliteDebug(Debug):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
+    SQLALCHEMY_DATABASE_URI = "sqlite:///site.db"
 
 
 class SqliteProduction(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
+    SQLALCHEMY_DATABASE_URI = "sqlite:///site.db"
 
 
 class PostgresDebug(Debug):

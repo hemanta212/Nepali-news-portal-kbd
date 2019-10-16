@@ -1,9 +1,9 @@
-#-*-code: UTF-8
-'''
+# -*-code: UTF-8
+"""
 Initialization module of projects that initializes
 app, db, Kbdlog,bcrypt, login_manager, mail, Config
 
-'''
+"""
 import json
 import os
 
@@ -19,7 +19,8 @@ login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
 db = SQLAlchemy()
 mail = Mail()
-NEWS_API_KEY = os.getenv('NEWS_API_KEY')
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+
 
 def create_app(config):
     app = Flask(__name__)
