@@ -1,0 +1,20 @@
+name: Update News
+
+on:
+  push:
+    branches:
+    - develop
+
+  schedule:
+    - cron:  '59 * * * *'
+
+
+jobs:
+   Updates:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Update
+        run: |
+          curl https://kbd.herokuapp.com/update
