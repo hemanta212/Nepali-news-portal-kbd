@@ -60,7 +60,6 @@ def escape_html_charectars(text):
     chars = ["&amp;nbsp;", "&amp;", "&amp;ndash;", "&ndash;"]
     for char in chars:
         text = text.replace(char, html.unescape(char))
-    print(text)
     return text
 
 

@@ -40,15 +40,10 @@
             <ul class="list-unstyled components">
                 <p>Dashboard</p>
                 <li class="#">
-                    {% if logged %}
                     <a id='sidebar_home' href="{{url_for('newslet.nep_national_news')}}">Home</a>
-                    {% else %}
-                    <a id='sidebar_home' href="{{url_for('newslet.eng_international_news')}}">Home</a>
-                    {% endif %}
                 <li>
                     <a id='about' href="{{url_for('main.about')}}">About</a>
 
-                    {% if logged %}
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">News
                     </a>
 
@@ -57,11 +52,12 @@
 
                         <li><a id='sidebar_ENN' href="{{url_for('newslet.eng_national_news')}}">National(Eng)</a></li>
 
+                    {% if logged %}
                         <li><a id='sidebar_NIN' href="{{url_for('newslet.nep_international_news')}}">International(नेपा)</a></li>
+                    {% endif %}
 
                         <li><a id='sidebar_EIN' href="{{url_for('newslet.eng_international_news')}}">International(Eng)</a></li>
                     </ul>
-                    {% endif %}
                 </li>
 
                 <li>

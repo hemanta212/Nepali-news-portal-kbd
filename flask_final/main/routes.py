@@ -10,9 +10,9 @@ main = Blueprint("main", __name__)
 
 @main.route("/", methods=["GET", "POST"])
 def home():
-    if current_user.is_authenticated:
-        return redirect(url_for("newslet.nep_national_news"))
-    return redirect(url_for("newslet.eng_international_news"))
+    # if current_user.is_authenticated:
+    return redirect(url_for("newslet.nep_national_news"))
+    # return redirect(url_for("newslet.eng_international_news"))
 
 
 @main.route("/home", methods=["GET", "POST"])

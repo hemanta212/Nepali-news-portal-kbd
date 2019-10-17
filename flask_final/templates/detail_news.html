@@ -1,7 +1,6 @@
 {% extends "dashboard.html" %}
 {% block content %}
 
-{% if logged %}
 <div class="news_menu">
     <span>Categories</span>
     <ul>
@@ -13,16 +12,17 @@
             National News[Eng]
         </a></li>
 
+{% if logged %}
         <li> <a id='newsmenu_NIN' href='{{url_for('newslet.nep_international_news')}}'>
             International News[नेपा]
         </a></li>
+{% endif %}
 
         <li> <a id="newsmenu_EIN" href='{{url_for('newslet.eng_international_news')}}'>
             International News[Eng]
         </a></li>
     </ul>
 </div>
-{% endif %}
 
 
 <div class="news">

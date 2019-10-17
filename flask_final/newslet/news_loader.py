@@ -3,7 +3,7 @@
 Utils module to get news from extractor and register them with an order
 to the database models.
 Contains:
-    news_fetcher(): collects and registers news of specified category
+    load_news_to_models(): collects and registers news of specified category
 """
 
 # Try catch block to make orffline development possble
@@ -23,9 +23,9 @@ try:
 except Exception as E:
     print(E)
 
-    def news_fetcher(category):
+    def load_news_to_models(category):
         """
-        Have an ineffective news_fetcher function
+        Have an ineffective loader function
         just to prevent import errros
         """
         pass
@@ -40,7 +40,7 @@ else:
     from flask_final.newslet.models import EngInternationalNews as EIN
     from flask_final import db, NEWS_API_KEY
 
-    def news_fetcher(category):
+    def load_news_to_models(category):
         """
         Get news from scraper and registers to database model of
         associated given category
