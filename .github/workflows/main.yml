@@ -1,10 +1,6 @@
 name: Update News
 
 on:
-  push:
-    branches:
-    - develop
-
   schedule:
     - cron:  '15 1,7,14 * * *'
 
