@@ -117,3 +117,5 @@ def update():
             news_fetcher(category)
         except Exception as E:
             print(E)
+
+    return "<h1>Updated all news sources</h1>"
