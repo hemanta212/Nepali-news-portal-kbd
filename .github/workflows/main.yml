@@ -6,7 +6,7 @@ on:
     - develop
 
   schedule:
-    - cron:  '59 * * * *'
+    - cron:  '15 1,7,14 * * *'
 
 
 jobs:
