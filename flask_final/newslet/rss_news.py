@@ -1,4 +1,3 @@
-import html
 import feedparser
 from bs4 import BeautifulSoup
 
@@ -12,6 +11,9 @@ def get_news_from_rss(source, feed_url=None):
     feed_url = feed_url if feed_url else url_map[source]
     news_list = parse_feed_for_news(feed_url)
     add_source_to_news(news_list, source)
+    reverse_order = "ujyaalo_online"
+    if source in reverse_order:
+        news_list.reverse()
     return news_list
 
 
@@ -57,14 +59,13 @@ def get_news_from_entries(entries):
 
 
 def escape_html_charectars(text):
-    chars = ["&amp;nbsp;", "&amp;", "&amp;ndash;", "&ndash;"]
-    for char in chars:
-        text = text.replace(char, html.unescape(char))
+    soup = BeautifulSoup(text, features="lxml")
+    text = parse_text_from_html(soup.prettify(formatter="html"))
     return text
 
 
-def parse_text_from_html(html):
-    tree = BeautifulSoup(html, "lxml")
+def parse_text_from_html(html_str):
+    tree = BeautifulSoup(html_str, "lxml")
 
     body = tree.body
     if body is None:
