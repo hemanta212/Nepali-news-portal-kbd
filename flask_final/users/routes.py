@@ -1,8 +1,7 @@
 """
 contains resource for managing users functionality.
 """
-from flask import Blueprint
-from flask import render_template, url_for, redirect, flash
+from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_mail import Message
 from flask_final import bcrypt, db, mail
@@ -48,14 +47,12 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-
-            allowed_emails = ["sharmahemanta.212@gmail.com", "try@try.com"]
+        correct_password = bcrypt.check_password_hash(user.password, form.password.data)
+        if user and correct_password:
+            allowed_emails = ["try@try.com"]
             if user.email in allowed_emails:
                 login_user(user, remember=form.remember.data)
-                return redirect(url_for("newslet.nep_national_news"))
-            else:
-                return redirect(url_for("newslet.eng_international_news"))
+            return redirect(url_for("newslet.nep_national_news"))
         else:
             flash("Invalid email or password. Try again!", "info    ")
             return redirect(url_for("users.login"))
@@ -66,7 +63,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("newslet.eng_international_news"))
+    return redirect(url_for("newslet.nep_national_news"))
 
 
 @users.route("/password/reset", methods=["GET", "POST"])

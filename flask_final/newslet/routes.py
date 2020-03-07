@@ -31,18 +31,20 @@ def nep_national_news():
 
     load_news_to_models("NNN")
     page = request.args.get("page", 1, type=int)
-    free_sources = ("ujyaalo_online",)
-    news = NNN.query.filter_by(source=" ")
+    free_sources = ("ujyaalo_online", "hamra_kura")
+    news = None
     logged = current_user.is_authenticated
     if not logged:
         for source in free_sources:
-            news = news.union(NNN.query.filter_by(source=source)).order_by(
-                NNN.date.desc()
-            )
+            if not news:
+                news = NNN.query.filter_by(source=source)
+            else:
+                news = news.union(NNN.query.filter_by(source=source))
 
     else:
         news = NNN.query.order_by(NNN.date.desc())
 
+    news = news.order_by(NNN.date.desc())
     news_list = news.paginate(page=page, per_page=15)
     return render_template(
         "detail_news.html",
@@ -85,17 +87,20 @@ def eng_national_news():
     """
     load_news_to_models("ENN")
     page = request.args.get("page", 1, type=int)
-    free_sources = ("himalayan_times",)
-    news = ENN.query.filter_by(source=" ")
+    free_sources = ("himalayan_times", "nepali_times")
+    news = None
     logged = current_user.is_authenticated
     if not logged:
         for source in free_sources:
-            news = news.union(ENN.query.filter_by(source=source)).order_by(
-                ENN.date.desc()
-            )
+            if not news:
+                news = ENN.query.filter_by(source=source)
+            else:
+                news = news.union(ENN.query.filter_by(source=source))
+
     else:
         news = ENN.query.order_by(ENN.date.desc())
 
+    news = news.order_by(ENN.date.desc())
     news_list = news.paginate(page=page, per_page=15)
     return render_template(
         "detail_news.html",

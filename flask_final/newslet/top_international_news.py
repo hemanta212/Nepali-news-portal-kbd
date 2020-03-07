@@ -48,7 +48,11 @@ def get_general_headlines(api_key, **kwargs):
     response_dict = response.json()
     total_news = response_dict.get("totalResults")
     status = response_dict.get("status", "error")
-    news_list = response_dict["articles"]
+    try:
+        news_list = response_dict["articles"]
+    except:
+        return []
+
     refined_news_list = []
     for index, news in enumerate(news_list):
         title = news.get("title", "error")

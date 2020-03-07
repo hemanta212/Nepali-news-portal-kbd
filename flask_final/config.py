@@ -57,9 +57,9 @@ class SqliteProduction(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///site.db"
 
 
-class PostgresDebug(Debug):
+class DatabaseDebug(Debug):
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 
 
-class PostgresProduction(Config):
+class DatabaseProduction(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")

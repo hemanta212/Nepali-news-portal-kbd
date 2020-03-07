@@ -6,10 +6,14 @@ def get_news_from_rss(source, feed_url=None):
     url_map = {
         "himalayan_times": "http://thehimalayantimes.com/feed/",
         "ujyaalo_online": "http://ujyaaloonline.com/rss/",
+        "hamra_kura": "https://hamrakura.com/rss.xml",
+        "nepali_times": "https://www.nepalitimes.com/feed/",
     }
 
+    print(f"etting source {source}")
     feed_url = feed_url if feed_url else url_map[source]
     news_list = parse_feed_for_news(feed_url)
+    print(f"etting newslist {len(news_list)}")
     add_source_to_news(news_list, source)
     reverse_order = "ujyaalo_online"
     if source in reverse_order:

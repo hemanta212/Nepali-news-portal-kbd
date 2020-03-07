@@ -2,7 +2,7 @@
 Khabar-board is an online webapp that scrapes news from diffrent new portals of Nepal and worldwide.
 
 Currently, the news is Scraped for National nepali,
-International nepali, National english and International english sections from Kantipur and Kathmandu Post, and top headlines from International sources like bbc, cnn, new york times, etc
+International nepali, National english and International english sections from Kantipur, Nagarik, Ujyaalo and Kathmandu Post, himalayan times, nepal times and top headlines from International sources like bbc, cnn, new york times, etc
 
 Features:
 
@@ -47,14 +47,24 @@ Todo:
 
 ## Note
 * If you're facing problems while installing packages in windows try removing the package gunicorn from requirements.txt.
+
 * Also to enable the international news section get an api key from [News API](https://newsapi.org/register) and set environment variable 'NEWS_API_KEY' to that value.
 
-- Once setup completed, You can just activate virtualenv inside venv folder and run one of these:
+- Once setup completed, You can just activate virtual environment inside venv folder and run ONE of these according to your setup:
 
-    python start.py (for sqlite production)
+```
+# For sqlite
+    python manage.py sqlite
+    python run.py sqlite-prod # Production environment
+    python run.py sqlite-debug # Debug environment
 
-    python start.py SqliteDebug
+# For other databases like postgres, sql
+    python run.py db-prod
+    python run.py db-debug
+```
 
-    python run.py PostgresProduction or PostgresDebug
+## Complete installation
+For complete installation details visit [installation docs](docs/manual_install.md) which includes:
 
-For complete installation details visit [installation docs](https://github.com/hemanta212/Khabar-board/tree/master/docs/manual_install.md)
+* Step by step setup process.
+* Running with diffrent databases and with debug and production configs

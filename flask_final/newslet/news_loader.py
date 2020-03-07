@@ -71,20 +71,26 @@ else:
                 func, API_KEY, kwargs = func_info
                 news_list = func(API_KEY, **kwargs)
 
-        category_rss_map = {"NNN": ("ujyaalo_online",), "ENN": ("himalayan_times",)}
+        category_rss_map = {
+            "NNN": ("ujyaalo_online", "hamra_kura"),
+            "ENN": ("himalayan_times", "nepali_times"),
+        }
         if category in category_rss_map:
             sources = category_rss_map[category]
             for source in sources:
                 news_list += get_news_from_rss(source)
+            print("NEWSLIST IS ", len(news_list))
 
+        i = 0
         for news in reversed(news_list):
             # In scraped_news_list index 0 is latest one. This for loop
             # iterates in opposite direction so that
             # index 0 (latest news) is registered at last so that
             # it has newest date and the last item is registerd at first
             # so it gets oldest date assigned by db model
-
-            duplicate = models[category].query.filter_by(title=news["title"]).first()
+            duplicate = (
+                models[category].query.filter_by(news_link=news["news_link"]).first()
+            )
 
             if not duplicate:
                 news_post = models[category](
@@ -98,8 +104,10 @@ else:
                 )
                 db.session.add(news_post)
                 db.session.commit()
+                i += 1
 
         order = models[category].date.desc()
+        print("Unique news", i)
 
         # this for loop picks iterates over latest news list
         # and then preserves first 60 items and deletes  all others
