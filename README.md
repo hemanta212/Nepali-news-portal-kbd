@@ -68,3 +68,7 @@ For complete installation details visit [installation docs](docs/manual_install.
 
 * Step by step setup process.
 * Running with diffrent databases and with debug and production configs
+
+## Accessing all news
+After successfully running the app, go to localhost:5000/signup and create an account with this email 'try@try.com' and login. You should see news from all the sources.
+
