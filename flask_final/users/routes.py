@@ -47,8 +47,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        correct_password = bcrypt.check_password_hash(user.password, form.password.data)
-        if user and correct_password:
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
             allowed_emails = ["try@try.com"]
             if user.email in allowed_emails:
                 login_user(user, remember=form.remember.data)
