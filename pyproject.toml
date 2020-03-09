@@ -43,7 +43,7 @@ cffi = "^1.13.0"
 pylint = "^2.3"
 pytest = "^5.2.1"
 autopep8 = "^1.4"
-rope = "^0.14.0"
+rope = "^0.16.0"
 
 
 [build-system]
