@@ -41,7 +41,7 @@ cffi = "^1.13.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.3"
-pytest = "^5.2.1"
+pytest = "^6.0.0"
 autopep8 = "^1.4"
 rope = "^0.16.0"
 ptpython = "^3.0.1"
