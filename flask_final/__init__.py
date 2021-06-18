@@ -23,7 +23,7 @@ NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
 
 def create_app(config):
-    app = Flask(__name__)
+    app = Flask(__name__.split('.')[0])
     app.config.from_object(config)
 
     db.init_app(app)

@@ -1,19 +1,22 @@
 import os
-import sys
-from flask_final.config import DatabaseProduction, SqliteProduction
+
+from flask_final.config import Debug, Secrets
 from flask_final import db, create_app
 
-args = sys.argv[1:]
-app = create_app(DatabaseProduction)
+is_env_var_set = os.getenv("SQLALCHEMY_DATABASE_URI")
+if not is_env_var_set:
+    config = Secrets()
+else:
+    config = Debug
 
-# if database is not postgres but sqlite we initialize it diffrently.
-if "sqlite" in args:
-    app = create_app(SqliteProduction)
-    print("setting sqlite db....")
-    with app.app_context():
-        db.create_all()
-        print("done.")
-        sys.exit(0)
+# Support for relative sqlite URIs
+if config.SQLALCHEMY_DATABASE_URI == "sqlite:///site.db":
+    temp_app = create_app(config)
+    config.SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
+        temp_app.root_path, "site.db"
+    )
+
+app = create_app(config)
 
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
