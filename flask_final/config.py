@@ -15,7 +15,9 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SECRET_KEY = os.getenv("SECRET_KEY")
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    if('postgresql' not in SQLALCHEMY_DATABASE_URI):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("://", "ql://", 1)
 
     # Email configs for reseting things you know.
     MAIL_SERVER = "smtp.googlemail.com"
@@ -42,11 +44,9 @@ def Secrets():
 
 
 class Debug(Config):
-
     DEBUG = True
     TESTING = True
     SQLALCHEMY_TRACK_MODIFICATIONS = (True,)
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 
 
 class SqliteDebug(Debug):
@@ -58,8 +58,8 @@ class SqliteProduction(Config):
 
 
 class DatabaseDebug(Debug):
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    pass
 
 
 class DatabaseProduction(Config):
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    pass
