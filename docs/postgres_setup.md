@@ -39,7 +39,7 @@ postgresql://localhost/name_of_database
 Or, if you have setup password then,
 
 ```
-postgresql://user_name:password/localhost/name_of_database
+postgresql://username:password@localhost/name_of_database
 ```
 
 7. Now take this url and go back to [this section in Main Readme file](../README.md#setting up-the-postgres-databse)

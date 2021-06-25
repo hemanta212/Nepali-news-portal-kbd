@@ -112,7 +112,7 @@ gunicorn run:app debug
 ```
 
 #### *NOTE*:
-Gunicorn is not supported in windows operating system. However, you can run it using [WSL](https://google.com/search?query=windows%20subsytem%20for%20linux).
+Gunicorn is not supported in windows operating system. However, you can run it using [WSL](https://google.com/search?query=windows%20subsystem%20for%20linux).
 
 ## Accessing all news
 After successfully running the app, go to localhost:5000/signup and sign up with an account with this admin provisioned email 'try@try.com' (yes this exact email only) and login. You should see news from all the sources.
