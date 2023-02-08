@@ -18,9 +18,9 @@ Todos:
 
 - [x] Integrate various international news apis(top, general, sports, tech...)
 - [x] Rewrite manage.py and database management
+- [x] Experiment with docker deploys
 - [ ] Add logging
 - [ ] Add tests
-- [ ] Experiment with docker deploys
 - [ ] Extract the scraper to separate news API
 - [ ] Redesign the dashboard
 - [ ] Remove compulsory login and establish per person db record of preferences
@@ -77,7 +77,7 @@ Once you have setup the db and have its URI, just set it as the value of 'SQLALC
 #### Initializing the database
 To upgrade the newly created database to the project's structure use 
 ```
-$ python manage.py upgrade
+$ python manage.py db upgrade
 ```
 
 Similarly, if you need to start fresh, delete the migrations folder and now run,
