@@ -24,4 +24,4 @@ if not is_env_var_set:
     app = create_app(Secrets())
 
 if __name__ == "__main__":
-    app.run()
+    app.run('0.0.0.0')

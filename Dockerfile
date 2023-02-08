@@ -1,4 +1,4 @@
-FROM python:3-slim as python
+FROM python:3.10.6-slim as python
 ENV PYTHONUNBUFFERED=true
 WORKDIR /app
 
@@ -15,5 +15,5 @@ RUN poetry install --only main --no-interaction --no-ansi -vvv
 FROM python as runtime
 ENV PATH="/app/.venv/bin:$PATH"
 COPY --from=poetry /app /app
-EXPOSE 8000
+EXPOSE 5000
 CMD python manage.py db upgrade && python run.py debug

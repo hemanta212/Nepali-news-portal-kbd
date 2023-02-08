@@ -28,6 +28,12 @@ Todos:
 - [ ] News search on keyword for custom category (like bitcoin, trump, etc)
 - [ ] Integrate social media login (facebook, github)
 
+## Run with Docker
+
+```sh
+docker build -t kbd .
+docker run -it --rm --net=host kbd
+```
 
 ## Installation and Usage
 
