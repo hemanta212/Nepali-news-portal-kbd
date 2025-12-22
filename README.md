@@ -29,10 +29,6 @@ Todos:
 - [ ] News search on keyword for custom category (like bitcoin, trump, etc)
 - [ ] Integrate social media login (facebook, github)
 
-## Regarding scraping proxies (optional)
-
-For avoiding bans and throttling, you can use your scraper with a proxy like [Webshare.io](https://www.webshare.io/?referral_code=8geenxoq36e2), they're an awesome service with generous free trial for testing, if you want to support this project (optional), use the affiliate link above to sign up :) [link](https://www.webshare.io/?referral_code=8geenxoq36e2)
-
 ## Run with Docker
 
 ```sh
